@@ -62,7 +62,7 @@ export default function MyTimeline() {
         postId: '', comment: ''
     })
 
-    
+
     // comment checker
     const [commentChecker, setCommentChecker] = useState(false);
 
@@ -79,6 +79,7 @@ export default function MyTimeline() {
     const [pop, setPop] = useState(false);
 
     const [open, setOpen] = useState(false);
+    const [undoSnackbar, setUndoSnackbar] = useState(false);
     const [alert, setAlert] = useState({ sev: 'success', content: '' });
 
 
@@ -91,6 +92,33 @@ export default function MyTimeline() {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
 
+    const undoSnackbarDesign = (
+        <>
+            <div className="container-fluid mb-3">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="row">
+                            <div className="col-8">
+                                <div className="row">
+                                    <div className="col-2">
+                                        <img src='/assets/images/Icons/deleted.png' alt='delete'/>
+                                    </div>
+                                    <div className="col-10">
+                                        <h2 className="font-weight-bold text-white">Post Deleted</h2>
+                                    </div>
+                                    <h6 className='text-white'>Slide Undo to recover post within 10 sec.</h6>
+                                </div>
+                            </div>
+                            <div className="col-4">
+                                <button className='group-btn group-btn-new green-clr-btn' onClick={undoPostHandler}>Undo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+
 
     let dispatch = useDispatch();
 
@@ -99,6 +127,13 @@ export default function MyTimeline() {
         const postId = { postId: [id] }
         dispatch(deletePost(postId))
         setPop(false)
+        setUndoSnackbar(true);
+    }
+
+    // undo post delete handler
+    const undoPostHandler=({})=>{
+        console.log(globalPostId)
+
     }
 
     // like handler function
@@ -445,6 +480,15 @@ export default function MyTimeline() {
                     </Alert>
                 </Snackbar>
             </Stack>
+
+            {/* undo post snackbar */}
+            <Snackbar
+             sx={{ maxWidth: 400 }}
+             onClose={handleClose}
+                open={undoSnackbar}
+                autoHideDuration={6000}
+                action={undoSnackbarDesign}
+            />
         </>
 
     );

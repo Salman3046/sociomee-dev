@@ -5,6 +5,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { loadAllTrendingHashtag } from '../Services/Actions/Common/trandingHashtagAction';
 import Autocomplete from "react-google-autocomplete";
 
+import MuiAutocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 export default function AddInYourPost({ createPostHandler, postData, setPostData, clickMedia, pollOptions }) {
     const [value, onChange] = useState('');
     // Model nav menu
@@ -22,26 +25,12 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
     // infinite scroll functionality
     const [pageSize] = useState({
         pageIndex: 0,
-        pageSize: 10
+        pageSize: ""
     })
 
 
     const { trandingHashtags } = useSelector(state => state.TrendingHashtagData);
     const dispatch = useDispatch();
-
-    const [hasMore, setHasMore] = useState(true);
-    // get more data function
-    const getMoreData = () => {
-        if (trandingHashtags?.rows?.length >= trandingHashtags?.rows?.count) {
-            setHasMore(false);
-        }
-        // call fetch user's post
-        // 1 more records in .5 secs
-        setTimeout(() => {
-            pageSize.pageSize += 10;
-            dispatch(loadAllTrendingHashtag(pageSize));
-        }, 500);
-    }
 
     const onhashtagClick = (e) => {
         navRef.current.classList.add("hashtag");
@@ -97,8 +86,9 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
     };
 
     const handleSubmit = (e) => {
-        postData.hashTags = tags;
+        postData.hashTags = tags && tags.map(({ name }) => name);
         setTags('');
+        document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0].click();
         postData.displayLocation = location;
         inputRef.current.value = '';
         postData.schedule = (value && value.toISOString());
@@ -205,7 +195,7 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
             <div className="options-input" ref={navRef} id="additional-input">
 
                 <div className="search-input hashtag-input" >
-                    {
+                    {/* {
                         !toggle ? <a id="icon-close" onClick={() => { setToggle(true); searchTag.current.classList.add("show") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="iw-22 icon-font-light icon-close bi bi-search">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -213,41 +203,24 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
                         </a> : <a id="icon-close" onClick={() => { setToggle(false); searchTag.current.classList.remove("show") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iw-15 icon-font-light icon-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                         </a>
-                    }
+                    } */}
                     <h4 className='mb-3'>Trending #tags</h4>
-                    <div className="phone-with-code">
-                        <input type="text" className="form-control" placeholder="Hashtag..." value={tags} />
-                        <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="iw-15 icon-left" width="16" height="16" viewBox="0 0 16 16" fill="#afb8c2" ><path d="M15.8754 8.77081C15.6635 8.1214 14.956 7.77619 14.3032 7.9881L12.7514 8.50421L11.7158 5.42804L13.2675 4.91193C13.9204 4.70001 14.2622 3.99591 14.0537 3.34308C13.8417 2.69367 13.1342 2.34845 12.4814 2.56036L10.9296 3.07648L10.393 1.47003C10.1811 0.820618 9.47358 0.475403 8.82075 0.687317C8.16792 0.899231 7.82612 1.60333 8.03461 2.25617L8.57124 3.86261L5.37885 4.92902L4.84223 3.32257C4.63032 2.67316 3.9228 2.32794 3.26997 2.53986C2.61714 2.75177 2.27534 3.45587 2.48383 4.1087L3.02046 5.71515L1.47212 6.22785C0.819284 6.43976 0.477487 7.14386 0.685983 7.79669C0.856881 8.2923 1.33881 8.61701 1.83442 8.63751C2.06684 8.67169 2.24458 8.58283 3.80659 8.06329L4.84223 11.1395L3.29047 11.6556C2.64106 11.8675 2.29585 12.575 2.50434 13.2244C2.67524 13.72 3.15717 14.0447 3.65278 14.0652C3.8852 14.0994 4.06294 14.0106 5.62495 13.491L6.16157 15.0975C6.36323 15.6751 7.00581 16.0887 7.73383 15.8802C8.38667 15.6683 8.72846 14.9642 8.51997 14.3113L7.98335 12.7049L11.1826 11.6351L11.7192 13.2415C11.9208 13.8192 12.5634 14.2327 13.2915 14.0242C13.9443 13.8123 14.2861 13.1082 14.0776 12.4554L13.541 10.8489L15.0927 10.3328C15.7421 10.1277 16.0873 9.42023 15.8754 8.77081ZM7.19038 10.3841L6.15473 7.30109L9.35053 6.23126L10.3862 9.31427L7.19038 10.3841Z" /></svg>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-right custom-dropdown" ref={searchTag}>
-                            <ul>
-                                <InfiniteScroll
-                                    dataLength={trandingHashtags?.rows?.length || 1}
-                                    next={getMoreData}
-                                    hasMore={hasMore}
-                                    height={210}
-                                    loader={<h4>Loading...</h4>}
-                                    endMessage={
-                                        <div className="no-more-text">
-                                            <p>no more tags</p>
-                                        </div>
-                                    }
-                                >
-                                    {
-                                        trandingHashtags?.rows && trandingHashtags?.rows
-                                            .map(({
-                                                id,
-                                                name
-                                            }) => {
-                                                return <li className='p-2' key={id} onClick={() => setTags([...tags, name])}>#{name}</li>
-                                            })
-                                    }
+                    <MuiAutocomplete
+                        multiple
+                        id="tags-standard"
+                        options={trandingHashtags?.rows || []}
+                        getOptionLabel={(option) => option.name}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                label="# Hashtags"
+                                placeholder="Hashtags..."
+                            />
+                        )}
+                        onChange={(e, params) => setTags(params)}
+                    />
 
-                                </InfiniteScroll>
-                            </ul>
-                        </div>
-                    </div>
 
                 </div>
                 <div className="search-input place-input">
