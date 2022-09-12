@@ -87,8 +87,8 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
 
     const handleSubmit = (e) => {
         postData.hashTags = tags && tags.map(({ name }) => name);
+        tags && document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0].click();
         setTags('');
-        document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0].click();
         postData.displayLocation = location;
         inputRef.current.value = '';
         postData.schedule = (value && value.toISOString());

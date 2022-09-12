@@ -78,3 +78,80 @@
       background: none;
       font-weight: 500;
   }
+
+  
+.checkbox_animated2 input[type="checkbox"]+label:after {
+  content: "\2714";
+  border: 0.1em solid rgba(100, 117, 137, 0.45);
+  border-radius: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding-left: 0;
+  padding-bottom: 0;
+  margin-right: 10px;
+  vertical-align: bottom;
+  color: transparent;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  line-height: 1;
+}
+.checkbox_animated2 input[type="checkbox"]:checked+label:after {
+  background-color: #81C14B;
+  border-color: #81C14B;
+  color: #fff;
+}
+
+.checkbox_animated2 input[type="checkbox"] {
+  display: none;
+}
+
+
+.checkbox_animated2 input[type="checkbox"]+label:active:after {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+
+.checkbox_animated2 input[type="checkbox"]:checked:disabled _ label:after {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  background-color: rgba(3, 137, 201, 0.2);
+  border-color: rgba(3, 137, 201, 0.2);
+}
+
+.checkbox_animated2 input[type="checkbox"]:disabled _ label:after {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  border-color: #aaa;
+}
+
+.checkbox_animated2 input[type="checkbox"]+label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.media-img-vid-addmore {
+  position: absolute;
+  top: 20px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #fff;
+  display: inline-block;
+  z-index: 1;
+}
