@@ -7,17 +7,17 @@ const getAllPostsByUserId = (allPostsByUserId) => ({
 });
 
 // get all post by user id
-export const loadAllPostsByUserId = () => {
+export const loadAllPostsByUserId = (pageSize) => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('user')); 
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getAllPosts`, {},
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getAllPosts`, pageSize,
                 {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
                 .then((res) => {
                     // console.log("all posts:", res.data.data.successResult);
-                    dispatch(getAllPostsByUserId(res.data.data.successResult.rows))
+                    dispatch(getAllPostsByUserId(res.data.data.successResult))
                 })
                 .catch((error) => {
                     console.log(error);

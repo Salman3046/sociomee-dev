@@ -1,5 +1,4 @@
 import React, { Component, useRef, useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom";
 import DateTimePicker from "react-datetime-picker";
 
 // Use for snakebar
@@ -24,42 +23,6 @@ export default function CreatePost() {
     // this is used for event post
     const [startTime, startOnChange] = useState(new Date());
     const [endTime, endOnChange] = useState(new Date());
-
-    // Media File Preview of media post
-    const [file, setFile] = useState();
-    const [postMedia, setPostMedia] = useState('');
-
-    // Media File Preview of event post
-    const [eventCoverImage, setEventCoverImage] = useState();
-    const [postMedia2, setPostMedia2] = useState('');
-
-    // thought color selection
-    const [selectedColor, setSelectedColor] = useState('#9acd32');
-
-
-    // get all article category
-    const { articleCategory } = useSelector(state => state.getArticleCategoryData)
-    // get all event category
-    const { eventCategory } = useSelector(state => state.getEventCategoryData)
-    // get all colors
-    const { colors } = useSelector(state => state.getColorsData)
-
-
-
-    function handleChange(e, identifier) {
-        if (identifier === 'media') {
-            console.log(e.target.files);
-            setFile(URL.createObjectURL(e.target.files[0]));
-            setPostMedia(e.target.files[0]);
-        }
-        else {
-            setEventCoverImage(URL.createObjectURL(e.target.files[0]));
-            setPostMedia2(e.target.files[0]);
-        }
-
-
-    }
-
     const [postData, setPostData] = useState({
         postType: "text",
         caption: "",
@@ -82,6 +45,41 @@ export default function CreatePost() {
         "thoughtForeColor": "#fff",
         "thoughtBackColor": "",
     })
+    // Media File Preview of media post
+    const [file, setFile] = useState([]);
+    const [postMedia, setPostMedia] = useState('');
+
+    // Media File Preview of event post
+    const [eventCoverImage, setEventCoverImage] = useState();
+    const [postMedia2, setPostMedia2] = useState('');
+
+    // thought color selection
+    const [selectedColor, setSelectedColor] = useState('#9acd32');
+
+    // get all article category
+    const { articleCategory } = useSelector(state => state.getArticleCategoryData)
+    // get all event category
+    const { eventCategory } = useSelector(state => state.getEventCategoryData)
+    // get all colors
+    const { colors } = useSelector(state => state.getColorsData)
+
+
+
+    function handleChange(e, identifier) {
+        if (identifier === 'media') {
+            console.log(e.target.files);
+            setFile([...file, ...e.target.files]);
+            setPostMedia(e.target.files[0]);
+        }
+        else {
+            setEventCoverImage(URL.createObjectURL(e.target.files[0]));
+            setPostMedia2(e.target.files[0]);
+        }
+
+
+    }
+
+
 
 
     const Alert = React.forwardRef(function Alert(props, ref) {
@@ -590,12 +588,12 @@ export default function CreatePost() {
                     {/* Gradiant Section */}
                     <div className="search-input input-style icon-right" ref={bgNoneRef}>
                         <div className="creatpost-profile-blk">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                         </div>
                         <textarea name="message" className="form-control enable" cols="30" rows="10" placeholder="What’s  going on? #Hashtag... @Mention." spellCheck="false" value={postData.caption} onChange={(e) => { setPostData({ ...postData, caption: e.target.value }) }}></textarea>
                         {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
                         <a className="pen-icon-creatpost">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid icon" alt="pen" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid icon" alt="pen" />
                         </a>
                     </div>
 
@@ -603,7 +601,7 @@ export default function CreatePost() {
                     <div className="media-create-post-block" ref={mediaRef}>
                         <div className="search-input input-style icon-right">
                             <div className="creatpost-profile-blk">
-                                <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                             </div>
                             <textarea name="message" className="form-control enable" cols="30" rows="10" placeholder="What’s  going on? #Hashtag... @Mention." spellCheck="false" value={postData.caption} onChange={(e) => { setPostData({ ...postData, caption: e.target.value }) }}></textarea>
                             <a className="pen-icon-creatpost">
@@ -614,15 +612,28 @@ export default function CreatePost() {
                             <a className="media-img-vid-close" onClick={closeMediaClick}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                             </a>
-                            <input className="choose-file" type="file" onChange={(e) => handleChange(e, 'media')} />
-                            <img src={file ? file : "assets/images/image-preview.jpg"} />
+                            <input className="choose-file" type="file" onChange={(e) => handleChange(e, 'media')} multiple accept=".jpg,.jpeg,.png"/>
+                            <button className="media-img-vid-addmore">Add Photo/Video</button>
+                            <img src={file[0] ? `${URL.createObjectURL(file[0])}` : "assets/images/image-preview.jpg"} />
+                            {
+                                file.length > 1 && <div className="row">
+                                    {
+                                        file.slice(1).map((img) => {
+                                            return <div className="col-4" key={img}>
+                                                <img src={`${URL.createObjectURL(img)}`} />
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            }
+
                         </div>
                     </div>
 
                     {/* Recomendation Section */}
                     <div className="search-input input-style icon-right recommendation-block" ref={RecommendationRef}>
                         <div className="creatpost-profile-blk">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                         </div>
                         <textarea name="message" className="form-control enable" maxLength={'150'} cols="30" rows="10" placeholder="I am seeking recommendation for " spellCheck="false" value={postData?.caption} onChange={(e) => setPostData({ ...postData, caption: e.target.value })}></textarea>
                         {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
@@ -634,7 +645,7 @@ export default function CreatePost() {
                     {/* Alert Section */}
                     <div className="alert-create-post-block" ref={alertRef}>
                         <div className="user-profile-cp">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                             <h4>{userProfileByUserId.fullName}</h4>
                         </div>
                         <div className="custom-fixed-height-blk">
@@ -742,7 +753,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="event-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -812,7 +823,7 @@ export default function CreatePost() {
 
                                     <div className="article-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -874,7 +885,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="poll-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -935,7 +946,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="article-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">

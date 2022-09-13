@@ -10,11 +10,11 @@ const Gallery = () => {
     const [postMedia, setPostMedia] = useState([]);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadAllPostsByUserId())
+        dispatch(loadAllPostsByUserId({pageSize:''}))
     }, [])
     // filter media post
     useEffect(() => {
-        setPostMedia(allPostsByUserId.filter(post => post.postType === 'media'))?.slice(0,9)
+        setPostMedia(allPostsByUserId?.rows?.filter(post => post.postType === 'media'))?.slice(0,9)
     }, [allPostsByUserId])
 
     
@@ -24,7 +24,7 @@ const Gallery = () => {
                 <div className="gallery-top">
                     <div className="card-title">
                         <h3>gallery</h3>
-                        <h5>{postMedia.length} photos</h5>
+                        <h5>{postMedia?.length} photos</h5>
                         <div className="settings">
                             <div className="setting-btn">
                                 <a href="#">
