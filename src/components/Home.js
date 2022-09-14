@@ -38,6 +38,7 @@ import ThoughtPost from './post-components/ThoughtPost';
 import Comments from './post-components/Comments';
 import timeAgo from '../functions/timeAgo';
 import ReportPostModal from './post-components/Modals/ReportPostModal';
+import MultiMediaPost from './post-components/MultiMediaPost';
 
 
 
@@ -413,7 +414,11 @@ export default function Home({ user }) {
                                                                 <div className="post-details">
                                                                     <div className="img-wrapper">
                                                                         {
-                                                                            userPosts.mediaList && <MediaPost userPosts={userPosts} pageSize={pageSize} setOpen={setOpen} setAlert={setAlert} />
+                                                                            userPosts.mediaList && userPosts.mediaList?.length === 1 ? (
+                                                                                <MediaPost userPosts={userPosts} pageSize={pageSize} setOpen={setOpen} setAlert={setAlert} />
+                                                                            ) : (
+                                                                                <MultiMediaPost userPosts={userPosts}/>
+                                                                            )
                                                                         }
                                                                     </div>
                                                                     <div className="detail-box">

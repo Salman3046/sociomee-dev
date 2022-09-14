@@ -24,34 +24,34 @@ const ReportPostModal = ({ modal, setModal, reportPostBody, setReportPostBody, s
     return (
         <>
             {/* Mui Modal box content */}
-            <Dialog open={modal} onClose={false} fullWidth={true}
-                maxWidth={'sm'}>
+            <Dialog open={modal} onClose={false} scroll={'body'}>
                 <DialogTitle>Report</DialogTitle>
                 <DialogContent>
                     <h3 className='font-bold'>Please select a problem</h3>
                     <DialogContentText>
-                        If someone is in immediate danger, get help before reporting to Facebook. Don't wait
+                        If someone is in immediate danger, get help before <br/>
+                        reporting to Facebook. Don't wait
                     </DialogContentText>
                     {/* <div className="card-block-box"> */}
-                    <ul className="searchfiler-list">
-                            {
-                                ['demo', 'demo2', 'demo3'].map((hobbi) => {
-                                    return (
-                                        <li key={hobbi} >
-                                                <div className="form-check checkbox_animated2">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="form-check-input"
-                                                        id={hobbi}
-                                                    
-                                                    />
-                                                    <label className="form-check-label d-flex justify-content-between" htmlFor={hobbi}>{hobbi}</label>
-                                                </div>
-                                            </li>
-                                    )
-                                })
-                            }
-                        </ul>
+                    <ul className="searchfiler-list mt-2">
+                        {
+                            ['demo', 'demo2', 'demo3'].map((hobbi) => {
+                                return (
+                                    <li key={hobbi} >
+                                        <div className="form-check checkbox_animated2">
+                                            <input
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                id={hobbi}
+
+                                            />
+                                            <label className="form-check-label d-flex justify-content-between" htmlFor={hobbi}>{hobbi}</label>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
                     {/* </div> */}
                 </DialogContent>
                 <DialogActions>

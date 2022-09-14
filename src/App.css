@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -40,24 +41,26 @@
 .react-datetime-picker__wrapper {
   border: none !important;
 }
-.fr-btn .confirm-btn:hover{
-  color:#fff !important;
+
+.fr-btn .confirm-btn:hover {
+  color: #fff !important;
 }
 
-.phone-code-list:hover{
+.phone-code-list:hover {
   cursor: pointer;
-  border:1px solid rgba(27, 139, 27, 0.445) !important ;
-}
-.active-phone-code{
-  border:1px solid rgba(27, 139, 27, 0.445) !important ;
+  border: 1px solid rgba(27, 139, 27, 0.445) !important;
 }
 
-.thought-input::placeholder{
-  color:#fff !important;
+.active-phone-code {
+  border: 1px solid rgba(27, 139, 27, 0.445) !important;
+}
+
+.thought-input::placeholder {
+  color: #fff !important;
   opacity: 1;
 }
 
-.static-margin{
+.static-margin {
   margin-left: 10px;
 }
 
@@ -65,21 +68,24 @@
 .conversation-panel .friend-section .friend-list .friend-box .user-img img {
   border-radius: 25% !important;
 }
-.react-datetime-picker__calendar{
-  z-index:2 !important;
+
+.react-datetime-picker__calendar {
+  z-index: 2 !important;
 }
+
 .without-input-fill {
   background: #ACDAD6;
   border-color: #ACDAD6;
 }
-.button-anchor {
-  color:#81C14B !important;
-  border: none;
-      background: none;
-      font-weight: 500;
-  }
 
-  
+.button-anchor {
+  color: #81C14B !important;
+  border: none;
+  background: none;
+  font-weight: 500;
+}
+
+
 .checkbox_animated2 input[type="checkbox"]+label:after {
   content: "\2714";
   border: 0.1em solid rgba(100, 117, 137, 0.45);
@@ -104,6 +110,7 @@
   transition: 0.2s;
   line-height: 1;
 }
+
 .checkbox_animated2 input[type="checkbox"]:checked+label:after {
   background-color: #81C14B;
   border-color: #81C14B;
@@ -147,11 +154,38 @@
 .media-img-vid-addmore {
   position: absolute;
   top: 20px;
+  margin-left: 6rem;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #fff;
+  display: inline-block;
+  z-index: 1;
+}
+
+.media-img-vid-edit {
+  position: absolute;
+  top: 20px;
   margin-left: 5px;
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
   background-color: #fff;
+  display: inline-block;
+  z-index: 1;
+}
+
+.media-img-close-icon .iw-20 {
+  border: 1px solid #E0E0E0;
+  stroke: #E0E0E0;
+  border-radius: 50%;
+  background: white;
+}
+
+.media-img-close-icon {
+  position: absolute;
+  right: 20px;
+  top: 5px;
   display: inline-block;
   z-index: 1;
 }
