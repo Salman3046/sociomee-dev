@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllPostsByUserId } from '../../Services/Actions/SocialFeed/getAllPostsByUserIdAction';
 
@@ -7,24 +7,25 @@ const Gallery = () => {
     // get all user posts by id using redux
     const { allPostsByUserId } = useSelector(state => state.getAllPostsByUserIdData)
     // all filter post by media will saved in this state
-    const [postMedia, setPostMedia] = useState([]);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadAllPostsByUserId({pageSize:''}))
-    }, [])
-    // filter media post
-    useEffect(() => {
-        setPostMedia(allPostsByUserId?.rows?.filter(post => post.postType === 'media'))?.slice(0,9)
+
+    const allMediaForGallery = useMemo(() => {
+        const media = allPostsByUserId?.rows?.filter(post => post.postType === 'media')?.slice(0, 9)?.map((media) => [...media.mediaList]);
+        return media?.flat()
     }, [allPostsByUserId])
 
-    
+    useEffect(() => {
+        dispatch(loadAllPostsByUserId({ pageSize: '' }))
+    }, [])
+
+
     return (
         <>
             <div className="gallery-section section-b-space">
                 <div className="gallery-top">
                     <div className="card-title">
                         <h3>gallery</h3>
-                        <h5>{postMedia?.length} photos</h5>
+                        <h5>{allMediaForGallery?.length} photos</h5>
                         <div className="settings">
                             <div className="setting-btn">
                                 <a href="#">
@@ -55,14 +56,22 @@ const Gallery = () => {
                     <div className="container-fluid p-0">
                         <div className="row">
                             {
-                                postMedia && postMedia.map((media) => {
-                                    return <div className="col-4" key={media.postId}>
+                                allMediaForGallery && allMediaForGallery.slice(0,9).map((media) => {
+                                    return <div className="col-4" key={media.mediaId}>
                                         <div className="overlay">
                                             <div className="portfolio-image">
                                                 <a href="#" data-bs-toggle="modal"
                                                     data-bs-target="#imageModel">
-                                                    <img src={media.mediaList[0].fileURL} alt=""
-                                                        className="img-fluid bg-img" />
+                                                    {
+                                                        media.fileType === 'video' ? (
+                                                            <video width="100%" height="300" controls>
+                                                                <source src={media.fileURL} type="video/mp4" />
+                                                            </video>
+                                                        ) : (
+                                                            <img src={media.fileURL} className="img-fluid bg-img"
+                                                                alt={media.caption} />
+                                                        )
+                                                    }
                                                 </a>
                                             </div>
                                         </div>
