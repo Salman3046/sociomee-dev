@@ -46,12 +46,11 @@ export default function CreatePost() {
         "thoughtBackColor": "",
     })
     // Media File Preview of media post
-    const [file, setFile] = useState([]);
-    const [postMedia, setPostMedia] = useState('');
+    const [mediaPost, setMediaPost] = useState([]);
 
     // Media File Preview of event post
     const [eventCoverImage, setEventCoverImage] = useState();
-    const [postMedia2, setPostMedia2] = useState('');
+    const [eventBannerImage, setEventBannerImage] = useState('');
 
     // thought color selection
     const [selectedColor, setSelectedColor] = useState('#9acd32');
@@ -67,13 +66,11 @@ export default function CreatePost() {
 
     function handleChange(e, identifier) {
         if (identifier === 'media') {
-            console.log(e.target.files);
-            setFile([...file, ...e.target.files]);
-            setPostMedia(e.target.files[0]);
+            setMediaPost([...mediaPost, ...e.target.files]);
         }
         else {
             setEventCoverImage(URL.createObjectURL(e.target.files[0]));
-            setPostMedia2(e.target.files[0]);
+            setEventBannerImage(e.target.files[0]);
         }
 
 
@@ -146,7 +143,7 @@ export default function CreatePost() {
         mediaRef.current.classList.remove("d-block");
         bgNoneRef.current.classList.remove("d-none");
         gradientMainBlockRef.current.classList.remove("d-none");
-        setFile("")
+        setMediaPost("")
     };
 
     // Create Recommendation Post 
@@ -260,56 +257,67 @@ export default function CreatePost() {
                     postData.location2 = res.data.state_prov;
                     postData.location3 = res.data.city;
                     console.log(res.data)
-                    console.log(postMedia)
-                    if (file.length>0) {
+                    if (mediaPost.length > 0) {
                         postData.postType = 'media';
-                        const formData = new FormData();
-                        formData.append('files', postMedia);
-                        file.map((imgObj) => {
-                            return formData.append("files", imgObj);
-                        })
-                        formData.append('uploadFor', 'postMedia');
-                        axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
-                            .then((res) => {
-                                console.log(res.data)
-                                postData.mediaList = [];
-                                res.data.data.successResult.forEach((img,i)=>{
-                                    postData.mediaList.push({
-                                    "fileType": "image",
-                                    "fileURL": img,
-                                    "caption": "Caption",
-                                    "sequence": i
-                                })
-                                })
-                               
-                                dispatch(addPost(postData));
-                                setPostData({
-                                    "postType": "text",
-                                    "caption": "",
-                                    "displayLocation": "",
-                                    "schedule": "",
-                                    "isScheduled": "",
-                                    "feelingId": "",
-                                    "feelingCategoryId": "",
-                                    "allowComments": 0,
-
-                                    "mentionIds": null,
-                                    "hashTags": [],
-                                    "taggedUserIds": null,
-
-                                    "locationLAT": "",
-                                    "locationLONG": "",
-                                    "location1": "",
-                                    "location2": "",
-                                    "location3": ""
-                                })
-                                setFile('');
-                                setOpen(true);
-                                setAlert({ sev: "success", content: "Post Add Successfully !", });
+                        console.log(mediaPost)
+                        if (mediaPost.length <= 5) {
+                            const formData = new FormData();
+                            mediaPost.map((imgObj) => {
+                                return formData.append("files", imgObj);
                             })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+                            formData.append('uploadFor', 'postMedia');
+                            axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
+                                .then((res) => {
+                                    console.log(res.data)
+                                    if (res.data.success) {
+                                        postData.mediaList = [];
+                                        res.data.data.successResult.forEach((img, i) => {
+                                            postData.mediaList.push({
+                                                "fileType": mediaPost[i].type.slice(0,5),
+                                                "fileURL": img,
+                                                "caption": "Caption",
+                                                "sequence": i
+                                            })
+                                        })
+
+                                        dispatch(addPost(postData));
+                                        setPostData({
+                                            "postType": "text",
+                                            "caption": "",
+                                            "displayLocation": "",
+                                            "schedule": "",
+                                            "isScheduled": "",
+                                            "feelingId": "",
+                                            "feelingCategoryId": "",
+                                            "allowComments": 0,
+
+                                            "mentionIds": null,
+                                            "hashTags": [],
+                                            "taggedUserIds": null,
+
+                                            "locationLAT": "",
+                                            "locationLONG": "",
+                                            "location1": "",
+                                            "location2": "",
+                                            "location3": ""
+                                        })
+                                        setMediaPost('');
+                                        setOpen(true);
+                                        setAlert({ sev: "success", content: "Post Add Successfully !", });
+                                    }
+                                    else {
+                                        setOpen(true);
+                                        setAlert({ sev: "error", content: `${res.data.data.errorResult}`, });
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        }
+                        else {
+                            setOpen(true);
+                            setAlert({ sev: "error", content: "Max Image Upload Limit Exceed: Allowed Limit 5 Images !", });
+                        }
                     }
                     else if (postData.postType === 'poll') {
                         if (tempPollOption.seq1 === '' && tempPollOption.seq2 === '') {
@@ -367,7 +375,7 @@ export default function CreatePost() {
                         }
                         else {
                             const formData = new FormData();
-                            formData.append('files', postMedia2);
+                            formData.append('files', eventBannerImage);
                             formData.append('uploadFor', 'postMedia');
                             axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
                                 .then(res => {
@@ -402,7 +410,6 @@ export default function CreatePost() {
 
                                     })
 
-                                    setPostMedia('')
                                     setEventCoverImage('')
 
                                     setOpen(true);
@@ -613,11 +620,14 @@ export default function CreatePost() {
                             </a>
                         </div>
                         <div className="images-videos-block">
-                            <a className="media-img-vid-close" onClick={closeMediaClick}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            <a className="media-img-close-icon mt-3 " onClick={closeMediaClick}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20">
+                                    <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
+                                </svg>
                             </a>
                             <input id='media-input' className="choose-file" type="file" onChange={(e) => handleChange(e, 'media')} multiple accept=".jpg,.jpeg,.png" />
-                            {file.length >= 1 && <div className='d-flex'>
+                            {mediaPost.length >= 1 && <div className='d-flex'>
                                 <button className="media-img-vid-edit" >
                                     <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" className="icon-font-light  mr-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                     Edit all
@@ -628,19 +638,35 @@ export default function CreatePost() {
                                 </button>
                             </div>
                             }
-                            <img src={file[0] ? `${URL.createObjectURL(file[0])}` : "assets/images/image-preview.jpg"} />
                             {
-                                file.length > 1 && <div className="row">
+                                mediaPost[0]?.type === 'video/mp4' ? (
+                                    <video width="100%" height="300" controls>
+                                        <source src={mediaPost[0] ? `${URL.createObjectURL(mediaPost[0])}` : "assets/images/image-preview.jpg"} type="video/mp4" />
+                                    </video>
+                                ) : (
+                                    <img src={mediaPost[0] ? `${URL.createObjectURL(mediaPost[0])}` : "assets/images/image-preview.jpg"} />
+                                )
+                            }
+                            {
+                                mediaPost.length > 1 && <div className="row">
                                     {
-                                        file.slice(1).map((img) => {
-                                            return <div className="col-4" key={img.lastModified}>
-                                                <a className="media-img-close-icon" onClick={()=>{setFile(file.filter(file=>file.lastModified!==img.lastModified))}}>
+                                        mediaPost.slice(1).map((med) => {
+                                            return <div className="col-4" key={med.lastModified}>
+                                                <a className="media-img-close-icon" onClick={() => { setMediaPost(mediaPost.filter(media => media.lastModified !== med.lastModified)) }}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20">
-                                                    <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
-                                                    <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
+                                                        <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
                                                     </svg>
                                                 </a>
-                                                <img src={`${URL.createObjectURL(img)}`} />
+                                                {
+                                                    med.type === 'video/mp4' ? (
+                                                        <video width="100%" height="300" controls>
+                                                            <source src={`${URL.createObjectURL(med)}`} type="video/mp4" />
+                                                        </video>
+                                                    ) : (
+                                                        <img src={`${URL.createObjectURL(med)}`} />
+                                                    )
+                                                }
                                             </div>
                                         })
                                     }
@@ -868,7 +894,7 @@ export default function CreatePost() {
                                                     <label>Upload banner Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">
@@ -1011,7 +1037,7 @@ export default function CreatePost() {
                                                     <label>Upload podcast cover Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">
@@ -1101,7 +1127,7 @@ export default function CreatePost() {
                                                     <label>Upload Product Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">
