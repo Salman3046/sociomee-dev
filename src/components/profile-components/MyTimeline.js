@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom";
+import React, {  useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../Header';
 import LeftSidebar from '../LeftSidebar';
@@ -36,16 +35,16 @@ import { addCommentOnPost } from '../../Services/Actions/SocialFeed/addCommentOn
 import { loadProfileByUserId } from '../../Services/Actions/UserProfile/getUserProfileByUserIdAction';
 import { addAnswerOnPollPost } from '../../Services/Actions/SocialFeed/addAnswerOnPollPostAction';
 
-import PollPost from '../post-components/PollPost';
-import MediaPost from '../post-components/MediaPost';
-import AlertPost from '../post-components/AlertPost';
-import EventPost from '../post-components/EventPost';
+import PollPost from '../post-components/display-post/PollPost';
+import MediaPost from '../post-components/display-post/MediaPost';
+import AlertPost from '../post-components/display-post/AlertPost';
+import EventPost from '../post-components/display-post/EventPost';
 import SuggestedBizPage from '../post-components/SuggestedItems/SuggestedBizPage';
 import SuggestedGroup from '../post-components/SuggestedItems/SuggestedGroup';
 import SuggestedAd from '../post-components/SuggestedItems/SuggestedAd';
-import ThoughtPost from '../post-components/ThoughtPost';
+import ThoughtPost from '../post-components/display-post/ThoughtPost';
 import timeAgo from '../../functions/timeAgo';
-import Comments from '../post-components/Comments';
+import Comments from '../post-components/display-post/Comments';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function MyTimeline() {
@@ -54,8 +53,6 @@ export default function MyTimeline() {
     const { allPostsByUserId } = useSelector(state => state.getAllPostsByUserIdData)
     const [globalPostId, setGlobalPostId] = useState('');
 
-    // load more functionality
-    const [postNumber, setPostNumber] = useState(10)
     // get all reactions using redux
     const { allReactions } = useSelector(state => state.getAllReactionsData)
     // post comment state
@@ -69,7 +66,7 @@ export default function MyTimeline() {
 
 
     // infinite scroll functionality
-    const [pageSize, setPageSize] = useState({
+    const [pageSize] = useState({
         pageIndex: 0,
         pageSize: 3
     })

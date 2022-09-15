@@ -1,8 +1,6 @@
-import React, { Component, useEffect, useRef } from 'react';
+import React, {  useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useRoutes } from "react-router-dom";
-import Slider from "react-slick";
 import { loadAllUserPosts } from '../Services/Actions/SocialFeed/getAllUserPostsAction';
 import { loadAllReactions } from '../Services/Actions/SocialFeed/getAllReactionsAction';
 import ContentLeft from './ContentLeft';
@@ -26,183 +24,23 @@ import Snackbar from '@mui/material/Snackbar';
 import { addCommentOnPost } from '../Services/Actions/SocialFeed/addCommentOnPost';
 import { loadProfileByUserId } from '../Services/Actions/UserProfile/getUserProfileByUserIdAction';
 import { addLikeOnPost } from '../Services/Actions/SocialFeed/addLikeOnPost';
-import { addAnswerOnPollPost } from '../Services/Actions/SocialFeed/addAnswerOnPollPostAction';
 import { setPostSaved } from '../Services/Actions/SocialFeed/postSavedAction';
 // import react infinite scroll
 import InfiniteScroll from "react-infinite-scroll-component";
-import PollPost from './post-components/PollPost';
-import MediaPost from './post-components/MediaPost';
-import AlertPost from './post-components/AlertPost';
-import EventPost from './post-components/EventPost';
-import ThoughtPost from './post-components/ThoughtPost';
-import Comments from './post-components/Comments';
+import PollPost from './post-components/display-post/PollPost';
+import MediaPost from './post-components/display-post/MediaPost';
+import AlertPost from './post-components/display-post/AlertPost';
+import EventPost from './post-components/display-post/EventPost';
+import ThoughtPost from './post-components/display-post/ThoughtPost';
+import Comments from './post-components/display-post/Comments';
 import timeAgo from '../functions/timeAgo';
 import ReportPostModal from './post-components/Modals/ReportPostModal';
-import MultiMediaPost from './post-components/MultiMediaPost';
+import MultiMediaPost from './post-components/display-post/MultiMediaPost';
 
 
 
 
 export default function Home({ user }) {
-
-    var friendSettings = {
-        dots: false,
-        speed: 300,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 5000,
-        infinite: true,
-        centerMode: true,
-        centerPadding: '100px',
-        responsive: [{
-            breakpoint: 1800,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '100px'
-            }
-        }, {
-            breakpoint: 1400,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 991,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 576,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                centerMode: true,
-                centerPadding: '20px',
-                dots: false
-            }
-        },
-        {
-            breakpoint: 460,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                centerMode: true,
-                centerPadding: '30px',
-                dots: false
-            }
-        }
-        ]
-    };
-    var bizPageSettings = {
-        dots: false,
-        speed: 300,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 5000,
-        infinite: true,
-        centerMode: true,
-        centerPadding: '80px',
-        responsive: [{
-            breakpoint: 1800,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '100px'
-            }
-        }, {
-            breakpoint: 1400,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        },
-        {
-            breakpoint: 991,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        },
-        {
-            breakpoint: 576,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        },
-        {
-            breakpoint: 460,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        }
-        ]
-    };
-    var podcastSettings = {
-        dots: false,
-        speed: 300,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 5000,
-        infinite: true,
-        centerMode: true,
-        centerPadding: '80px',
-        responsive: [{
-            breakpoint: 1800,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        }, {
-            breakpoint: 1400,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                centerPadding: '40px'
-            }
-        },
-        {
-            breakpoint: 991,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        },
-        {
-            breakpoint: 576,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        },
-        {
-            breakpoint: 460,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerPadding: '60px'
-            }
-        }
-        ]
-    };
-
 
     // Snackbar Code
     const Alert = React.forwardRef(function Alert(props, ref) {
@@ -226,7 +64,7 @@ export default function Home({ user }) {
     const { allReactions } = useSelector(state => state.getAllReactionsData)
 
     // infinite scroll functionality
-    const [pageSize, setPageSize] = useState({
+    const [pageSize] = useState({
         pageIndex: 0,
         pageSize: 3
     })

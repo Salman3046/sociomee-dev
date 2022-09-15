@@ -1,12 +1,8 @@
-import React,{Component} from 'react';
-import { NavLink } from "react-router-dom";
+import React from 'react'
 
-export class Event extends Component {  
-
-  render() {
-    return (
-      <>
-        <div className="event-box section-b-space ratio2_3">
+const Event = () => {
+  return (
+      <div className="event-box section-b-space ratio2_3">
           <div className="image-section">
               <img src="/assets/images/event-1.jpg" className="img-fluid bg-img"
                   alt="event"/>
@@ -55,8 +51,7 @@ export class Event extends Component {
               </a>
           </div>
         </div>
-      </>
-    );
-  }
-} 
-export default Event 
+  )
+}
+
+export default Event
