@@ -23,7 +23,6 @@ const SubComments = ({ postId, commentId, commentChecker, pageSize }) => {
         pageSize: 2
     }
 
-    console.log(postSubComments)
     useEffect(() => {
         axios.post(`${process.env.REACT_APP_IPURL}/post/getComments`, data,
             {

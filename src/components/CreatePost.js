@@ -1,5 +1,4 @@
 import React, { Component, useRef, useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom";
 import DateTimePicker from "react-datetime-picker";
 
 // Use for snakebar
@@ -24,42 +23,6 @@ export default function CreatePost() {
     // this is used for event post
     const [startTime, startOnChange] = useState(new Date());
     const [endTime, endOnChange] = useState(new Date());
-
-    // Media File Preview of media post
-    const [file, setFile] = useState();
-    const [postMedia, setPostMedia] = useState('');
-
-    // Media File Preview of event post
-    const [eventCoverImage, setEventCoverImage] = useState();
-    const [postMedia2, setPostMedia2] = useState('');
-
-    // thought color selection
-    const [selectedColor, setSelectedColor] = useState('#9acd32');
-
-
-    // get all article category
-    const { articleCategory } = useSelector(state => state.getArticleCategoryData)
-    // get all event category
-    const { eventCategory } = useSelector(state => state.getEventCategoryData)
-    // get all colors
-    const { colors } = useSelector(state => state.getColorsData)
-
-
-
-    function handleChange(e, identifier) {
-        if (identifier === 'media') {
-            console.log(e.target.files);
-            setFile(URL.createObjectURL(e.target.files[0]));
-            setPostMedia(e.target.files[0]);
-        }
-        else {
-            setEventCoverImage(URL.createObjectURL(e.target.files[0]));
-            setPostMedia2(e.target.files[0]);
-        }
-
-
-    }
-
     const [postData, setPostData] = useState({
         postType: "text",
         caption: "",
@@ -82,6 +45,38 @@ export default function CreatePost() {
         "thoughtForeColor": "#fff",
         "thoughtBackColor": "",
     })
+    // Media File Preview of media post
+    const [mediaPost, setMediaPost] = useState([]);
+
+    // Media File Preview of event post
+    const [eventCoverImage, setEventCoverImage] = useState();
+    const [eventBannerImage, setEventBannerImage] = useState('');
+
+    // thought color selection
+    const [selectedColor, setSelectedColor] = useState('#9acd32');
+
+    // get all article category
+    const { articleCategory } = useSelector(state => state.getArticleCategoryData)
+    // get all event category
+    const { eventCategory } = useSelector(state => state.getEventCategoryData)
+    // get all colors
+    const { colors } = useSelector(state => state.getColorsData)
+
+
+
+    function handleChange(e, identifier) {
+        if (identifier === 'media') {
+            setMediaPost([...mediaPost, ...e.target.files]);
+        }
+        else {
+            setEventCoverImage(URL.createObjectURL(e.target.files[0]));
+            setEventBannerImage(e.target.files[0]);
+        }
+
+
+    }
+
+
 
 
     const Alert = React.forwardRef(function Alert(props, ref) {
@@ -98,7 +93,6 @@ export default function CreatePost() {
     })
 
     const [pollOptionCount, setPollOptionCount] = useState([1, 2]);
-
 
     // get user profile by user id 
     const { userProfileByUserId } = useSelector(state => state.getUserProfileByUserIdData);
@@ -149,7 +143,7 @@ export default function CreatePost() {
         mediaRef.current.classList.remove("d-block");
         bgNoneRef.current.classList.remove("d-none");
         gradientMainBlockRef.current.classList.remove("d-none");
-        setFile("")
+        setMediaPost("")
     };
 
     // Create Recommendation Post 
@@ -263,51 +257,67 @@ export default function CreatePost() {
                     postData.location2 = res.data.state_prov;
                     postData.location3 = res.data.city;
                     console.log(res.data)
-                    console.log(postMedia)
-                    if (postMedia) {
+                    if (mediaPost.length > 0) {
                         postData.postType = 'media';
-                        const formData = new FormData();
-                        formData.append('files', postMedia);
-                        formData.append('uploadFor', 'postMedia');
-                        axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
-                            .then((res) => {
-                                console.log(res.data)
-                                postData.mediaList = [
-                                    {
-                                        "fileType": "image",
-                                        "fileURL": res.data.data.successResult[0],
-                                        "caption": "media File Caption",
-                                        "sequence": 0
+                        console.log(mediaPost)
+                        if (mediaPost.length <= 5) {
+                            const formData = new FormData();
+                            mediaPost.map((imgObj) => {
+                                return formData.append("files", imgObj);
+                            })
+                            formData.append('uploadFor', 'postMedia');
+                            axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
+                                .then((res) => {
+                                    console.log(res.data)
+                                    if (res.data.success) {
+                                        postData.mediaList = [];
+                                        res.data.data.successResult.forEach((img, i) => {
+                                            postData.mediaList.push({
+                                                "fileType": mediaPost[i].type.slice(0,5),
+                                                "fileURL": img,
+                                                "caption": "Caption",
+                                                "sequence": i
+                                            })
+                                        })
+
+                                        dispatch(addPost(postData));
+                                        setPostData({
+                                            "postType": "text",
+                                            "caption": "",
+                                            "displayLocation": "",
+                                            "schedule": "",
+                                            "isScheduled": "",
+                                            "feelingId": "",
+                                            "feelingCategoryId": "",
+                                            "allowComments": 0,
+
+                                            "mentionIds": null,
+                                            "hashTags": [],
+                                            "taggedUserIds": null,
+
+                                            "locationLAT": "",
+                                            "locationLONG": "",
+                                            "location1": "",
+                                            "location2": "",
+                                            "location3": ""
+                                        })
+                                        setMediaPost('');
+                                        setOpen(true);
+                                        setAlert({ sev: "success", content: "Post Add Successfully !", });
                                     }
-                                ];
-                                dispatch(addPost(postData));
-                                setPostData({
-                                    "postType": "text",
-                                    "caption": "",
-                                    "displayLocation": "",
-                                    "schedule": "",
-                                    "isScheduled": "",
-                                    "feelingId": "",
-                                    "feelingCategoryId": "",
-                                    "allowComments": 0,
-
-                                    "mentionIds": null,
-                                    "hashTags": [],
-                                    "taggedUserIds": null,
-
-                                    "locationLAT": "",
-                                    "locationLONG": "",
-                                    "location1": "",
-                                    "location2": "",
-                                    "location3": ""
+                                    else {
+                                        setOpen(true);
+                                        setAlert({ sev: "error", content: `${res.data.data.errorResult}`, });
+                                    }
                                 })
-                                setFile('');
-                                setOpen(true);
-                                setAlert({ sev: "success", content: "Post Add Successfully !", });
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        }
+                        else {
+                            setOpen(true);
+                            setAlert({ sev: "error", content: "Max Image Upload Limit Exceed: Allowed Limit 5 Images !", });
+                        }
                     }
                     else if (postData.postType === 'poll') {
                         if (tempPollOption.seq1 === '' && tempPollOption.seq2 === '') {
@@ -365,7 +375,7 @@ export default function CreatePost() {
                         }
                         else {
                             const formData = new FormData();
-                            formData.append('files', postMedia2);
+                            formData.append('files', eventBannerImage);
                             formData.append('uploadFor', 'postMedia');
                             axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
                                 .then(res => {
@@ -400,7 +410,6 @@ export default function CreatePost() {
 
                                     })
 
-                                    setPostMedia('')
                                     setEventCoverImage('')
 
                                     setOpen(true);
@@ -590,12 +599,12 @@ export default function CreatePost() {
                     {/* Gradiant Section */}
                     <div className="search-input input-style icon-right" ref={bgNoneRef}>
                         <div className="creatpost-profile-blk">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                         </div>
                         <textarea name="message" className="form-control enable" cols="30" rows="10" placeholder="What’s  going on? #Hashtag... @Mention." spellCheck="false" value={postData.caption} onChange={(e) => { setPostData({ ...postData, caption: e.target.value }) }}></textarea>
                         {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
                         <a className="pen-icon-creatpost">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid icon" alt="pen" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid icon" alt="pen" />
                         </a>
                     </div>
 
@@ -603,7 +612,7 @@ export default function CreatePost() {
                     <div className="media-create-post-block" ref={mediaRef}>
                         <div className="search-input input-style icon-right">
                             <div className="creatpost-profile-blk">
-                                <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                             </div>
                             <textarea name="message" className="form-control enable" cols="30" rows="10" placeholder="What’s  going on? #Hashtag... @Mention." spellCheck="false" value={postData.caption} onChange={(e) => { setPostData({ ...postData, caption: e.target.value }) }}></textarea>
                             <a className="pen-icon-creatpost">
@@ -611,18 +620,66 @@ export default function CreatePost() {
                             </a>
                         </div>
                         <div className="images-videos-block">
-                            <a className="media-img-vid-close" onClick={closeMediaClick}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            <a className="media-img-close-icon mt-3 " onClick={closeMediaClick}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20">
+                                    <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
+                                </svg>
                             </a>
-                            <input className="choose-file" type="file" onChange={(e) => handleChange(e, 'media')} />
-                            <img src={file ? file : "assets/images/image-preview.jpg"} />
+                            <input id='media-input' className="choose-file" type="file" onChange={(e) => handleChange(e, 'media')} multiple accept=".jpg,.jpeg,.png" />
+                            {mediaPost.length >= 1 && <div className='d-flex'>
+                                <button className="media-img-vid-edit" >
+                                    <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" className="icon-font-light  mr-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                    Edit all
+                                </button>
+                                <button className="media-img-vid-addmore" onClick={() => document.getElementById('media-input').click()}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="addpost-option-btn mr-1" width="17" height="17" viewBox="0 0 21 21" fill="#A6A6A6"><path fillRule="evenodd" clipRule="evenodd" d="M16.625 1.75H4.375C2.8875 1.75 1.75 2.8875 1.75 4.375V16.625C1.75 18.1125 2.8875 19.25 4.375 19.25H16.625C18.1125 19.25 19.25 18.1125 19.25 16.625V4.375C19.25 2.8875 18.1125 1.75 16.625 1.75ZM3.5 4.375C3.5 3.85 3.85 3.5 4.375 3.5H16.625C17.15 3.5 17.5 3.85 17.5 4.375V11.025L14.6125 8.1375C14.2625 7.7875 13.7375 7.7875 13.3875 8.1375L4.1125 17.4125C3.7625 17.325 3.5 16.975 3.5 16.625V4.375ZM6.475 17.5H16.625C17.15 17.5 17.5 17.15 17.5 16.625V13.475L14 9.975L6.475 17.5ZM7.4375 9.625C8.6625 9.625 9.625 8.6625 9.625 7.4375C9.625 6.2125 8.6625 5.25 7.4375 5.25C6.2125 5.25 5.25 6.2125 5.25 7.4375C5.25 8.6625 6.2125 9.625 7.4375 9.625ZM7.875 7.4375C7.875 7.175 7.7 7 7.4375 7C7.175 7 7 7.175 7 7.4375C7 7.7 7.175 7.875 7.4375 7.875C7.7 7.875 7.875 7.7 7.875 7.4375Z"></path></svg>
+                                    Add Photo/Videos
+                                </button>
+                            </div>
+                            }
+                            {
+                                mediaPost[0]?.type === 'video/mp4' ? (
+                                    <video width="100%" height="300" controls>
+                                        <source src={mediaPost[0] ? `${URL.createObjectURL(mediaPost[0])}` : "assets/images/image-preview.jpg"} type="video/mp4" />
+                                    </video>
+                                ) : (
+                                    <img src={mediaPost[0] ? `${URL.createObjectURL(mediaPost[0])}` : "assets/images/image-preview.jpg"} />
+                                )
+                            }
+                            {
+                                mediaPost.length > 1 && <div className="row">
+                                    {
+                                        mediaPost.slice(1).map((med) => {
+                                            return <div className="col-4" key={med.lastModified}>
+                                                <a className="media-img-close-icon" onClick={() => { setMediaPost(mediaPost.filter(media => media.lastModified !== med.lastModified)) }}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-20 ih-20">
+                                                        <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
+                                                    </svg>
+                                                </a>
+                                                {
+                                                    med.type === 'video/mp4' ? (
+                                                        <video width="100%" height="300" controls>
+                                                            <source src={`${URL.createObjectURL(med)}`} type="video/mp4" />
+                                                        </video>
+                                                    ) : (
+                                                        <img src={`${URL.createObjectURL(med)}`} />
+                                                    )
+                                                }
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            }
+
                         </div>
                     </div>
 
                     {/* Recomendation Section */}
                     <div className="search-input input-style icon-right recommendation-block" ref={RecommendationRef}>
                         <div className="creatpost-profile-blk">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                         </div>
                         <textarea name="message" className="form-control enable" maxLength={'150'} cols="30" rows="10" placeholder="I am seeking recommendation for " spellCheck="false" value={postData?.caption} onChange={(e) => setPostData({ ...postData, caption: e.target.value })}></textarea>
                         {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
@@ -634,7 +691,7 @@ export default function CreatePost() {
                     {/* Alert Section */}
                     <div className="alert-create-post-block" ref={alertRef}>
                         <div className="user-profile-cp">
-                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                             <h4>{userProfileByUserId.fullName}</h4>
                         </div>
                         <div className="custom-fixed-height-blk">
@@ -742,7 +799,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="event-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -812,7 +869,7 @@ export default function CreatePost() {
 
                                     <div className="article-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -837,7 +894,7 @@ export default function CreatePost() {
                                                     <label>Upload banner Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">
@@ -874,7 +931,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="poll-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -935,7 +992,7 @@ export default function CreatePost() {
                                     </div>
                                     <div className="article-create-post-block">
                                         <div className="user-profile-cp">
-                                            <img src={userProfileByUserId.profileImage || 'assets/images/my-profile.jpg'} className="img-fluid" alt="profile" />
+                                            <img src={userProfileByUserId.profileImage} className="img-fluid" alt="profile" />
                                             <h4>{userProfileByUserId.fullName}</h4>
                                         </div>
                                         <form className="theme-form form-sm">
@@ -980,7 +1037,7 @@ export default function CreatePost() {
                                                     <label>Upload podcast cover Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">
@@ -1070,7 +1127,7 @@ export default function CreatePost() {
                                                     <label>Upload Product Image</label>
                                                     <div className="upload-image-blk">
                                                         <input type="file" onChange={handleChange} />
-                                                        <img src={file} className="event-img-prev" />
+                                                        <img src={mediaPost} className="event-img-prev" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group col-md-12">

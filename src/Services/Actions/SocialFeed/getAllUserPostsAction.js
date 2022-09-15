@@ -56,7 +56,7 @@ const config = {
     };
 };
 
-// add post
+// delete post
 export const deletePost = (id) => {
     let user = JSON.parse(localStorage.getItem('user'));
 const config = {
@@ -68,10 +68,25 @@ const config = {
             console.log("delete post response :", res);
             dispatch(postDeleted(res.data));
             dispatch(loadAllUserPosts({pageIndex: 0,pageSize: 3}));
-            dispatch(loadAllPostsByUserId());
         }) 
         .catch((error) => {
             console.log(error);
         })
     };
 };
+
+// undo delete post
+export const undoDeletePost = (id) => {
+    let user = JSON.parse(localStorage.getItem('user'));
+    return function (dispatch) {
+        axios.post(`${process.env.REACT_APP_IPURL}/post/undoPostDelete`, id,{ headers: { Authorization: `Bearer ${user?.token}` }})
+        .then((res) => {
+            dispatch(loadAllUserPosts({pageIndex: 0,pageSize: 3}));
+        }) 
+        .catch((error) => {
+            console.log(error);
+        })
+    };
+};
+
+

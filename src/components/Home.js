@@ -22,14 +22,6 @@ import SuggestedAd from './post-components/SuggestedItems/SuggestedAd';
 import MuiAlert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
-// mui dailog box
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 import { addCommentOnPost } from '../Services/Actions/SocialFeed/addCommentOnPost';
 import { loadProfileByUserId } from '../Services/Actions/UserProfile/getUserProfileByUserIdAction';
@@ -45,6 +37,8 @@ import EventPost from './post-components/EventPost';
 import ThoughtPost from './post-components/ThoughtPost';
 import Comments from './post-components/Comments';
 import timeAgo from '../functions/timeAgo';
+import ReportPostModal from './post-components/Modals/ReportPostModal';
+import MultiMediaPost from './post-components/MultiMediaPost';
 
 
 
@@ -219,6 +213,8 @@ export default function Home({ user }) {
     const [alert, setAlert] = useState({ sev: 'success', content: '' });
     // mui dialog box for confirmation
     const [modal, setModal] = useState(false);
+    // used for blank comment field
+    const commentRef = useRef();
 
     // report post's data
     const [reportPostBody, setReportPostBody] = useState({ postId: "", comment: "" });
@@ -267,6 +263,7 @@ export default function Home({ user }) {
             setCommentData({
                 postId: '', comment: ''
             })
+            commentRef.current.value = ''
             setOpen(true);
             setAlert({ sev: "success", content: "Comment Added !", });
             setTimeout(() => {
@@ -308,17 +305,6 @@ export default function Home({ user }) {
         dispatch(setPostSaved({ postId: postId, isSaved: true }))
         setOpen(true);
         setAlert({ sev: "success", content: "Post Saved ✔️", });
-    }
-
-    // post report function
-    const postReportHandler = () => {
-        if (!reportPostBody.comment) {
-            setOpen(true);
-            setAlert({ sev: "error", content: "Please Enter Reason !", });
-        }
-        else {
-            console.log(reportPostBody)
-        }
     }
 
     // Cancel Snackbar
@@ -428,7 +414,11 @@ export default function Home({ user }) {
                                                                 <div className="post-details">
                                                                     <div className="img-wrapper">
                                                                         {
-                                                                            userPosts.mediaList && <MediaPost userPosts={userPosts} pageSize={pageSize} setOpen={setOpen} setAlert={setAlert} />
+                                                                            userPosts.mediaList && userPosts.mediaList?.length === 1 ? (
+                                                                                <MediaPost userPosts={userPosts} pageSize={pageSize} setOpen={setOpen} setAlert={setAlert} />
+                                                                            ) : (
+                                                                                <MultiMediaPost userPosts={userPosts}/>
+                                                                            )
                                                                         }
                                                                     </div>
                                                                     <div className="detail-box">
@@ -546,7 +536,7 @@ export default function Home({ user }) {
                                                                             <div className="search-input input-style input-lg icon-right">
 
                                                                                 {userPosts.allowComments === 1 ? <><input type="text" className="form-control emojiPicker"
-                                                                                    placeholder="write a comment.." value={commentData.comment} onChange={(e) => { setCommentData({ postId: userPosts.postId, comment: e.target.value }) }} />
+                                                                                    placeholder="write a comment.." ref={commentRef} onChange={(e) => { setCommentData({ postId: userPosts.postId, comment: e.target.value }) }} />
                                                                                     <a>
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-2 iw-14 ih-14"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                                                                                     </a>
@@ -584,34 +574,7 @@ export default function Home({ user }) {
                 </Snackbar>
             </Stack>
 
-            {/* Mui Modal box content */}
-            <Dialog open={modal} onClose={false} fullWidth={true}
-                maxWidth={'sm'}>
-                <DialogTitle>Report Post</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Please Enter Reason for Reporting
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        color="success"
-                        margin="dense"
-                        id="name"
-                        label="Reason"
-                        type="text"
-                        fullWidth
-                        // variant="filled"
-                        multiline
-                        rows={4}
-                        value={reportPostBody.comment}
-                        onChange={(e) => setReportPostBody({ ...reportPostBody, comment: e.target.value })}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setModal(false)}>Cancel</Button>
-                    <Button onClick={postReportHandler}>Submit</Button>
-                </DialogActions>
-            </Dialog>
+            <ReportPostModal modal={modal} setModal={setModal} reportPostBody={reportPostBody} setReportPostBody={setReportPostBody} setOpen={setOpen} setAlert={setAlert} />
         </>
     );
 }
