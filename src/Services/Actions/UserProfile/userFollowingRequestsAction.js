@@ -29,7 +29,7 @@ export const getUserFollowingRequests = () => {
 export const sendUserFollowingRequests = (id, isPrivate) => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('user'));
-        if (user?.token) {
+        if (user?.token) { 
             const data = {
                 "followingToId": id,
                 "isFollowed": true,

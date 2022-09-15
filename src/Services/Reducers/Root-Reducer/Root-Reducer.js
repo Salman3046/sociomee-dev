@@ -35,6 +35,10 @@ import getGroupAdministraterReducer from '../getGroupAdministraterReducer'
 import TrendingHashtagReducer from '../Common/TrendingHashtagReducer'
 import GetUserFollowersReducer from '../Common/GetUserFollowersReducer'
 import GetUserFollowingReducer from '../Common/GetUserFollowingReducer'
+import GetUserConnectionReducer from '../Common/GetUserConnectionReducer'
+
+// AD MANGER
+import getAllAdByStatusReducer from '../AdManager/getAllAdByStatusReducer'
 
 
 
@@ -73,7 +77,12 @@ const rootReducer = combineReducers({
     //  COMMON
     TrendingHashtagData: TrendingHashtagReducer, 
     GetUserFollowersData: GetUserFollowersReducer, 
-    GetUserFollowingData: GetUserFollowingReducer, 
+    GetUserFollowingData: GetUserFollowingReducer,
+    GetUserConnectionData: GetUserConnectionReducer,
+    
+    // AD MANAGER
+    getAllAdByStatusData: getAllAdByStatusReducer,
+
 
 });
 

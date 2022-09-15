@@ -55,7 +55,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>
@@ -87,7 +87,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>
@@ -119,7 +119,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>
@@ -151,7 +151,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>
@@ -183,7 +183,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>
@@ -215,7 +215,7 @@ const AdPausd = () => {
                                 </td>
                                 <td className='img-con'>
                                     <img src="assets/images/story-0.jpg" className="img-fluid max-width" alt="" />
-                                    <div>
+                                    <div className='ml-2'>
                                         <p>New Traffic Ad - Kickstarter</p>
                                         <div className='table-link'>
                                             <span><a href="/">View Charts</a></span>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
+import { loadAllUserConnection } from '../../../Services/Actions/Common/getUserConnectionAction';
 import { loadProfileByUserId } from '../../../Services/Actions/UserProfile/getUserProfileByUserIdAction';
 
 const ConnectionPlaceMenu = () => {
@@ -9,6 +10,12 @@ const ConnectionPlaceMenu = () => {
     let dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadProfileByUserId());
+    }, [])
+
+    // GET FOLLOWING DATA
+    const { getUserConnection } = useSelector(state => state.GetUserConnectionData)
+    useEffect(() => {
+        dispatch(loadAllUserConnection())
     }, [])
 
     return (
@@ -30,11 +37,25 @@ const ConnectionPlaceMenu = () => {
                                 <NavLink to="/FollowersScreen">Followers ({userProfileByUserId.followersCount})</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/#">SocioMates (100)</NavLink>
+                                <a to="#">SocioMates (100)</a>
                             </li>
-                            <li>
-                                <NavLink to="/#">Categries</NavLink>
+                            <li data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <NavLink to="/ConnectionMenuScreen" >Categries
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </NavLink>
                             </li>
+
+                            <div className="dropdown-menu dropdown-menu-right custom-dropdown drop-menu-gal-new-follower conn-menu-dropdown" style={{transform: "translate(600px, 45px) !important"}}>
+                                <ul>
+                                    {
+                                        getUserConnection.rows?.map((request) => {
+                                            return <li>
+                                                <a href="#">{request.name?.slice(0, 15) || 'name'} (0)</a>
+                                            </li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
                         </ul>
                     </div>
 

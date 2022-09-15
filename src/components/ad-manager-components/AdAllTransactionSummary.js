@@ -9,7 +9,7 @@ const AdAllTransactionSummary = () => {
         <>
             <div className='d-flex'>
                 <AdSidebar></AdSidebar>
-                <div>
+                <div style={{width: "95%"}}>
 
                     <AdManagerHeader></AdManagerHeader>
 

@@ -80,6 +80,7 @@ import Connection from "./components/Connections/Connection";
 import FollowRequestsScreen from "./components/Connections/ConnectionPlaceMenu/FollowRequestsScreen";
 import FollowingScreen from "./components/Connections/ConnectionPlaceMenu/FollowingScreen";
 import FollowersScreen from "./components/Connections/ConnectionPlaceMenu/FollowersScreen";
+import ConnectionMenuScreen from "./components/Connections/ConnectionPlaceMenu/ConnectionMenuScreen";
 
 
 const Root = () => {
@@ -167,6 +168,7 @@ const Root = () => {
             <Route exact path="/FollowRequests" element={<FollowRequestsScreen />} />
             <Route exact path="/FollowingScreen" element={<FollowingScreen />} />
             <Route exact path="/FollowersScreen" element={<FollowersScreen />} />
+            <Route exact path="/ConnectionMenuScreen" element={<ConnectionMenuScreen />} />
 
 
             {/* <Route path="*" element={<NotFound/>}/> */}

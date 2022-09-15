@@ -56,8 +56,8 @@ const FollowersScreen = () => {
                             </div>
                             <div className="row">
                                 {
-                                    getUserFollowers && getUserFollowers.rows.map((request) => {
-                                        return <div className="col-lg-4 col-12 p-1">
+                                    getUserFollowers && getUserFollowers.rows?.map((request) => {
+                                        return <div className="col-lg-4 col-12 p-1" key={request.id}>
                                             <div className="mp-releted-pro-blk content-mp-block d-flex justify-content-between">
                                                 <div className="media-body d-none d-md-block">
                                                     <div class="media media-new d-none d-sm-flex">

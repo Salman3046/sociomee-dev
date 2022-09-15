@@ -6,6 +6,7 @@ import Header from '../Header';
 import LeftSidebar from '../LeftSidebar';
 import RightSidebar from '../RightSidebar';
 import ConnectionPlaceMenu from './ConnectionPlaceMenu/ConnectionPlaceMenu';
+import ConnectionSub from './ConnectionSub';
 import Followers from './Followers';
 import FollowingScreen from './FollowingScreen';
 import PendingRequest from './PendingRequest';
@@ -54,7 +55,7 @@ const Connection = () => {
                     <Followers></Followers>
                     <FollowingScreen></FollowingScreen>
                     <SociomateScreen></SociomateScreen>
-
+                    <ConnectionSub></ConnectionSub>
 
                 </div>
                 <RightSidebar></RightSidebar>
