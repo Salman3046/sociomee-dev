@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { loadProfileByUserId } from '../../Services/Actions/UserProfile/getUserProfileByUserIdAction';
 
 const ProfileBox = () => {
@@ -77,7 +77,7 @@ const ProfileBox = () => {
                                 </li>
                             </ul>
                         </div>
-                        <a href="#" className="btn btn-solid">view profile</a>
+                        <Link to='/MyProfile' className="btn btn-solid">view profile</Link>
                     </div>
                 </div>
             </div>

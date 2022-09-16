@@ -7,7 +7,6 @@ const CreateSellModal = ({
   setPostData,
   userProfileByUserId,
   createPostHandler,
-  handleChange,
   clickMedia,
   tempPollOption,
 }) => {
@@ -93,7 +92,7 @@ const CreateSellModal = ({
                         <div className="form-group col-md-12">
                           <label>Upload Product Image</label>
                           <div className="upload-image-blk">
-                            <input type="file" onChange={handleChange} />
+                            <input type="file" />
                             {/* <img src={mediaPost} className="event-img-prev" /> */}
                           </div>
                         </div>
