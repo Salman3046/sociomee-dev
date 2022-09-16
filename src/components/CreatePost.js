@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import DateTimePicker from "react-datetime-picker";
 
 // Use for snakebar
 import MuiAlert from "@mui/material/Alert";
@@ -28,6 +27,7 @@ import CreateThought from "./post-components/CreateThought";
 import CreateRecommendation from "./post-components/CreateRecommendation";
 import CreateText from "./post-components/CreateText";
 import CreateMedia from "./post-components/CreateMedia";
+import Loader from "./Loader/Loader";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -67,6 +67,9 @@ export default function CreatePost() {
   // Snackbar Code
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({ sev: "success", content: "" });
+
+  // loading
+  const [loading, setLoading] = useState(false);
 
   const [pollOptionCount, setPollOptionCount] = useState([1, 2]);
 
@@ -219,6 +222,7 @@ export default function CreatePost() {
             postData.postType = "media";
             console.log(mediaPost);
             if (mediaPost.length <= 5) {
+              setLoading(true)
               const formData = new FormData();
               mediaPost.map((imgObj) => {
                 return formData.append("files", imgObj);
@@ -250,6 +254,7 @@ export default function CreatePost() {
                     });
 
                     dispatch(addPost(postData));
+                    setLoading(false)
                     setPostData({
                       postType: "text",
                       caption: "",
@@ -319,6 +324,7 @@ export default function CreatePost() {
                 }
               }
               postData.pollOptions = polOpt;
+              postData.allowComments = 0;
               dispatch(addPost(postData));
               // pollRef.current.classList.remove("d-block");
               // bgNoneRef.current.classList.remove("d-none");
@@ -533,12 +539,12 @@ export default function CreatePost() {
 
   useEffect(() => {
     dispatch(loadProfileByUserId());
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <div className="create-post">
+      <div className="create-post position-relative">
         <div className="static-section">
           <div className="card-title create-port-title">
             <PostDisplayType postData={postData} setPostData={setPostData} />
@@ -546,7 +552,7 @@ export default function CreatePost() {
             <div className="golive-more-blk">
               <div className="create-btn-livetrad">
                 <a className="btntrad">
-                  <img src="/assets/images/hotspot_pulse-1.svg" alt=''/>
+                  <img src="/assets/images/hotspot_pulse-1.svg" alt="" />
                   Go Live
                 </a>
               </div>
@@ -580,17 +586,19 @@ export default function CreatePost() {
                       <ul>
                         <li>
                           <a onClick={clickMedia}>
-                            <img src="/assets/images/Media.png" alt='' /> Media
+                            <img src="/assets/images/Media.png" alt="" /> Media
                           </a>
                         </li>
                         <li>
                           <a onClick={(e) => clickGradient(e, "#9acd32")}>
-                            <img src="/assets/images/Thought.png" alt='' /> Thought
+                            <img src="/assets/images/Thought.png" alt="" />{" "}
+                            Thought
                           </a>
                         </li>
                         <li>
                           <a>
-                            <img src="/assets/images/Go_live.png" alt='' /> Go Live
+                            <img src="/assets/images/Go_live.png" alt="" /> Go
+                            Live
                           </a>
                         </li>
                         <li>
@@ -599,7 +607,7 @@ export default function CreatePost() {
                             data-bs-target="#createPostEvent"
                             onClick={eventPopup}
                           >
-                            <img src="assets/images/Event.png" alt=''/> Event
+                            <img src="assets/images/Event.png" alt="" /> Event
                           </a>
                         </li>
                         <li>
@@ -607,7 +615,7 @@ export default function CreatePost() {
                             data-bs-toggle="modal"
                             data-bs-target="#createPostPodcast"
                           >
-                            <img src="assets/images/Audio.png" alt=""/> Podcast
+                            <img src="assets/images/Audio.png" alt="" /> Podcast
                           </a>
                         </li>
                         <li>
@@ -616,12 +624,15 @@ export default function CreatePost() {
                             data-bs-target="#createPostArticle"
                             onClick={articlePopup}
                           >
-                            <img src="assets/images/Blog.png" alt=''/> Articles
+                            <img src="assets/images/Blog.png" alt="" /> Articles
                           </a>
                         </li>
                         <li>
                           <a onClick={clickRecommendation}>
-                            <img src="/assets/images/Recommendation.png" alt=''/>{" "}
+                            <img
+                              src="/assets/images/Recommendation.png"
+                              alt=""
+                            />{" "}
                             Recommendation
                           </a>
                         </li>
@@ -631,12 +642,12 @@ export default function CreatePost() {
                             data-bs-target="#createPostPoll"
                             onClick={pollPopup}
                           >
-                            <img src="/assets/images/Poll.png" alt=''/> Poll
+                            <img src="/assets/images/Poll.png" alt="" /> Poll
                           </a>
                         </li>
                         <li>
-                          <a onClick={clickAlert} >
-                            <img src="/assets/images/Threat.png" alt=''/> Alert
+                          <a onClick={clickAlert}>
+                            <img src="/assets/images/Threat.png" alt="" /> Alert
                           </a>
                         </li>
                         <li>
@@ -644,7 +655,7 @@ export default function CreatePost() {
                             data-bs-toggle="modal"
                             data-bs-target="#createPostSell"
                           >
-                            <img src="assets/images/Sell.png" alt=''/> Sell
+                            <img src="assets/images/Sell.png" alt="" /> Sell
                           </a>
                         </li>
                       </ul>
@@ -713,6 +724,7 @@ export default function CreatePost() {
           clickMedia={clickMedia}
           pollOptions={tempPollOption}
         />
+        {loading && <Loader loading={loading} />}
       </div>
 
       {/* Event Model Block */}
