@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { addAnswerOnPollPost } from '../../Services/Actions/SocialFeed/addAnswerOnPollPostAction'
-import { loadAllUserPosts } from '../../Services/Actions/SocialFeed/getAllUserPostsAction'
+import { addAnswerOnPollPost } from '../../../Services/Actions/SocialFeed/addAnswerOnPollPostAction'
+import { loadAllUserPosts } from '../../../Services/Actions/SocialFeed/getAllUserPostsAction'
 
 const PollPost = ({ poll, pageSize, setOpen, setAlert }) => {
 
