@@ -8,7 +8,6 @@ const CreateArticleModal = ({
   setPostData,
   userProfileByUserId,
   createPostHandler,
-  handleChange,
   clickMedia,
   tempPollOption,
 }) => {
@@ -104,7 +103,7 @@ const CreateArticleModal = ({
                         <div className="form-group col-md-12">
                           <label>Upload banner Image</label>
                           <div className="upload-image-blk">
-                            <input type="file" onChange={handleChange} />
+                            <input type="file" />
                             {/* <img src={mediaPost} className="event-img-prev" /> */}
                           </div>
                         </div>
