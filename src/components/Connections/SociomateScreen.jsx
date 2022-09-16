@@ -13,13 +13,13 @@ const SociomateScreen = () => {
           <div className="row">
             <div className="col-lg-4 col-12">
               <div className="col-lg-12 mp-releted-pro-blk mp-releted-pro-blk-new content-mp-block d-flex justify-content-between">
-                <div className="col-lg-8 media-body d-none d-md-block">
-                  <div class="media media-new d-none d-sm-flex">
+                <div className="col-lg-8 media-body d-md-block">
+                  <div class="media media-new d-sm-flex">
                     <div class="user-img">
                       <img src={'https://sociomee-dev.s3.ap-south-1.amazonaws.com/userProfileDp/LhXHReJcWmnBW.jpg'} className="img-fluid bg-img connection-profile connection-profile-new" alt="shivam singh" />
                       <span class="available-stats online"></span>
                     </div>
-                    <div class="media-body d-none d-md-block pl-2">
+                    <div class="media-body d-md-block pl-2">
                       <h4 className='m-0'>{'name'}</h4>
                       <span>{'userName'}</span>
                       <h6>Professional Guitarist</h6>

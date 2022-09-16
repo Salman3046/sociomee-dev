@@ -23,9 +23,9 @@ const ConnectionSub = () => {
                     <div className="row">
                         <div className="col-lg-2 col-12 p-1">
                             <a className="mp-releted-pro-blk mp-releted-pro-blk-new mp-releted-pro-blk-new-new content-mp-block d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#createGroup">
-                                <div className="media-body d-none d-md-block">
-                                    <div class="media media-new d-none d-sm-flex">
-                                        <div class="media-body d-none d-md-block pl-2">
+                                <div className="media-body d-md-block">
+                                    <div class="media media-new d-sm-flex">
+                                        <div class="media-body d-md-block pl-2">
                                             <span className='mt-2 green-text'>
                                                 <i class="fa fa-plus" aria-hidden="true"></i>New category
                                             </span>
@@ -41,9 +41,9 @@ const ConnectionSub = () => {
                             getUserConnection && getUserConnection.rows?.slice(0, 8).map((request) => {
                                 return <div className="col-lg-3 col-12 p-1">
                                     <div className="mp-releted-pro-blk mp-releted-pro-blk-new content-mp-block d-flex justify-content-between">
-                                        <div className="media-body d-none d-md-block">
-                                            <div class="media media-new d-none d-sm-flex">
-                                                <div class="media-body d-none d-md-block pl-2">
+                                        <div className="media-body d-md-block">
+                                            <div class="media media-new d-sm-flex">
+                                                <div class="media-body d-md-block pl-2">
                                                     <h4 className='m-0'>{request.name?.slice(0, 15) || 'name'}</h4>
                                                     <span className='mt-2'>{request.byAdmin || '0'} SocioMates</span>
                                                 </div>

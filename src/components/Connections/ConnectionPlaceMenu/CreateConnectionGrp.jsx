@@ -79,8 +79,8 @@ const CreateConnectionGrp = () => {
                                         <input type="text" className="form-control" name="connectionName" placeholder="Enter new category name" onChange={onChangeHandler} />
                                         <div className="col-lg-12 d-flex p-3">
 
-                                            <Stack spacing={2} sx={{ width: '100%' }} id="stack">
-                                                <button className="btn btn-primary col-lg-8 m-2" onClick={handleSubmit}>Save</button>
+                                            <Stack spacing={2} sx={{ width: '100%', flexDirection: "unset"}} id="stack">
+                                                <button className="btn btn-primary col-lg-8" onClick={handleSubmit}>Save</button>
                                                 {/* Snackbar */}
                                                 <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
                                                     <Alert onClose={handleClose} severity={alert.sev} sx={{ width: '100%' }}>
@@ -88,7 +88,7 @@ const CreateConnectionGrp = () => {
                                                     </Alert>
                                                 </Snackbar>
 
-                                                <button className="btn btn-connection-save-btn col-lg-4">Add members</button>
+                                                <button className="btn btn-connection-save-btn col-lg-4 m-0">Add members</button>
                                             </Stack>
                                         </div>
                                     </div>

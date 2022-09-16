@@ -59,18 +59,18 @@ const FollowingScreen = () => {
                                     getUserFollowing && getUserFollowing.rows.map((request) => {
                                         return <div className="col-lg-4 col-12 p-1">
                                             <div className="mp-releted-pro-blk mp-releted-pro-blk-new content-mp-block d-flex justify-content-between">
-                                                <div className="media-body d-none d-md-block col-lg-12">
-                                                    <div class="media media-new d-none d-sm-flex">
+                                                <div className="media-body d-md-block col-lg-12">
+                                                    <div class="media media-new d-sm-flex">
                                                         <div class="user-img">
                                                             <img src={request.profileImage || 'https://sociomee-dev.s3.ap-south-1.amazonaws.com/userProfileDp/LhXHReJcWmnBW.jpg'} className="img-fluid bg-img connection-profile connection-profile-new" alt="shivam singh" />
                                                             <span class="available-stats online"></span>
                                                         </div>
-                                                        <div class="media-body d-none d-md-block pl-2">
+                                                        <div class="media-body d-md-block pl-2">
                                                             <h4 className='m-0'>{request.fullName?.slice(0, 15) || 'name'}</h4>
-                                                            <span>{request.userName || 'userName'}</span>
+                                                            <span>@{request.userName || 'userName'}</span>
                                                             <p>Professional Guitarist</p>
                                                         </div>
-                                                        <div className=''>
+                                                        <div className='mr-4'>
                                                             <p className='red-text'>Unfollow</p>
                                                         </div>
                                                         <button className="gallery-img-sublink gallery-img-sublink-new request-group-dots">
