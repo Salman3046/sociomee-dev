@@ -131,7 +131,7 @@ const CreateMedia = ({
                   ? `${URL.createObjectURL(mediaPost[0])}`
                   : "assets/images/image-preview.jpg"
               }
-              alt=''
+              alt=""
             />
           )}
           {mediaPost.length > 1 && (
@@ -140,7 +140,7 @@ const CreateMedia = ({
                 return (
                   <div className="col-4" key={med.lastModified}>
                     <div
-                    role='button'
+                      role="button"
                       className="media-img-close-icon"
                       onClick={() => {
                         setMediaPost(
@@ -186,7 +186,7 @@ const CreateMedia = ({
                         />
                       </video>
                     ) : (
-                      <img src={`${URL.createObjectURL(med)}`} alt=''/>
+                      <img src={`${URL.createObjectURL(med)}`} alt="" />
                     )}
                   </div>
                 );
@@ -194,6 +194,7 @@ const CreateMedia = ({
             </div>
           )}
         </div>
+       
       </div>
     </>
   );

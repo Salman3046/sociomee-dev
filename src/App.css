@@ -73,10 +73,16 @@
   z-index: 2 !important;
 }
 
-.without-input-fill {
+.without-input-fill:disabled {
   background: #ACDAD6;
   border-color: #ACDAD6;
 }
+
+.without-input-fill {
+  background: #81C14B;
+  border-color: #81C14B;
+}
+
 
 .button-anchor {
   color: #81C14B !important;
