@@ -76,7 +76,7 @@ const Followers = () => {
                         {
                             getUserFollowers.length <= 0 && <h3 className='text-center'>No Followers Found</h3>
                         }
-                    </div>
+                    </div> 
                 </div>
             </div>
         </>

@@ -123,7 +123,7 @@ const PendingRequest = () => {
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> 
                             })
                         }
                         {

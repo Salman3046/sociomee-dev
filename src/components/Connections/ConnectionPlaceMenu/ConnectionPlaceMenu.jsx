@@ -45,17 +45,20 @@ const ConnectionPlaceMenu = () => {
                                     Categries
                                     <i class="fa fa-caret-down" aria-hidden="true" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 </NavLink>
-                            </li>
 
-                            <div className="dropdown-content">
-                                {
-                                    getUserConnection.rows?.map((request) => {
-                                        return <a href="#">
-                                            {request.name?.slice(0, 15) || 'name'} (0)
-                                        </a>
-                                    })
-                                }
-                            </div>
+                                <div className="dropdown-content-new">
+                                    {
+                                        getUserConnection.rows?.map((request) => {
+                                            // return <NavLink to={`/ConnectionMenuScreen/${request.id}`}>
+                                            //     {request.name?.slice(0, 15) || 'name'} (0)
+                                            // </NavLink>
+                                            return <a href="#">
+                                                {request.name?.slice(0, 15) || 'name'} (0)
+                                            </a>
+                                        })
+                                    }
+                                </div>
+                            </li>
                         </ul>
                     </div>
 

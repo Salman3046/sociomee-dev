@@ -56,7 +56,7 @@ const FollowingScreen = () => {
                             </div>
                             <div className="row">
                                 {
-                                    getUserFollowing && getUserFollowing.rows.map((request) => {
+                                    getUserFollowing && getUserFollowing.rows?.map((request) => {
                                         return <div className="col-lg-4 col-12 p-1">
                                             <div className="mp-releted-pro-blk mp-releted-pro-blk-new content-mp-block d-flex justify-content-between">
                                                 <div className="media-body d-md-block col-lg-12">
@@ -72,7 +72,7 @@ const FollowingScreen = () => {
                                                         </div>
                                                         <div className='mr-4'>
                                                             <p className='red-text'>Unfollow</p>
-                                                        </div>
+                                                        </div> 
                                                         <button className="gallery-img-sublink gallery-img-sublink-new request-group-dots">
                                                             <a href="#" className="dropbtn-gal" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="iw-14 ih-14"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle>
