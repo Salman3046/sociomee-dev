@@ -18,8 +18,6 @@ export const addAnswerOnPollPost = (answer) => {
             .then((res) => {
                 console.log("add answer response :", res);
                 dispatch(answerAdded(res.data));
-                dispatch(loadAllUserPosts());
-
             })
             .catch((error) => {
                 console.log(error);
