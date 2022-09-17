@@ -9,12 +9,16 @@ const CreateEventModal = ({
   setPostData,
   userProfileByUserId,
   createPostHandler,
-  handleChange,
   clickMedia,
   tempPollOption,
 }) => {
   // get all event category
   const { eventCategory } = useSelector((state) => state.getEventCategoryData);
+  
+  const handleChange = (e) => {
+    setPostData({ ...postData, eventCoverImageURL: e.target.files[0] });
+  };
+
   return (
     <>
       <div
@@ -31,11 +35,12 @@ const CreateEventModal = ({
         >
           <div className="modal-content">
             <div className="modal-body">
-              <a
+              <div
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 className="popupclose-button"
                 id="popupclose"
+                role='button'
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +57,7 @@ const CreateEventModal = ({
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
-              </a>
+              </div>
               <div className="create-post">
                 <div className="static-section">
                   <div className="card-title create-port-title">

@@ -7,7 +7,6 @@ const CreatePodcastModal = ({
   setPostData,
   userProfileByUserId,
   createPostHandler,
-  handleChange,
   clickMedia,
   tempPollOption,
 }) => {
@@ -114,7 +113,7 @@ const CreatePodcastModal = ({
                         <div className="form-group col-md-12">
                           <label>Upload podcast cover Image</label>
                           <div className="upload-image-blk">
-                            <input type="file" onChange={handleChange} />
+                            <input type="file" />
                             {/* <img src={mediaPost} className="event-img-prev" /> */}
                           </div>
                         </div>

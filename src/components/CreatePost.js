@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import DateTimePicker from "react-datetime-picker";
 
 // Use for snakebar
 import MuiAlert from "@mui/material/Alert";
@@ -18,12 +17,17 @@ import {
 } from "../Services/Actions/SocialFeed/getAlertDataAction";
 import AddInYourPost from "./AddInYourPost";
 import PostDisplayType from "./PostDisplayType";
-import ColorModal from "./post-components/Modals/ColorModal";
 import CreateEventModal from "./post-components/Modals/CreateEventModal";
 import CreateArticleModal from "./post-components/Modals/CreateArticleModal";
 import CreatePollModal from "./post-components/Modals/CreatePollModal";
 import CreatePodcastModal from "./post-components/Modals/CreatePodcastModal";
 import CreateSellModal from "./post-components/Modals/CreateSellModal";
+import CreateAlert from "./post-components/CreateAlert";
+import CreateThought from "./post-components/CreateThought";
+import CreateRecommendation from "./post-components/CreateRecommendation";
+import CreateText from "./post-components/CreateText";
+import CreateMedia from "./post-components/CreateMedia";
+import Loader from "./Loader/Loader";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -55,9 +59,6 @@ export default function CreatePost() {
   // Media File Preview of media post
   const [mediaPost, setMediaPost] = useState([]);
 
-  // thought color selection
-  const [selectedColor, setSelectedColor] = useState("#9acd32");
-
   const [tempPollOption, setTempPollOption] = useState({
     seq1: "",
     seq2: "",
@@ -67,19 +68,15 @@ export default function CreatePost() {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({ sev: "success", content: "" });
 
-  const [pollOptionCount, setPollOptionCount] = useState([1, 2]);
+  // loading
+  const [loading, setLoading] = useState(false);
 
-  // get all colors
-  const { colors } = useSelector((state) => state.getColorsData);
+  const [pollOptionCount, setPollOptionCount] = useState([1, 2]);
 
   // get user profile by user id
   const { userProfileByUserId } = useSelector(
     (state) => state.getUserProfileByUserIdData
   );
-  // get all alert range
-  const { alertRange } = useSelector((state) => state.getAlertData);
-  // get all alert level
-  const { alertLevel } = useSelector((state) => state.getAlertData);
 
   let dispatch = useDispatch();
 
@@ -110,7 +107,6 @@ export default function CreatePost() {
     alertRef.current.classList.remove("d-block");
     RecommendationRef.current.classList.remove("d-block");
     gradientMainBlockRef.current.classList.remove("d-none");
-    setSelectedColor(colorCode);
     setPostData({
       ...postData,
       postType: "thought",
@@ -142,6 +138,7 @@ export default function CreatePost() {
     RecommendationRef.current.classList.add("d-block");
     setPostData({ ...postData, postType: "recommendation" });
     bgNoneRef.current.classList.add("d-none");
+    bgRef.current.classList.remove("d-block");
     mediaRef.current.classList.remove("d-block");
     alertRef.current.classList.remove("d-block");
     //gradient Button
@@ -202,14 +199,6 @@ export default function CreatePost() {
     setPostData({ ...postData, postType: "poll" });
   };
 
-  const handleChange = (e, identifier) => {
-    if (identifier === "media") {
-      setMediaPost([...mediaPost, ...e.target.files]);
-    } else {
-      setPostData({ ...postData, eventCoverImageURL: e.target.files[0] });
-    }
-  };
-
   // create post functionality
   const createPostHandler = (e) => {
     e.preventDefault();
@@ -233,6 +222,7 @@ export default function CreatePost() {
             postData.postType = "media";
             console.log(mediaPost);
             if (mediaPost.length <= 5) {
+              setLoading(true)
               const formData = new FormData();
               mediaPost.map((imgObj) => {
                 return formData.append("files", imgObj);
@@ -264,6 +254,7 @@ export default function CreatePost() {
                     });
 
                     dispatch(addPost(postData));
+                    setLoading(false)
                     setPostData({
                       postType: "text",
                       caption: "",
@@ -333,6 +324,7 @@ export default function CreatePost() {
                 }
               }
               postData.pollOptions = polOpt;
+              postData.allowComments = 0;
               dispatch(addPost(postData));
               // pollRef.current.classList.remove("d-block");
               // bgNoneRef.current.classList.remove("d-none");
@@ -547,11 +539,12 @@ export default function CreatePost() {
 
   useEffect(() => {
     dispatch(loadProfileByUserId());
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <div className="create-post">
+      <div className="create-post position-relative">
         <div className="static-section">
           <div className="card-title create-port-title">
             <PostDisplayType postData={postData} setPostData={setPostData} />
@@ -559,15 +552,14 @@ export default function CreatePost() {
             <div className="golive-more-blk">
               <div className="create-btn-livetrad">
                 <a className="btntrad">
-                  <img src="/assets/images/hotspot_pulse-1.svg" />
+                  <img src="/assets/images/hotspot_pulse-1.svg" alt="" />
                   Go Live
                 </a>
               </div>
               <div className="settings more-settings-blk">
                 <div className="setting-btn ms-2 setting-dropdown no-bg">
                   <div className="btn-group custom-dropdown arrow-none dropdown-sm">
-                    <div
-                      role="button"
+                    <a
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
@@ -589,22 +581,24 @@ export default function CreatePost() {
                       >
                         <polyline points="6 9 12 15 18 9"></polyline>
                       </svg>
-                    </div>
+                    </a>
                     <div className="dropdown-menu dropdown-menu-right custom-dropdown more-post-type-dropdown">
                       <ul>
                         <li>
                           <a onClick={clickMedia}>
-                            <img src="/assets/images/Media.png" /> Media
+                            <img src="/assets/images/Media.png" alt="" /> Media
                           </a>
                         </li>
                         <li>
                           <a onClick={(e) => clickGradient(e, "#9acd32")}>
-                            <img src="/assets/images/Thought.png" /> Thought
+                            <img src="/assets/images/Thought.png" alt="" />{" "}
+                            Thought
                           </a>
                         </li>
                         <li>
                           <a>
-                            <img src="/assets/images/Go_live.png" /> Go Live
+                            <img src="/assets/images/Go_live.png" alt="" /> Go
+                            Live
                           </a>
                         </li>
                         <li>
@@ -613,7 +607,7 @@ export default function CreatePost() {
                             data-bs-target="#createPostEvent"
                             onClick={eventPopup}
                           >
-                            <img src="assets/images/Event.png" /> Event
+                            <img src="assets/images/Event.png" alt="" /> Event
                           </a>
                         </li>
                         <li>
@@ -621,7 +615,7 @@ export default function CreatePost() {
                             data-bs-toggle="modal"
                             data-bs-target="#createPostPodcast"
                           >
-                            <img src="assets/images/Audio.png" /> Podcsat
+                            <img src="assets/images/Audio.png" alt="" /> Podcast
                           </a>
                         </li>
                         <li>
@@ -630,12 +624,15 @@ export default function CreatePost() {
                             data-bs-target="#createPostArticle"
                             onClick={articlePopup}
                           >
-                            <img src="assets/images/Blog.png" /> Articles
+                            <img src="assets/images/Blog.png" alt="" /> Articles
                           </a>
                         </li>
                         <li>
                           <a onClick={clickRecommendation}>
-                            <img src="/assets/images/Recommendation.png" />{" "}
+                            <img
+                              src="/assets/images/Recommendation.png"
+                              alt=""
+                            />{" "}
                             Recommendation
                           </a>
                         </li>
@@ -645,12 +642,12 @@ export default function CreatePost() {
                             data-bs-target="#createPostPoll"
                             onClick={pollPopup}
                           >
-                            <img src="/assets/images/Poll.png" /> Poll
+                            <img src="/assets/images/Poll.png" alt="" /> Poll
                           </a>
                         </li>
                         <li>
                           <a onClick={clickAlert}>
-                            <img src="/assets/images/Threat.png" /> Alert
+                            <img src="/assets/images/Threat.png" alt="" /> Alert
                           </a>
                         </li>
                         <li>
@@ -658,7 +655,7 @@ export default function CreatePost() {
                             data-bs-toggle="modal"
                             data-bs-target="#createPostSell"
                           >
-                            <img src="assets/images/Sell.png" /> Sell
+                            <img src="assets/images/Sell.png" alt="" /> Sell
                           </a>
                         </li>
                       </ul>
@@ -669,441 +666,55 @@ export default function CreatePost() {
             </div>
           </div>
 
-          {/* Gradiant Section */}
-          <div className="search-input input-style icon-right" ref={bgNoneRef}>
-            <div className="creatpost-profile-blk">
-              <img
-                src={userProfileByUserId.profileImage}
-                className="img-fluid"
-                alt="profile"
-              />
-            </div>
-            <textarea
-              name="message"
-              className="form-control enable"
-              cols="30"
-              rows="10"
-              placeholder="What’s  going on? #Hashtag... @Mention."
-              spellCheck="false"
-              value={postData.caption}
-              onChange={(e) => {
-                setPostData({ ...postData, caption: e.target.value });
-              }}
-            ></textarea>
-            {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
-            <a className="pen-icon-creatpost">
-              <img
-                src={userProfileByUserId.profileImage}
-                className="img-fluid icon"
-                alt="pen"
-              />
-            </a>
-          </div>
+          {/* Text Section */}
+          <CreateText
+            postData={postData}
+            setPostData={setPostData}
+            userProfileByUserId={userProfileByUserId}
+            reference={bgNoneRef}
+          />
 
           {/* Media Section */}
-          <div className="media-create-post-block" ref={mediaRef}>
-            <div className="search-input input-style icon-right">
-              <div className="creatpost-profile-blk">
-                <img
-                  src={userProfileByUserId.profileImage}
-                  className="img-fluid"
-                  alt="profile"
-                />
-              </div>
-              <textarea
-                name="message"
-                className="form-control enable"
-                cols="30"
-                rows="10"
-                placeholder="What’s  going on? #Hashtag... @Mention."
-                spellCheck="false"
-                value={postData.caption}
-                onChange={(e) => {
-                  setPostData({ ...postData, caption: e.target.value });
-                }}
-              ></textarea>
-              <a className="pen-icon-creatpost">
-                <img
-                  src="/assets/images/pen-solid-2.png"
-                  className="img-fluid icon"
-                  alt="pen"
-                />
-              </a>
-            </div>
-            <div className="images-videos-block">
-              <a
-                className="media-img-close-icon mt-3 "
-                onClick={closeMediaClick}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="iw-20 ih-20"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" stroke="#000"></line>
-                  <line x1="6" y1="6" x2="18" y2="18" stroke="#000"></line>
-                </svg>
-              </a>
-              <input
-                id="media-input"
-                className="choose-file"
-                type="file"
-                onChange={(e) => handleChange(e, "media")}
-                multiple
-                accept=".jpg,.jpeg,.png"
-              />
-              {mediaPost.length >= 1 && (
-                <div className="d-flex">
-                  <button className="media-img-vid-edit">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="13"
-                      height="13"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="icon-font-light  mr-1"
-                    >
-                      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                    </svg>
-                    Edit all
-                  </button>
-                  <button
-                    className="media-img-vid-addmore"
-                    onClick={() =>
-                      document.getElementById("media-input").click()
-                    }
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="addpost-option-btn mr-1"
-                      width="17"
-                      height="17"
-                      viewBox="0 0 21 21"
-                      fill="#A6A6A6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M16.625 1.75H4.375C2.8875 1.75 1.75 2.8875 1.75 4.375V16.625C1.75 18.1125 2.8875 19.25 4.375 19.25H16.625C18.1125 19.25 19.25 18.1125 19.25 16.625V4.375C19.25 2.8875 18.1125 1.75 16.625 1.75ZM3.5 4.375C3.5 3.85 3.85 3.5 4.375 3.5H16.625C17.15 3.5 17.5 3.85 17.5 4.375V11.025L14.6125 8.1375C14.2625 7.7875 13.7375 7.7875 13.3875 8.1375L4.1125 17.4125C3.7625 17.325 3.5 16.975 3.5 16.625V4.375ZM6.475 17.5H16.625C17.15 17.5 17.5 17.15 17.5 16.625V13.475L14 9.975L6.475 17.5ZM7.4375 9.625C8.6625 9.625 9.625 8.6625 9.625 7.4375C9.625 6.2125 8.6625 5.25 7.4375 5.25C6.2125 5.25 5.25 6.2125 5.25 7.4375C5.25 8.6625 6.2125 9.625 7.4375 9.625ZM7.875 7.4375C7.875 7.175 7.7 7 7.4375 7C7.175 7 7 7.175 7 7.4375C7 7.7 7.175 7.875 7.4375 7.875C7.7 7.875 7.875 7.7 7.875 7.4375Z"
-                      ></path>
-                    </svg>
-                    Add Photo/Videos
-                  </button>
-                </div>
-              )}
-              {mediaPost[0]?.type === "video/mp4" ? (
-                <video width="100%" height="300" controls>
-                  <source
-                    src={
-                      mediaPost[0]
-                        ? `${URL.createObjectURL(mediaPost[0])}`
-                        : "assets/images/image-preview.jpg"
-                    }
-                    type="video/mp4"
-                  />
-                </video>
-              ) : (
-                <img
-                  src={
-                    mediaPost[0]
-                      ? `${URL.createObjectURL(mediaPost[0])}`
-                      : "assets/images/image-preview.jpg"
-                  }
-                />
-              )}
-              {mediaPost.length > 1 && (
-                <div className="row">
-                  {mediaPost.slice(1).map((med) => {
-                    return (
-                      <div className="col-4" key={med.lastModified}>
-                        <a
-                          className="media-img-close-icon"
-                          onClick={() => {
-                            setMediaPost(
-                              mediaPost.filter(
-                                (media) =>
-                                  media.lastModified !== med.lastModified
-                              )
-                            );
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="iw-20 ih-20"
-                          >
-                            <line
-                              x1="18"
-                              y1="6"
-                              x2="6"
-                              y2="18"
-                              stroke="#000"
-                            ></line>
-                            <line
-                              x1="6"
-                              y1="6"
-                              x2="18"
-                              y2="18"
-                              stroke="#000"
-                            ></line>
-                          </svg>
-                        </a>
-                        {med.type === "video/mp4" ? (
-                          <video width="100%" height="300" controls>
-                            <source
-                              src={`${URL.createObjectURL(med)}`}
-                              type="video/mp4"
-                            />
-                          </video>
-                        ) : (
-                          <img src={`${URL.createObjectURL(med)}`} />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
+          <CreateMedia
+            postData={postData}
+            setPostData={setPostData}
+            userProfileByUserId={userProfileByUserId}
+            reference={mediaRef}
+            mediaPost={mediaPost}
+            setMediaPost={setMediaPost}
+            closeMediaClick={closeMediaClick}
+          />
 
-          {/* Recomendation Section */}
-          <div
-            className="search-input input-style icon-right recommendation-block"
-            ref={RecommendationRef}
-          >
-            <div className="creatpost-profile-blk">
-              <img
-                src={userProfileByUserId.profileImage}
-                className="img-fluid"
-                alt="profile"
-              />
-            </div>
-            <textarea
-              name="message"
-              className="form-control enable"
-              maxLength={"150"}
-              cols="30"
-              rows="10"
-              placeholder="I am seeking recommendation for "
-              spellCheck="false"
-              value={postData?.caption}
-              onChange={(e) =>
-                setPostData({ ...postData, caption: e.target.value })
-              }
-            ></textarea>
-            {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
-            <a className="pen-icon-creatpost">
-              <img
-                src="/assets/images/pen-solid-2.png"
-                className="img-fluid icon"
-                alt="pen"
-              />
-            </a>
-          </div>
+          {/* Recommendation Section */}
+          <CreateRecommendation
+            postData={postData}
+            setPostData={setPostData}
+            userProfileByUserId={userProfileByUserId}
+            reference={RecommendationRef}
+          />
 
           {/* Alert Section */}
-          <div className="alert-create-post-block" ref={alertRef}>
-            <div className="user-profile-cp">
-              <img
-                src={userProfileByUserId.profileImage}
-                className="img-fluid"
-                alt="profile"
-              />
-              <h4>{userProfileByUserId.fullName}</h4>
-            </div>
-            <div className="custom-fixed-height-blk">
-              <form className="theme-form form-sm">
-                <div className="row  g-3">
-                  <div className="form-group col-md-12">
-                    <h4 className="create-alert-head">#creatalert</h4>
-                    {/* <label>Description</label> */}
-                    <div className="create-alert-textarea">
-                      <textarea
-                        rows="5"
-                        className="form-control"
-                        maxLength={"320"}
-                        value={postData?.caption}
-                        placeholder="Define the threat..."
-                        onChange={(e) =>
-                          setPostData({ ...postData, caption: e.target.value })
-                        }
-                      ></textarea>
-                      <p className="input-hints">Max 320 Characters</p>
-                    </div>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label>
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="12"
-                        height="12"
-                        stroke="#FF822E"
-                        strokeWidth="2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="css-i6dzq1"
-                      >
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                        <line x1="12" y1="9" x2="12" y2="13"></line>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                      </svg>{" "}
-                      Alert Level
-                    </label>
-                    <select
-                      id="inputState"
-                      className="form-control"
-                      value={postData?.alertLevelId}
-                      onChange={(e) =>
-                        setPostData({
-                          ...postData,
-                          alertLevelId: e.target.value,
-                        })
-                      }
-                    >
-                      <option value="">Select...</option>
-                      {alertLevel &&
-                        alertLevel.map((lev) => {
-                          return (
-                            <option value={lev.id} key={lev.id}>
-                              {lev.name}
-                            </option>
-                          );
-                        })}
-                    </select>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label>
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="12"
-                        height="12"
-                        stroke="#16C31E"
-                        strokeWidth="2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="css-i6dzq1"
-                      >
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>{" "}
-                      Post Alert within
-                    </label>
-                    <select
-                      id="inputState"
-                      className="form-control"
-                      value={postData?.alertRangeMeter}
-                      onChange={(e) =>
-                        setPostData({
-                          ...postData,
-                          alertRangeMeter: e.target.value,
-                        })
-                      }
-                    >
-                      <option value="">Select...</option>
-                      {alertRange &&
-                        alertRange.map((ran, i) => {
-                          return (
-                            <option
-                              value={ran.distance}
-                              key={i}
-                            >{`${ran.distance} ${ran.unit}`}</option>
-                          );
-                        })}
-                    </select>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          
+          <CreateAlert
+            postData={postData}
+            setPostData={setPostData}
+            userProfileByUserId={userProfileByUserId}
+            reference={alertRef}
+          />
+
           {/* Thought Section */}
-          <div className="create-bg">
-            <div className="bg-post gr-1" ref={bgRef} id="bg-post">
-              <div className="input-sec" style={{ background: selectedColor }}>
-                <input
-                  type="text"
-                  className="form-control enable text-white thought-input"
-                  placeholder="What's going on"
-                  value={postData?.caption}
-                  onChange={(e) =>
-                    setPostData({ ...postData, caption: e.target.value })
-                  }
-                />
-                <div className="close-icon" onClick={closeBgClick}>
-                  <a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="iw-20 ih-20"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-bg-block" ref={gradientMainBlockRef}>
-              <img
-                className="opengradient-box"
-                ref={openGradientRef}
-                onClick={clickColorShow}
-                src="assets/images/colorgroupbtn.png"
-              />
-              <ul className="gradient-bg d-none" ref={colorListRef}>
-                <li className="closearrow-btn" onClick={clickColorHide}></li>
-                {colors &&
-                  colors
-                    .map(({ id, colorHexCode }) => {
-                      return (
-                        <li
-                          onClick={(e) => clickGradient(e, colorHexCode)}
-                          className="gr-1"
-                          style={{ background: colorHexCode }}
-                          key={id}
-                        ></li>
-                      );
-                    })
-                    .slice(0, 16)}
-              </ul>
-              <a
-                className="bg-color-btn d-none"
-                ref={colorToggleRef}
-                data-bs-toggle="modal"
-                data-bs-target="#bgColorModel"
-              >
-                <img src="assets/images/bg-color.png" />
-              </a>
-            </div>
-            {/* More Colors Modal */}
-            <ColorModal colors={colors} clickGradient={clickGradient} />
-          </div>
+          <CreateThought
+            postData={postData}
+            setPostData={setPostData}
+            bgReference={bgRef}
+            closeBgClick={closeBgClick}
+            clickColorShow={clickColorShow}
+            clickGradient={clickGradient}
+            gradientReference={gradientMainBlockRef}
+            OpenGradientReference={openGradientRef}
+            clickColorHide={clickColorHide}
+            colorToggleRef={colorToggleRef}
+            colorListReference={colorListRef}
+          />
         </div>
 
         <AddInYourPost
@@ -1113,6 +724,7 @@ export default function CreatePost() {
           clickMedia={clickMedia}
           pollOptions={tempPollOption}
         />
+        {loading && <Loader loading={loading} />}
       </div>
 
       {/* Event Model Block */}
@@ -1121,7 +733,6 @@ export default function CreatePost() {
         setPostData={setPostData}
         userProfileByUserId={userProfileByUserId}
         createPostHandler={createPostHandler}
-        handleChange={handleChange}
         clickMedia={clickMedia}
         tempPollOption={tempPollOption}
       />
@@ -1132,7 +743,6 @@ export default function CreatePost() {
         setPostData={setPostData}
         userProfileByUserId={userProfileByUserId}
         createPostHandler={createPostHandler}
-        handleChange={handleChange}
         clickMedia={clickMedia}
         tempPollOption={tempPollOption}
       />
@@ -1156,7 +766,6 @@ export default function CreatePost() {
         setPostData={setPostData}
         userProfileByUserId={userProfileByUserId}
         createPostHandler={createPostHandler}
-        handleChange={handleChange}
         clickMedia={clickMedia}
         tempPollOption={tempPollOption}
       />
@@ -1166,7 +775,6 @@ export default function CreatePost() {
         setPostData={setPostData}
         userProfileByUserId={userProfileByUserId}
         createPostHandler={createPostHandler}
-        handleChange={handleChange}
         clickMedia={clickMedia}
         tempPollOption={tempPollOption}
       />

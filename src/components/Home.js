@@ -52,7 +52,7 @@ export default function Home({ user }) {
     // mui dialog box for confirmation
     const [modal, setModal] = useState(false);
     // used for blank comment field
-    const commentRef = useRef();
+    const commentRef = useRef(null);
 
     // report post's data
     const [reportPostBody, setReportPostBody] = useState({ postId: "", comment: "" });
@@ -101,10 +101,10 @@ export default function Home({ user }) {
             setCommentData({
                 postId: '', comment: ''
             })
-            commentRef.current.value = ''
             setOpen(true);
             setAlert({ sev: "success", content: "Comment Added !", });
             setTimeout(() => {
+                commentRef.current.value = ''
                 dispatch(loadAllUserPosts(pageSize))
             }, 1000)
         }
@@ -374,7 +374,7 @@ export default function Home({ user }) {
                                                                             <div className="search-input input-style input-lg icon-right">
 
                                                                                 {userPosts.allowComments === 1 ? <><input type="text" className="form-control emojiPicker"
-                                                                                    placeholder="write a comment.." ref={commentRef} onChange={(e) => { setCommentData({ postId: userPosts.postId, comment: e.target.value }) }} />
+                                                                                    placeholder="write a comment.." ref={commentRef} onChange={(e) => { setCommentData({ postId: userPosts.postId, comment: e.target.value }) }} onKeyPress={(e)=>e.key==='Enter' && submitComment(userPosts.postId)}/>
                                                                                     <a>
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-2 iw-14 ih-14"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                                                                                     </a>
