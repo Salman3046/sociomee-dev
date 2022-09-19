@@ -19,7 +19,7 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
     const [toggle, setToggle] = useState(false);
 
     const [optionActive, setOptionActive] = useState('');
-    const [tags, setTags] = useState('');
+    const [tags, setTags] = useState([]);
     const [location, setLocation] = useState('');
 
     // infinite scroll functionality
@@ -88,7 +88,7 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
     const handleSubmit = (e) => {
         postData.hashTags = tags && tags.map(({ name }) => name);
         tags && document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0].click();
-        setTags('');
+        setTags([]);
         postData.displayLocation = location;
         inputRef.current.value = '';
         postData.schedule = (value && value.toISOString());
@@ -218,7 +218,9 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
                                 placeholder="Hashtags..."
                             />
                         )}
+                        disableCloseOnSelect
                         onChange={(e, params) => setTags(params)}
+                        disabled={tags.length>=50 ? true : false}
                     />
 
 
