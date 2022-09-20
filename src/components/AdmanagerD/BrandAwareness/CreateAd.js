@@ -57,25 +57,25 @@ const CreateAd = () => {
                     <div className="step-select-second">
                         <p>Select your advertisement goal</p>
                         <p>To generate high-quality leads & acquire new customers.</p>
-                    </div>
 
 
-                    {/* <div className="container"> */}
-                    <div className="col-lg-12 brand-main brand-main-new">
-                        <div className="row">
-                            {
-                                adType.map((type) => {
-                                    return <div className="brand-main">
-                                        <div className="brand-first">
-                                            <input type="radio" />
+                        {/* <div className="container"> */}
+                        <div className="col-lg-12 brand-main brand-main-new">
+                            <div className="row">
+                                {
+                                    adType.map((type) => {
+                                        return <div className="brand-main">
+                                            <div className="brand-first">
+                                                <input type="radio" />
+                                            </div>
+                                            <div className="brand-second">
+                                                <p className='type'>{type.adTypes}</p>
+                                                <p className='dec'>{type.descriptions}</p>
+                                            </div>
                                         </div>
-                                        <div className="brand-second">
-                                            <p className='type'>{type.adTypes}</p>
-                                            <p className='dec'>{type.descriptions}</p>
-                                        </div>
-                                    </div>
-                                })
-                            }
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                     {/* </div> */}
