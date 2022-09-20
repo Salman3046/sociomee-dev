@@ -434,6 +434,7 @@ export default function CreatePost() {
               setOpen(true);
               setAlert({ sev: "error", content: "Please Fill All Data !" });
             } else {
+              postData.hashTags=['threat_alert'];
               dispatch(addPost(postData));
               alertRef.current.classList.remove("d-block");
               bgNoneRef.current.classList.remove("d-none");
@@ -468,6 +469,7 @@ export default function CreatePost() {
               setOpen(true);
               setAlert({ sev: "error", content: "Please Fill Caption !" });
             } else {
+              postData.hashTags=['#thought_of_the_day'];
               dispatch(addPost(postData));
               bgRef.current.classList.remove("d-block");
               bgNoneRef.current.classList.remove("d-none");

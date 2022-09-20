@@ -1,5 +1,4 @@
-import React,{Component, useEffect, useState} from 'react'; 
-import { NavLink, useParams } from "react-router-dom";
+import React from 'react'; 
 import Header from '../Header';
 import LeftSidebar from '../LeftSidebar';
 import RightSidebar from '../RightSidebar';

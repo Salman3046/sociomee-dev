@@ -135,7 +135,7 @@ const Signup = () => {
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-14 phone-code-arrow "><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                                 </a>
                                                             </div>
-                                                            <input type="text" className="form-control w-75 pr-5" placeholder="Enter Mobile Number" name="mobile" value={userData.mobile} onChange={(e) => { setUserData({ ...userData, mobile: e.target.value }); errorRef.current.classList.add('d-none') }} onKeyPress={numberFilter} maxLength={10}/>
+                                                            <input type="text" className="form-control w-75 pr-5" placeholder="Enter Mobile Number" name="mobile" value={userData.mobile} onChange={(e) => { setUserData({ ...userData, mobile: e.target.value.replace(/[^0-9]/gi, '') }); errorRef.current.classList.add('d-none') }} onKeyPress={numberFilter} maxLength={'10'}/>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B9B9C3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="input-icon iw-20 ih-20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                                         </div>
                                                     </div> 

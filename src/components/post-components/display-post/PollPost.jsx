@@ -22,7 +22,7 @@ const PollPost = ({ poll, pageSize, setOpen, setAlert }) => {
         <>
             {/* <label>Poll</label> */}
             <div className="form-check">
-                {/* <p>Total Participant: 234y</p> */}
+                <p>Total Participant: {poll?.totalVotesOnPoll}</p>
                 <div className="poll-homeoption-blk">
                     {
                         poll.pollOptions && poll.pollOptions.sort((a, b) => a.sequence - b.sequence).map((pollOpt) => {
