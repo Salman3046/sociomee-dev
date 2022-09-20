@@ -20,12 +20,12 @@ const Followers = () => {
     return (
         <>
             <div className="mppage-heading">
-                <div className="group-custom-block">
+                <div className="group-custom-block"> 
                     <div className="heading-podcast-blk">
                         <h3>Followers</h3>
                         <NavLink to="/FollowersScreen" className="single-ancor-blk">See All →</NavLink>
                     </div>
-                    <div className="row">
+                    <div className="row"> 
                         {
                             getUserFollowers && getUserFollowers.rows?.slice(0, 8).map((request) => {
                                 return <div className="col-lg-3 col-12 p-1">

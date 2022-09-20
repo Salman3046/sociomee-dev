@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
+import { loadAdType } from '../../../Services/Actions/AdManager/getAdTypeAction'
 import AdmanagerHeaderR from '../AdmanagerHeaderR/AdmanagerHeaderR'
 import "./brand.css"
+import "../style.css"
 
 const CreateAd = () => {
+    const { adType } = useSelector(state => state.getTypeData)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadAdType())
+    }, [])
 
     return (
         <>
@@ -49,59 +58,30 @@ const CreateAd = () => {
                         <p>Select your advertisement goal</p>
                         <p>To generate high-quality leads & acquire new customers.</p>
                     </div>
+
+
+                    {/* <div className="container"> */}
+                    <div className="col-lg-12 brand-main brand-main-new">
+                        <div className="row">
+                            {
+                                adType.map((type) => {
+                                    return <div className="brand-main">
+                                        <div className="brand-first">
+                                            <input type="radio" />
+                                        </div>
+                                        <div className="brand-second">
+                                            <p className='type'>{type.adTypes}</p>
+                                            <p className='dec'>{type.descriptions}</p>
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
+                    {/* </div> */}
                 </div>
 
 
-                <div className="brand-main">
-                    <div className="brand-first">
-                        <input type="radio" />
-                    </div>
-                    <div className="brand-second">
-                        <p>Brand Awareness- CPV</p>
-                        <p>Increase views of your products, services or company</p>
-                    </div>
-                </div>
-
-                <div className="brand-main-second">
-                    <div className="brand-first">
-                        <input type="radio" />
-                    </div>
-                    <div className="brand-second">
-                        <p>Website ( Link) Visits- CPC</p>
-                        <p>Drive traffic to your websites</p>
-                    </div>
-                </div>
-
-
-                <div className="brand-main-third">
-                    <div className="brand-first">
-                        <input type="radio" />
-                    </div>
-                    <div className="brand-second">
-                        <p>Post Engagement- CPV</p>
-                        <p>Increase user engagement of your posts</p>
-                    </div>
-                </div>
-
-                <div className="brand-main-fourth">
-                    <div className="brand-first">
-                        <input type="radio" />
-                    </div>
-                    <div className="brand-second">
-                        <p>Video Views- CPV</p>
-                        <p>Share your video with more customers</p>
-                    </div>
-                </div>
-
-                <div className="brand-main-fivth">
-                    <div className="brand-first">
-                        <input type="radio" />
-                    </div>
-                    <div className="brand-second">
-                        <p>Lead Generation- CPL</p>
-                        <p>Get more leads for your business</p>
-                    </div>
-                </div>
 
 
                 <div>

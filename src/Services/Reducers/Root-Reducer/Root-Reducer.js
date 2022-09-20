@@ -39,6 +39,7 @@ import GetUserConnectionReducer from '../Common/GetUserConnectionReducer'
 
 // AD MANGER
 import getAllAdByStatusReducer from '../AdManager/getAllAdByStatusReducer'
+import getTypeReducer from '../AdManager/getTypeReducer'
 
 
 
@@ -82,6 +83,7 @@ const rootReducer = combineReducers({
     
     // AD MANAGER
     getAllAdByStatusData: getAllAdByStatusReducer,
+    getTypeData: getTypeReducer,
 
 
 });
