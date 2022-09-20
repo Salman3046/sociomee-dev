@@ -110,7 +110,7 @@ const SignupEmail = () => {
                                  <form className="theme-form">
                                     <div className="form-group">
                                        {/* <label>Enter your Email Address</label> */}
-                                       <input type="email" className={`form-control ${error && 'border-danger'}`} placeholder="Enter Email Address" value={email.email} onChange={(ev) => { setEmail({email:ev.target.value}); setError(''); errorRef.current.classList.add('d-none') }} onKeyPress={(e) => { e.target.value.length >= 30 && e.preventDefault() }} maxLength={30} />
+                                       <input type="email" className={`form-control ${error && 'border-danger'}`} placeholder="Enter Email Address" value={email.email} onChange={(ev) => { setEmail({email:ev.target.value.replace(/[^0-9a-zA-Z!@#$%^&*.]/gi, '')}); setError(''); errorRef.current.classList.add('d-none') }} onKeyPress={(e) => { e.target.value.length >= 30 && e.preventDefault() }} maxLength={'30'} />
                                        <p className="error-input-msg text-center d-none" ref={errorRef}>{error}</p>
                                     </div>
                                     <div className="connect-with">

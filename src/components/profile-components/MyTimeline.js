@@ -48,6 +48,7 @@ import timeAgo from "../../functions/timeAgo";
 import Comments from "../post-components/display-post/Comments";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MultiMediaPost from "../post-components/display-post/MultiMediaPost";
+import RecommendationPost from "../post-components/display-post/RecommendationPost";
 
 export default function MyTimeline() {
   // get all user posts by id using redux
@@ -321,7 +322,18 @@ export default function MyTimeline() {
                                       </a>
                                       <div className="media-body">
                                         <h5>{userPosts.fullName}</h5>
-                                        <h6>{timeAgo(userPosts.createdAt)}</h6>
+                                        <h6>
+                                          {userPosts.postType ===
+                                            "recommendation" && (
+                                            <span>
+                                              <span class="color-orange">
+                                                Recommendation
+                                              </span>
+                                              &nbsp;•&nbsp;
+                                            </span>
+                                          )}
+                                          {timeAgo(userPosts.createdAt)}
+                                        </h6>
                                         {userPosts.displayLocation && (
                                           <h6 className="mt-2 d-flex align-items-center">
                                             <svg
@@ -484,6 +496,7 @@ export default function MyTimeline() {
                                     <h3 className=" overflow-auto">
                                       {userPosts.postType !== "alert" &&
                                         userPosts.postType !== "thought" &&
+                                        userPosts.postType !== "recommendation" &&
                                         userPosts.caption}
                                     </h3>
                                     {userPosts.postType === "poll" && (
@@ -502,6 +515,12 @@ export default function MyTimeline() {
                                     )}
                                     {userPosts?.postType === "thought" && (
                                       <ThoughtPost thought={userPosts} />
+                                    )}
+                                    {userPosts?.postType ===
+                                      "recommendation" && (
+                                      <RecommendationPost
+                                        recommendation={userPosts}
+                                      />
                                     )}
                                     <p></p>
                                     <h5 className="tag">

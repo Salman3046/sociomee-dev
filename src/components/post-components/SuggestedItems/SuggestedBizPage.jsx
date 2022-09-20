@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
 const SuggestedBizPage = ({bizPage}) => {
@@ -82,8 +83,9 @@ const SuggestedBizPage = ({bizPage}) => {
                                 {
                                     bizPage?.suggestedBusiness && bizPage?.suggestedBusiness?.map((page)=>{
                                         return  <div key={page?.id}>
+                                        <Link to={`/BizDetail/${page?.id}`}>
                                     <div className="bizpage-block">
-                                        <img src={page.logoUrl} />
+                                        <img src={page.logoUrl} alt=''/>
                                         <h4>{page.name}</h4>
                                         <div className="people-likes matual-friend-sec">
                                             <ul className="matual-friend-blk">
@@ -103,6 +105,7 @@ const SuggestedBizPage = ({bizPage}) => {
                                             <h6>+12 Likes</h6>
                                         </div>
                                     </div>
+                                        </Link>
                                 </div>
                                     })
                                 }

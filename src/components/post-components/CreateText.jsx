@@ -22,7 +22,9 @@ const CreateText = ({postData,setPostData,userProfileByUserId,reference}) => {
               onChange={(e) => {
                 setPostData({ ...postData, caption: e.target.value });
               }}
+              maxLength={'5000'}
             ></textarea>
+            
             {/* <input type="text" className="form-control enable" placeholder="write something here.."/> */}
             <div className="pen-icon-creatpost" role='button'>
               <img
