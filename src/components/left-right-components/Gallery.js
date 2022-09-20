@@ -14,7 +14,7 @@ const Gallery = () => {
     const media = allPostsByUserId?.rows
       ?.filter((post) => post.postType === "media")
       ?.slice(0, 9)
-      ?.map((media) => [...media.mediaList]);
+      ?.map((media) => media?.mediaList && [...media.mediaList]);
     return media?.flat();
   }, [allPostsByUserId]);
 
@@ -133,9 +133,9 @@ const Gallery = () => {
           <div className="container-fluid p-0">
             <div className="row">
               {allMediaForGallery &&
-                allMediaForGallery.slice(0, 9).map((media) => {
+                allMediaForGallery?.slice(0, 9)?.map((media) => {
                   return (
-                    <div className="col-4" key={media.mediaId}>
+                    <div className="col-4" key={media?.mediaId}>
                       <div className="overlay">
                         <div className="portfolio-image">
                           <a
@@ -143,15 +143,15 @@ const Gallery = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#imageModel"
                           >
-                            {media.fileType === "video" ? (
+                            {media?.fileType === "video" ? (
                               <video width="100%" height="100" controls>
-                                <source src={media.fileURL} type="video/mp4" />
+                                <source src={media?.fileURL} type="video/mp4" />
                               </video>
                             ) : (
                               <img
-                                src={media.fileURL}
+                                src={media?.fileURL}
                                 className="img-fluid bg-img"
-                                alt={media.caption}
+                                alt={media?.caption}
                               />
                             )}
                           </a>

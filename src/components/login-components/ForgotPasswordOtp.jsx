@@ -19,9 +19,8 @@ const Otp = () => {
     const handleOtpChange = (element, index) => {
         if (isNaN(element.value)) return false;
 
-        setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+        setOtp([...otp.map((d, idx) => (idx === index ? element.value.replace(/[^0-9]/gi, '') : d))]);
         errorRef.current.classList.add('d-none')
-
     };
 
 

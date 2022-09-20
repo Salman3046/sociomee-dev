@@ -90,7 +90,7 @@ export default function Signup() {
                         <div className="form-group">
                           <label>Enter your Mobile Number</label>
                           <div className="input-block">
-                            <input type="text" className={`form-control ${userData.mobile.length === 10 && 'border border-success rounded-3'} ${error && 'border-danger'}`} placeholder="Enter Mobile Number" onChange={(e) => { setUserData({ ...userData, mobile: e.target.value }); errorRef.current.classList.add('d-none');setError('') }} onKeyPress={numberFilter} maxLength={10}/>
+                            <input type="text" className={`form-control ${userData.mobile.length === 10 && 'border border-success rounded-3'} ${error && 'border-danger'}`} value={userData?.mobile} placeholder="Enter Mobile Number" onChange={(e) => { setUserData({ ...userData, mobile: e.target.value.replace(/[^0-9]/gi, '') }); errorRef.current.classList.add('d-none');setError('') }} onKeyPress={numberFilter} maxLength={10}/>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B9B9C3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="input-icon iw-20 ih-20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                           </div>
                           <p className="error-input-msg text-center d-none" ref={errorRef}>{error}</p>
