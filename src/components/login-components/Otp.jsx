@@ -26,12 +26,12 @@ const Otp = () => {
     const complete = otp.join("");
 
     const numberFilter = (e) => {
-        var ASCIICode = (e.which) ? e.which : e.keyCode
-        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-            e.preventDefault();
-        if (e.target.value.length === 1) {
-            e.preventDefault();
-        }
+        // var ASCIICode = (e.which) ? e.which : e.keyCode
+        // if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        //     e.preventDefault();
+        // if (e.target.value.length === 1) {
+        //     e.preventDefault();
+        // }
         if(e.key==='Enter'){
             otpSubmit(e);
         }
@@ -138,7 +138,12 @@ const Otp = () => {
 
 
     useEffect(() => {
-        timerFunc();
+        if(location.state){
+            timerFunc();
+        }
+        else{
+            navigate('/')
+        }
     }, [location.state])
 
 

@@ -147,6 +147,7 @@ const SignupDetail = () => {
                                                                 yearItemNumber={9}
                                                                 dateFormat="yyyy"
                                                                 className='form-control'
+                                                                minDate={new Date('January 01, 1910 01:15:00')}
                                                                 maxDate={addMonths(new Date(new Date().setFullYear(new Date().getFullYear() - 13)), 1)}
                                                                 showDisabledMonthNavigation
                                                             />

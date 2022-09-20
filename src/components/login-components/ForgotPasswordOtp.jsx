@@ -136,8 +136,7 @@ const Otp = () => {
     }
 
     useEffect(() => {
-        timerFunc();
-
+         timerFunc();
     }, [location.state])
 
 
