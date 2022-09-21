@@ -81,6 +81,12 @@ const SignupEmail = () => {
       return () => clearTimeout(emailTimeout);
    }, [email])
 
+   useEffect(()=>{
+      if(!location.state){
+         navigate('/');
+      }
+   },[location.state])
+
    return (
       <>
          <section className="login-section">

@@ -2,12 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-// Use for snakebar
-import MuiAlert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import LoginLanguage from './LoginLanguage';
-
+// Use for emoji restriction
 const REGEX=/(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
 
 const Login = () => {
@@ -180,7 +176,7 @@ const Login = () => {
                                                         <svg style={{ color: "red" }} xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor"
                                                             className="bi bi-exclamation-circle-fill mr-1" viewBox="0 0 16 16">
                                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" fill="red"></path> </svg>
-                                                        {error}</p>
+                                                        {error==='incorrectPassword' ? 'Password Incorrect' : error}</p>
                                                 </div>
                                                 <div className="bottom-sec">
                                                     <div className="form-check checkbox_animated"><input type="checkbox" className="form-check-input" id="exampleCheck1" /><label className="" htmlFor="exampleCheck1" >Remember me</label></div>
