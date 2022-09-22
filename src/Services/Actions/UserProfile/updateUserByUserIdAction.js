@@ -8,7 +8,7 @@ const userBioUpdated = () => ({
 
 export const updateUserBio = (id) => {
     return function (dispatch) {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     if (user) {
         axios.post(`${process.env.REACT_APP_IPURL}/user/update`, {} ,
         {

@@ -9,7 +9,7 @@ const getGroup = (getGroupAdministrater) => ({
 export const getGroupAdministraterAction = (id) => {
     return function (dispatch) {
 
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
             const grpBody = ({
                 "groupId": id

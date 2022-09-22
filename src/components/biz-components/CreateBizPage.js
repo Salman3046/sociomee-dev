@@ -170,7 +170,7 @@ export default function GroupDetail() {
             formData.append('files', logo);
             formData.append('files', coverImage);
             formData.append('uploadFor', 'userProfileCover');
-            axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('sociomeeUser')).token}` } })
                 .then(res => {
                     console.log(res)
                     bizPageBody.logo = res.data.data.successResult[0]

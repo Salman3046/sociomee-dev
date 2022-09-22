@@ -80,7 +80,7 @@ const Login = () => {
                     else {
                         setOpen(true);
                         setAlert({ sev: "success", content: 'Login Successfully', });
-                        localStorage.setItem('user', JSON.stringify(res.data.data.successResult))
+                        localStorage.setItem('sociomeeUser', JSON.stringify(res.data.data.successResult))
                         navigate('/Home')
                         // window.location.reload(false);
                     }

@@ -8,7 +8,7 @@ const getAllUserFollowers = (getUserFollowers) => ({
 // get all biz category
 export const loadAllUserFollowers = () => {
 
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getUserFollowers/`,{},

@@ -14,7 +14,7 @@ const getAlertLevel = (alertLevel) => ({
 
 // get all alert range
 export const loadAlertRange = () => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
         headers: { Authorization: `Bearer ${user?.token}` }
     };
@@ -33,7 +33,7 @@ export const loadAlertRange = () => {
 
 // get all alert level
 export const loadAlertLevel = () => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
         headers: { Authorization: `Bearer ${user?.token}` }
     };

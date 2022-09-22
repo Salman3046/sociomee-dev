@@ -23,7 +23,7 @@ const ProfileContactDetail = ({ userProfileByUserId }) => {
                             </div>
                             <div className="details">
                                 <h5>Mobile Number</h5>
-                                <h6>{userProfileByUserId.mobile || 'N/A'}</h6>
+                                <h6>{userProfileByUserId.mobile || ''}</h6>
                             </div>
                         </li>
                         <li>
@@ -32,7 +32,7 @@ const ProfileContactDetail = ({ userProfileByUserId }) => {
                             </div>
                             <div className="details">
                                 <h5>Email Address</h5>
-                                <h6>{userProfileByUserId.email || 'N/A'}</h6>
+                                <h6>{userProfileByUserId.email || ''}</h6>
                             </div>
                         </li>
                     </ul>

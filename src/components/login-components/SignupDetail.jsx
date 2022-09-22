@@ -8,7 +8,7 @@ import {addMonths} from '../../date_utils'
 
 const SignupDetail = () => {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('sociomeeUser'))
     const [detail, setDetail] = useState({ dob: "", gender: "", "addressBy": "" });
     const errorRef = useRef(null);
     const [error, setError] = useState('');

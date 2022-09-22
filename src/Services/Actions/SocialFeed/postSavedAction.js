@@ -15,7 +15,7 @@ const postSaved = () => ({
 // get all saved post
 export const loadAllSavedPost = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
@@ -35,7 +35,7 @@ export const loadAllSavedPost = () => {
 // get all saved post
 export const setPostSaved = (data) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };

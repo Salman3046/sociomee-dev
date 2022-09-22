@@ -12,7 +12,7 @@ const userFollowingRequestsGet = (userFollowingRequests) => ({
 // get user following requests
 export const getUserFollowingRequests = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getFollowingRequests/`, {}, { headers: { Authorization: `Bearer ${user.token}` } })
                 .then((res) => {
@@ -28,7 +28,7 @@ export const getUserFollowingRequests = () => {
 // send user following request
 export const sendUserFollowingRequests = (id, isPrivate) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) { 
             const data = {
                 "followingToId": id,
@@ -52,7 +52,7 @@ export const sendUserFollowingRequests = (id, isPrivate) => {
 // approve user following request
 export const approveUserFollowingRequests = (id) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
             const data = {
                 "followingUserId": id,
@@ -74,7 +74,7 @@ export const approveUserFollowingRequests = (id) => {
 // reject user following request
 export const rejectUserFollowingRequests = (id) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
             const data = {
                 "followingRequestId": id

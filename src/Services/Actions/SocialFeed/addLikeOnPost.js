@@ -9,7 +9,7 @@ const likeAdded = () => ({
 
 // add like on post
 export const addLikeOnPost = (like) => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
         headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` }
     };

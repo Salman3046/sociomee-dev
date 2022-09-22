@@ -44,7 +44,7 @@ export default function AdManagerHeader() {
         axios.post(`${process.env.REACT_APP_IPURL}/user/logOut/`, logoutBody, config)
             .then((respo) => {
                 if (respo.data.data?.successResult) {
-                    localStorage.removeItem('user');
+                    localStorage.removeItem('sociomeeUser');
                     navigate('/');
                     console.log(respo)
                 }
@@ -59,7 +59,7 @@ export default function AdManagerHeader() {
     };
 
     useEffect(() => {
-        setUserProfile(JSON.parse(localStorage.getItem('user')));
+        setUserProfile(JSON.parse(localStorage.getItem('sociomeeUser')));
     }, [])
 
 

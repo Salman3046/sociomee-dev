@@ -12,7 +12,7 @@ const SignupProfile = () => {
     fullName: "",
     userName: "",
     password: "",
-    tnc: false,
+    tnc: true,
   });
   // Complete Data for registration
   const [completeUserData, setCompleteUSerData] = useState({
@@ -143,7 +143,7 @@ const SignupProfile = () => {
                     if (res.data.data?.successResult) {
                       navigate("/SignupDetail");
                       localStorage.setItem(
-                        "user",
+                        "sociomeeUser",
                         JSON.stringify(res.data.data.successResult)
                       );
                     } else {
@@ -408,6 +408,7 @@ const SignupProfile = () => {
                               className="form-check-input"
                               name="tnc"
                               value={profile.tnc}
+                              checked={profile.tnc}
                               id="exampleCheck1"
                               onChange={onChangeHandler}
                             />

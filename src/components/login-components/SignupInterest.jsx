@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const SignupInterest = () => {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('sociomeeUser'))
     const errorRef = useRef(null);
     const [error, setError] = useState('')
 

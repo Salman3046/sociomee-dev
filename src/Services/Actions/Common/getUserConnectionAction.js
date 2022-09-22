@@ -12,7 +12,7 @@ const userConnectionAdded = () => ({
 
 // get all biz category
 export const loadAllUserConnection = () => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getUserConnections/`, {},
@@ -31,7 +31,7 @@ export const loadAllUserConnection = () => {
 
 // ADD USER CONNECTION
 export const addUserConnection = (privacy) => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/addUserConnection/`, privacy,  

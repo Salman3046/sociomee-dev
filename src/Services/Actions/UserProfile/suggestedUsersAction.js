@@ -9,7 +9,7 @@ const suggestedUsersGet = (suggestedUsers) => ({
 // get suggested user 
 export const getSuggestedUsers = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
             axios.get('https://api.ipgeolocation.io/ipgeo?apiKey=c1016d597c494a02aa190877148a5688')
                 .then((res) => {

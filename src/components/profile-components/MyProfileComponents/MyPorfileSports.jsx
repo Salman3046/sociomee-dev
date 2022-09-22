@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
-import { NavLink } from "react-router-dom";
+import React, {  useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 import { addSports, loadAllSports } from '../../../Services/Actions/UserProfile/getAllUserSportsAction';

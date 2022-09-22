@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DateTimePicker from "react-datetime-picker";
 import { useDispatch, useSelector } from 'react-redux';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { loadAllTrendingHashtag } from '../Services/Actions/Common/trandingHashtagAction';
 import Autocomplete from "react-google-autocomplete";
 
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-export default function AddInYourPost({ createPostHandler, postData, setPostData, clickMedia, pollOptions }) {
+const AddInYourPost=({ createPostHandler, postData, setPostData, clickMedia, pollOptions })=>{
     const [value, onChange] = useState('');
     // Model nav menu
     //   Create Post button 
@@ -87,7 +86,7 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
 
     const handleSubmit = (e) => {
         postData.hashTags = tags && tags.map(({ name }) => name);
-        tags && document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0].click();
+        tags.length>0 && document.getElementsByClassName('MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator')[0]?.click();
         setTags([]);
         postData.displayLocation = location;
         inputRef.current.value = '';
@@ -319,3 +318,4 @@ export default function AddInYourPost({ createPostHandler, postData, setPostData
         </>
     );
 } 
+export default AddInYourPost;

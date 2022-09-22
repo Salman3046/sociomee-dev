@@ -9,7 +9,7 @@ const getEventCategory = (eventCategory) => ({
 // get all event category
 export const loadEventCategory = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
