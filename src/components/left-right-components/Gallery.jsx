@@ -1,26 +1,36 @@
+import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadAllPostsByUserId } from "../../Services/Actions/SocialFeed/getAllPostsByUserIdAction";
+import { useSelector } from "react-redux";
 
 const Gallery = () => {
-  // get all user posts by id using redux
-  const { allPostsByUserId } = useSelector(
-    (state) => state.getAllPostsByUserIdData
-  );
-  // all filter post by media will saved in this state
-  const dispatch = useDispatch();
+  const [userMedia, setUserMedia] = useState([]);
+  const user = JSON.parse(localStorage.getItem('sociomeeUser')); 
+  const {allPostsByUserId}=useSelector(state=>state.getAllPostsByUserIdData)
 
   const allMediaForGallery = useMemo(() => {
-    const media = allPostsByUserId?.rows
+    const media = userMedia?.rows
       ?.filter((post) => post.postType === "media")
       ?.slice(0, 9)
       ?.map((media) => media?.mediaList && [...media.mediaList]);
     return media?.flat();
-  }, [allPostsByUserId]);
+  }, [userMedia]);
 
   useEffect(() => {
-    dispatch(loadAllPostsByUserId({ pageSize: "" }));
-  }, []);
+    axios
+      .post(
+        `${process.env.REACT_APP_IPURL}/post/getAllPosts`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${user?.token}` },
+        }
+      )
+      .then((res) => {
+        setUserMedia(res.data.data.successResult);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [allPostsByUserId]);
 
   return (
     <>

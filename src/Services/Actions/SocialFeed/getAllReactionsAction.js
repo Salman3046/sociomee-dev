@@ -9,7 +9,7 @@ const getAllReactions = (allReactions) => ({
 // get all user post
 export const loadAllReactions = () => {
     
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllReactions`,{},{ headers: { Authorization: `Bearer ${user.token}` }})

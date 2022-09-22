@@ -21,7 +21,7 @@ const getGroup = (singleGrpById) => ({
     payload: singleGrpById,
 })
 
-let user = JSON.parse(localStorage.getItem('user'));
+let user = JSON.parse(localStorage.getItem('sociomeeUser'));
 
 // get all user post
 export const loadAllUserGroups = () => {
@@ -87,7 +87,7 @@ export const deletePost = (id) => {
 // find admin by id
 export const getSingleGroup = (id) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };

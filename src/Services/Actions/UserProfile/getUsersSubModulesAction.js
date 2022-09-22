@@ -36,12 +36,9 @@ const getAllProfession = (allProfession) => ({
 // get all user's sports
 export const loadAllUserSports = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/user/getSports`, {}, config)
+            axios.post(`${process.env.REACT_APP_IPURL}/user/getSports`, {}, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getAllUserSports(res.data.data.successResult))
                 })
@@ -55,7 +52,7 @@ export const loadAllUserSports = () => {
 // get all user's Music
 export const loadAllUserMusics = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
@@ -74,7 +71,7 @@ export const loadAllUserMusics = () => {
 // get all user's Movies
 export const loadAllUserMovies = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
@@ -93,7 +90,7 @@ export const loadAllUserMovies = () => {
 // get all user's Music
 export const loadAllUserEducations = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
@@ -112,7 +109,7 @@ export const loadAllUserEducations = () => {
 // get all user's Music
 export const loadAllHobbies = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };
@@ -131,7 +128,7 @@ export const loadAllHobbies = () => {
 // get all professions
 export const loadAllProfessions = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllProfessions`, {}, { headers: { Authorization: `Bearer ${user.token}` } })
                 .then((res) => {
@@ -147,7 +144,7 @@ export const loadAllProfessions = () => {
 // add user's hobbies
 export const addUserHobbies = (hobbies) => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/addHobbies`, hobbies, { headers: { Authorization: `Bearer ${user.token}` } })
                 .then((res) => {

@@ -235,7 +235,7 @@ export default function CreatePost() {
                   {
                     headers: {
                       Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem("user")).token
+                        JSON.parse(localStorage.getItem("sociomeeUser")).token
                       }`,
                     },
                   }
@@ -276,11 +276,11 @@ export default function CreatePost() {
                       location3: "",
                     });
                     setMediaPost("");
-                    setOpen(true);
-                    setAlert({
-                      sev: "success",
-                      content: "Post Add Successfully !",
-                    });
+                    // setOpen(true);
+                    // setAlert({
+                    //   sev: "success",
+                    //   content: "Post Add Successfully !",
+                    // });
                   } else {
                     setOpen(true);
                     setAlert({
@@ -384,7 +384,7 @@ export default function CreatePost() {
                   {
                     headers: {
                       Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem("user")).token
+                        JSON.parse(localStorage.getItem("sociomeeUser")).token
                       }`,
                     },
                   }
@@ -419,11 +419,11 @@ export default function CreatePost() {
                     eventDescription: "",
                     eventAddress: "",
                   });
-                  setOpen(true);
-                  setAlert({
-                    sev: "success",
-                    content: "Post Add Successfully !",
-                  });
+                  // setOpen(true);
+                  // setAlert({
+                  //   sev: "success",
+                  //   content: "Post Add Successfully !",
+                  // });
                 })
                 .catch((err) => {
                   console.log(err);
@@ -461,8 +461,8 @@ export default function CreatePost() {
                 alertRangeMeter: "",
                 alertLevelId: "",
               });
-              setOpen(true);
-              setAlert({ sev: "success", content: "Post Add Successfully !" });
+              // setOpen(true);
+              // setAlert({ sev: "success", content: "Post Add Successfully !" });
             }
           } else if (postData.postType === "thought") {
             if (!postData?.caption) {
@@ -496,8 +496,8 @@ export default function CreatePost() {
                 alertRangeMeter: "",
                 alertLevelId: "",
               });
-              setOpen(true);
-              setAlert({ sev: "success", content: "Post Add Successfully !" });
+              // setOpen(true);
+              // setAlert({ sev: "success", content: "Post Add Successfully !" });
             }
           } else {
             dispatch(addPost(postData));
@@ -521,8 +521,8 @@ export default function CreatePost() {
               location2: "",
               location3: "",
             });
-            setOpen(true);
-            setAlert({ sev: "success", content: "Post Add Successfully !" });
+            // setOpen(true);
+            // setAlert({ sev: "success", content: "Post Add Successfully !" });
           }
         })
         .catch((err) => {

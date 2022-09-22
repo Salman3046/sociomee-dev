@@ -34,7 +34,6 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import { addCommentOnPost } from "../../Services/Actions/SocialFeed/addCommentOnPost";
 import { loadProfileByUserId } from "../../Services/Actions/UserProfile/getUserProfileByUserIdAction";
-import { addAnswerOnPollPost } from "../../Services/Actions/SocialFeed/addAnswerOnPollPostAction";
 
 import PollPost from "../post-components/display-post/PollPost";
 import MediaPost from "../post-components/display-post/MediaPost";
@@ -50,7 +49,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import MultiMediaPost from "../post-components/display-post/MultiMediaPost";
 import RecommendationPost from "../post-components/display-post/RecommendationPost";
 
-export default function MyTimeline() {
+const MyTimeline=()=> {
   // get all user posts by id using redux
   const { allPostsByUserId } = useSelector(
     (state) => state.getAllPostsByUserIdData
@@ -65,8 +64,6 @@ export default function MyTimeline() {
     comment: "",
   });
 
-  // comment checker
-  const [commentChecker, setCommentChecker] = useState(false);
 
   // infinite scroll functionality
   const [pageSize] = useState({
@@ -135,8 +132,8 @@ export default function MyTimeline() {
       ? postFinder.topLikes.find((fin) => fin.id === userProfileByUserId.id)
       : "";
     if (!likeFinder) {
-      setOpen(true);
-      setAlert({ sev: "success", content: "Like 👍" });
+      // setOpen(true);
+      // setAlert({ sev: "success", content: "Like 👍" });
       dispatch(addLikeOnPost(data));
       setTimeout(() => {
         dispatch(loadAllPostsByUserId(pageSize));
@@ -148,7 +145,7 @@ export default function MyTimeline() {
   };
 
   // comment submit function
-  const submitComment = (id) => {
+  const submitComment = async(id) => {
     if (!commentData.postId === id) {
       setOpen(true);
       setAlert({
@@ -162,17 +159,14 @@ export default function MyTimeline() {
         content: "Please Fill input field before submit !",
       });
     } else {
-      dispatch(addCommentOnPost(commentData));
-      setCommentChecker(true);
+      await dispatch(addCommentOnPost(commentData));
+      // setOpen(true);
+      // setAlert({ sev: "success", content: "Comment Added !" });
+      dispatch(loadAllPostsByUserId(pageSize));
       setCommentData({
         postId: "",
         comment: "",
       });
-      setOpen(true);
-      setAlert({ sev: "success", content: "Comment Added !" });
-      setTimeout(() => {
-        dispatch(loadAllPostsByUserId(pageSize));
-      }, 1000);
     }
   };
 
@@ -493,7 +487,7 @@ export default function MyTimeline() {
                                     )}
                                   </div>
                                   <div className="detail-box">
-                                    <h3 className=" overflow-auto">
+                                    <h3 className=" text-break">
                                       {userPosts.postType !== "alert" &&
                                         userPosts.postType !== "thought" &&
                                         userPosts.postType !== "recommendation" &&
@@ -523,7 +517,7 @@ export default function MyTimeline() {
                                       />
                                     )}
                                     <p></p>
-                                    <h5 className="tag">
+                                    <h5 className="tag text-break">
                                       {userPosts.postHashTags &&
                                         userPosts.postHashTags.map((tags) => {
                                           return (
@@ -533,7 +527,7 @@ export default function MyTimeline() {
                                           );
                                         })}
                                     </h5>
-                                    {/* <div className="bookmark favourite-btn">
+                                    {/* <div className="bookmark favorite-btn">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iw-14 ih-14"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                                                     </div> */}
                                     <div className="people-likes">
@@ -694,7 +688,6 @@ export default function MyTimeline() {
                                         {/* Comments Section */}
                                         <Comments
                                           postId={userPosts.postId}
-                                          commentChecker={() => commentChecker}
                                           pageSize={pageSize}
                                         />
                                       </div>
@@ -847,4 +840,4 @@ export default function MyTimeline() {
     </>
   );
 }
-// export default MyProfile
+export default MyTimeline

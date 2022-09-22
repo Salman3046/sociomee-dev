@@ -8,7 +8,7 @@ const getBizSubCategory = (bizSubCategory) => ({
 // get all biz category
 export const loadBizSubCategory = (categoryId) => {
     
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
         headers: { Authorization: `Bearer ${user.token}` }
     };

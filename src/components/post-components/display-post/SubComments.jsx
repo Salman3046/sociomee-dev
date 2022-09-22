@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import timeAgo from '../../../functions/timeAgo';
 import { addLikeOnComment } from '../../../Services/Actions/SocialFeed/addCommentOnPost';
 import { loadAllUserPosts } from '../../../Services/Actions/SocialFeed/getAllUserPostsAction';
 
-const SubComments = ({ postId, commentId, commentChecker, pageSize }) => {
+const SubComments = ({ postId, commentId, pageSize }) => {
+    // get all user posts using redux
+  const { allUserPosts } = useSelector((state) => state.getAllUserPostsData);
     const [postSubComments, setPostSubComments] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const dispatch = useDispatch();
 
     const commentLikeHandler = async (commentId) => {
@@ -34,7 +36,7 @@ const SubComments = ({ postId, commentId, commentChecker, pageSize }) => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [commentChecker])
+    }, [allUserPosts])
 
     return (
         <>

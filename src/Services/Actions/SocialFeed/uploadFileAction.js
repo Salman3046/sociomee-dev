@@ -6,7 +6,7 @@ const getUploadFiles = (uploadFile) => ({
     payload: uploadFile,
 });
 
-let user = JSON.parse(localStorage.getItem('user'));
+let user = JSON.parse(localStorage.getItem('sociomeeUser'));
 const config = {
     headers: { Authorization: `Bearer ${user.token}` }
 };

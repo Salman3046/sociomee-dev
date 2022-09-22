@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, {  useEffect, useState } from 'react';
-import { NavLink } from "react-router-dom";
 
 const Weather = () => {
     const [weather,setWeather]=useState('');

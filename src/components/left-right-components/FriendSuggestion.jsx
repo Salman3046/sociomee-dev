@@ -16,7 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 
-export default function FriendSuggestion() {
+const FriendSuggestion=()=> {
     var FriendSuggestsettings = {
         dots: false,
         speed: 300,
@@ -160,4 +160,4 @@ export default function FriendSuggestion() {
         </>
     );
 }
-// export default FriendSuggestion 
+export default FriendSuggestion 

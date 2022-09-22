@@ -125,7 +125,7 @@ const Signup = () => {
                                         <div>
                                             <form className="theme-form">
                                                 <div className="form-group">
-                                                    <label>Enter your Mobile Number</label>
+                                                    {/* <label>Enter your Mobile Number</label> */}
                                                     <div className={`input-block ${userData.mobile.length === 10 && 'border border-success rounded-3'}`}>
                                                         <div className="phone-with-code">
                                                             <div className="phone-code-dropdown">
@@ -175,13 +175,15 @@ const Signup = () => {
                             <form className="theme-form pr-3 pl-3 p-2">
                                 <div className="input-search-blk">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="search-svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    <input type="text" className="form-control" name="search" placeholder="Search Country..." value={searchValue} onChange={e => setSearchValue(e.target.value)} />
+                                    <input type="text" className="form-control" name="search" placeholder="Search Country..." value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyPress={(e)=>e.key==='Enter' && e.preventDefault()} />
                                 </div>
 
                                 {/* list of countries */}
                                 <ul className="list-group">
                                     {
                                         phoneCode && phoneCode
+                                            ?.filter(code => code.name.match(new RegExp(searchValue, "i")))
+                                            ?.length<=0 ?<h2 className='text-center'>Invalid Search</h2> : phoneCode
                                             ?.filter(code => code.name.match(new RegExp(searchValue, "i")))
                                             ?.map(({
                                                 id,

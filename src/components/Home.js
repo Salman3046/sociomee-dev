@@ -68,9 +68,6 @@ export default function Home({ user }) {
     pageSize: 3,
   });
 
-  // comment checker
-  const [commentChecker, setCommentChecker] = useState(false);
-
   const [hasMore, setHasMore] = useState(true);
   // get more data function
   const getMoreData = () => {
@@ -107,7 +104,6 @@ export default function Home({ user }) {
       });
     } else {
       dispatch(addCommentOnPost(commentData));
-      setCommentChecker(true);
       setCommentData({
         postId: "",
         comment: "",
@@ -449,7 +445,7 @@ export default function Home({ user }) {
                                     )}
                                   </div>
                                   <div className="detail-box">
-                                    <h3 className=" overflow-auto">
+                                    <h3 className=" text-break">
                                       {userPosts.postType !== "alert" &&
                                         userPosts.postType !== "thought" &&
                                         userPosts.postType !== "podcast" &&
@@ -484,7 +480,7 @@ export default function Home({ user }) {
                                       />
                                     )}
                                     <p></p>
-                                    <h5 className="tag">
+                                    <h5 className="tag text-break">
                                       {userPosts.postHashTags &&
                                         userPosts.postHashTags.map(
                                           (tags, i) => {
@@ -646,7 +642,7 @@ export default function Home({ user }) {
                                       >
                                         <a>
                                           <div className="post-btn-cust">
-                                            <img src="assets/images/share.png" />
+                                            <img src="assets/images/share.png" alt=''/>
                                           </div>{" "}
                                           share
                                         </a>
@@ -659,7 +655,6 @@ export default function Home({ user }) {
                                         {/* Comments Section */}
                                         <Comments
                                           postId={userPosts.postId}
-                                          commentChecker={() => commentChecker}
                                           pageSize={pageSize}
                                         />
                                       </div>
