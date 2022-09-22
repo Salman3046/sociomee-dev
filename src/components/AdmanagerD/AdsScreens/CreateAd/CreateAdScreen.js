@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
-import { loadAdType } from '../../../Services/Actions/AdManager/getAdTypeAction'
-import AdmanagerHeaderR from '../AdmanagerHeaderR/AdmanagerHeaderR'
-import '../style.css'
+import { loadAdType } from '../../../../Services/Actions/AdManager/getAdTypeAction'
+import AdmanagerHeaderR from '../../AdmanagerHeaderR/AdmanagerHeaderR'
+import '../../style.css'
 
 const CreateAdScreen = () => {
     const { adType } = useSelector(state => state.getTypeData)
@@ -82,7 +82,7 @@ const CreateAdScreen = () => {
                                 <Link to="" className="btn-cancel">
                                     Cancel
                                 </Link>
-                                <Link to="/Display" className='btn-next'>
+                                <Link to="" className='btn-next'>
                                     Next
                                 </Link>
                             </div>

@@ -108,3 +108,21 @@
     padding: 1rem;
     background-color: white;
 }
+
+
+/* SINGLE IMAGE AD */
+.p-heading{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    color: #4D4D4D;
+}
+.upload-img{
+    width: 400px;
+    height: 200px;
+    background: #F6F6F6;
+    border: 1px dashed #C4C4C4;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
