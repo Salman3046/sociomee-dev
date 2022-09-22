@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 import { loadAdType } from '../../../Services/Actions/AdManager/getAdTypeAction'
 import AdmanagerHeaderR from '../AdmanagerHeaderR/AdmanagerHeaderR'
+import '../style.css'
 
 const CreateAdScreen = () => {
     const { adType } = useSelector(state => state.getTypeData)
@@ -18,7 +19,7 @@ const CreateAdScreen = () => {
 
             <div className="col-lg-12">
                 <div className="row">
-                    <div className="col-lg-3">
+                    <div className="col-lg-3 ad-left">
                         <div className="desh-icon-main">
                             <div className="desh-icon">
                                 <img src="/assets/images/adIcon/grid.png" alt="" />
@@ -41,37 +42,52 @@ const CreateAdScreen = () => {
                         </div>
                     </div>
                     <div className="col-lg-9">
-                        <div className="step-select-one col-lg-12">
-                            <div className="row">
-                                <div className="step-select-child col-lg-4">
-                                    <button>1</button>
-                                    <p>Step 1</p>
+                        <div className="col-lg-12 step-ad-heading">
+                            <div className="row step-section">
+                                <div className="col-lg-2 ad-count">
+                                    <button className="ad-count-btn">1</button>
+                                    <p className="ad-count-step">Step 1</p>
                                 </div>
-                                <div className="step-select-second col-lg-8">
-                                    <p>Select your advertisement goal</p>
+                                <div className="col-lg-10">
+                                    <p className='ad-count-heading'>Select your advertisement goal</p>
                                     <p>To generate high-quality leads & acquire new customers.</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="brand-main-new">
+
+                        <div className="col-lg-12">
                             <div className="row">
                                 {
                                     adType.map((type) => {
-                                        return <div className="brand-main">
-                                            <div className="brand-second">
-                                                <div>
-                                                    <input type="radio" />
-                                                </div>
-                                                <div>
-                                                    <p className='type'>{type.adTypes}</p>
-                                                    <p className='dec'>{type.descriptions}</p>
+                                        return <Link to={`/Ad/Display/${type.id}`} >
+                                            <div className="col-lg-12">
+                                                <div className="ad-type d-flex">
+                                                    <div className='mr-3'>
+                                                        <input type="radio" className='ad-cont-input mr-2' />
+                                                    </div>
+                                                    <div>
+                                                        <p className='type'>{type.adTypes}</p>
+                                                        <p className='dec'>{type.descriptions}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     })
                                 }
                             </div>
                         </div>
+
+                        <div className='col-lg-12'>
+                            <div className="ad-btn">
+                                <Link to="" className="btn-cancel">
+                                    Cancel
+                                </Link>
+                                <Link to="/Display" className='btn-next'>
+                                    Next
+                                </Link>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

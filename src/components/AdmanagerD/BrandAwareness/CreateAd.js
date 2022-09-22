@@ -60,7 +60,7 @@ const CreateAd = () => {
 
 
                         {/* <div className="container"> */}
-                        <div className="col-lg-12 brand-main brand-main-new">
+                        <div className="col-lg-12 brand-main brand-main-new"> 
                             <div className="row">
                                 {
                                     adType.map((type) => {

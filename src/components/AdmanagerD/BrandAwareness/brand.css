@@ -187,29 +187,25 @@
 }
 
 
-.brand-first>input {
+.ad-cont-input {
     box-sizing: border-box;
     width: 20px;
     height: 20px;
 }
 
-.brand-second .type {
+.type {
     /* font-family: 'Poppins'; */
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 27px;
     color: #4D4D4D;
     font-weight: bold;
 }
 
-.brand-second .dec {
-    position: absolute;
-    width: 321px;
-    height: 14px;
-    /* font-family: 'Poppins'; */
+.dec {
     font-weight: 400;
-    font-size: 12px;
+    font-size: 1rem;
     line-height: 120%;
     color: #808080;
 }

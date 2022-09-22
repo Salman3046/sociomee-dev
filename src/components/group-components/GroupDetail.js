@@ -17,7 +17,7 @@ import GroupDetailsTop from './GroupDetailsTop';
 
 export default function GroupDetail() {
     let dispatch = useDispatch();
-    const { id } = useParams();
+    const { id } = useParams(); 
 
     // 
     const [state, setState] = useState({

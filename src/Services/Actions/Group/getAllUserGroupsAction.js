@@ -92,7 +92,7 @@ export const getSingleGroup = (id) => {
             headers: { Authorization: `Bearer ${user.token}` }
         };
         if (user) {
-            const grpBody=({
+            const grpBody=({ 
                 "groupId" : id,
                 "userId" : user.id
             })

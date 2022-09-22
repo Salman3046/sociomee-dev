@@ -81,7 +81,7 @@ import FollowingScreen from "./components/Connections/ConnectionPlaceMenu/Follow
 import FollowersScreen from "./components/Connections/ConnectionPlaceMenu/FollowersScreen";
 import ConnectionMenuScreen from "./components/Connections/ConnectionPlaceMenu/ConnectionMenuScreen";
 import CreateAdScreen from "./components/AdmanagerD/CreateAd/CreateAdScreen";
-import InDevelopment from "./components/InDevelopment";
+import AdTypeScreen from "./components/AdmanagerD/AdType/AdTypeScreen";
 
 const Root = () => {
   return (
@@ -149,9 +149,9 @@ const Root = () => {
       <Route exact path="/CreateBiz" element={<CreateBiz />} />
       <Route exact path="/CreateBizPage" element={<CreateBizPage />} />
 
-      <Route exact path="/CreateAd" element={<InDevelopment />} />
-      <Route exact path="/Display" element={<Display />} />
-      <Route exact path="/Display2" element={<Display2 />} />
+      <Route exact path="/CreateAd" element={<CreateAdScreen />} />
+      <Route exact path="/Ad/Display/:id" element={<AdTypeScreen />} />
+      <Route exact path="/Display2" element={<Display />} />
       <Route exact path="/ConfigureAd" element={<ConfigureAd />} />
       <Route exact path="/ConfigureAd1" element={<ConfigureAd1 />} />
       <Route exact path="/ConfigureAd2" element={<ConfigureAd2 />} />
