@@ -17,7 +17,7 @@ const postDeleted = () => ({
 
 // get all user post
 export const loadAllUserPosts = (data) => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(localStorage.getItem("sociomeeUser"));
   const config = {
     headers: { Authorization: `Bearer ${user?.token}` },
   };
@@ -38,7 +38,7 @@ export const loadAllUserPosts = (data) => {
 
 // add post
 export const addPost = (post) => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(localStorage.getItem("sociomeeUser"));
   return function (dispatch) {
     axios
       .post(`${process.env.REACT_APP_IPURL}/post/createPost/`, post, {
@@ -62,7 +62,7 @@ export const addPost = (post) => {
 
 // delete post
 export const deletePost = (id) => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(localStorage.getItem("sociomeeUser"));
   const config = {
     headers: {
       Authorization: `Bearer ${user.token !== undefined ? user?.token : ""}`,
@@ -84,7 +84,7 @@ export const deletePost = (id) => {
 
 // undo delete post
 export const undoDeletePost = (id) => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(localStorage.getItem("sociomeeUser"));
   return function (dispatch) {
     axios
       .post(`${process.env.REACT_APP_IPURL}/post/undoPostDelete`, id, {

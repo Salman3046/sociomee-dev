@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 
 // MUI Dialog box
@@ -10,8 +10,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
 
-export default function LeftSidebar() {
-    const userProfile = JSON.parse(localStorage.getItem('user'));
+const LeftSidebar=()=> {
+    const userProfile = JSON.parse(localStorage.getItem('sociomeeUser'));
     // MUI State
     const [open, setOpen] = useState(false);
     let navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function LeftSidebar() {
         axios.post(`${process.env.REACT_APP_IPURL}/user/logOut/`, logoutBody, config)
             .then((respo) => {
                 if (respo.data.data?.successResult) {
-                    localStorage.removeItem('user');
+                    localStorage.removeItem('sociomeeUser');
                     navigate('/');
                 }
             })
@@ -136,3 +136,4 @@ export default function LeftSidebar() {
         </>
     );
 } 
+export default LeftSidebar;

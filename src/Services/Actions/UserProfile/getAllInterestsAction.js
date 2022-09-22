@@ -11,7 +11,7 @@ const getAllInterests = (allInterests) => ({
 // get all interest 
 export const loadAllInterests = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllInterests`,{},{ headers: { Authorization: `Bearer ${user.token}` } })
                 .then((res) => {
@@ -26,7 +26,7 @@ export const loadAllInterests = () => {
 
 // add interests
 export const addInterests = (interest) => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         user && axios.post(`${process.env.REACT_APP_IPURL}/user/addInterests/`, { interestIds: interest }, {headers: { Authorization: `Bearer ${user.token}` }})
             .then((res) => {

@@ -76,7 +76,7 @@ const ProfileDetail = ({ userProfileByUserId }) => {
                             </div>
                             <div className="details">
                                 <h5>Current Residence</h5>
-                                <h6>{userProfileByUserId.homeAddress || 'N/A'}</h6>
+                                <h6>{userProfileByUserId.homeAddress || ''}</h6>
                             </div>
                         </li>
                     </ul>

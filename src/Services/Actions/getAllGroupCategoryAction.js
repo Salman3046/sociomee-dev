@@ -9,7 +9,7 @@ const getAllGroupCategory = (allGroupCategory) => ({
 // get all group categoryes
 export const loadAllGroupCategorys = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };

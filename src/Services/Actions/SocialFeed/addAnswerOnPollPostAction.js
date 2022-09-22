@@ -9,7 +9,7 @@ const answerAdded = () => ({
 
 // add answer on poll post
 export const addAnswerOnPollPost = (answer) => {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
         headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` }
     };

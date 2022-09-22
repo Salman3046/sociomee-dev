@@ -127,7 +127,7 @@ export default function MyProfile() {
 
     const [searchValue, setSearchValue] = useState("")
     const [userInterests, setUserInterests] = useState();
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('sociomeeUser'))
     const [userDetail, setUserDetail] = useState('');
 
 

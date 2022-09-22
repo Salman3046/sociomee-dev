@@ -9,7 +9,7 @@ const getArticleCategory = (articleCategory) => ({
 // get all article category
 export const loadArticleCategory = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
         };

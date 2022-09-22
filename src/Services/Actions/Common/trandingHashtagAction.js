@@ -8,7 +8,7 @@ const getAllTrendingHashtag = (trandingHashtags) => ({
 // get all biz category
 export const loadAllTrendingHashtag = (pageSize) => {
 
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/hashtag/getTrending`, pageSize,
