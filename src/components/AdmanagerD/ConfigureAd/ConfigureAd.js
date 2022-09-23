@@ -105,7 +105,7 @@ const ConfigureAd = () => {
 
               {/* <p>Enter advertisement sub-heading...</p> */}
             </div>
-            <p className="max-char-second-spss">Max 60 Characters</p>
+            <p className="max-char-second-spss">Max 60 Characters</p> 
 
             <div className="ad-heading-third-spss">
               <p>Ad Description <span ><img src="/assets/images/adIcon/alert-circle.png" alt="" /></span></p>
