@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 
 import axios from 'axios';
 
@@ -14,6 +14,8 @@ const Otp = () => {
     const [resendOtpLimit, setResendOtpLimit] = useState({ times: 0 })
     const [flag, setFlag] = useState(false)
     let navigate = useNavigate();
+    const navType = useNavigationType();
+
 
     // This function is used to handle six digit code 
     const handleOtpChange = (element, index) => {
@@ -138,13 +140,21 @@ const Otp = () => {
 
 
     useEffect(() => {
-        if(location.state){
             timerFunc();
-        }
-        else{
-            navigate('/')
-        }
-    }, [location.state])
+    }, [location])
+
+    
+  useEffect(() => {
+    if (!location.state) {
+      navigate("/Signup");
+    }
+  });
+
+  useLayoutEffect(() => {
+    if (navType !== "PUSH") {
+      navigate(1);
+    }
+  }, [navType]);
 
 
     return (

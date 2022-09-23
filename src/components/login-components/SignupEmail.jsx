@@ -1,16 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 
-
-// Use for snakebar
-import MuiAlert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import axios from 'axios';
 import { useUserAuth } from '../../Context/userAuthContext';
 
 const SignupEmail = () => {
    const location = useLocation();
+   const navType = useNavigationType();
+
    const [user, setUser] = useState(location.state);
 
    const { logIn, googleSignIn } = useUserAuth();
@@ -81,12 +78,18 @@ const SignupEmail = () => {
       return () => clearTimeout(emailTimeout);
    }, [email])
 
-   useEffect(()=>{
-      if(!location.state){
-         navigate('/');
+  
+   useEffect(() => {
+      if (!location.state) {
+        navigate("/Signup");
       }
-   },[location.state])
-
+    });
+  
+    useLayoutEffect(() => {
+      if (navType !== "PUSH") {
+        navigate(1);
+      }
+    }, [navType]);
    return (
       <>
          <section className="login-section">

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, NavLink, useNavigate, useNavigationType } from 'react-router-dom'
 
 import LoginLanguage from './LoginLanguage';
 // Use for emoji restriction
@@ -11,6 +11,7 @@ const Login = () => {
     const errorRef2 = useRef(null);
     const phoneField = useRef(null)
     const passwordField = useRef(null)
+  const navType = useNavigationType();
     const [error, setError] = useState('');
     const [user, setUser] = useState({ phone: "", password: "" })
     const [language, setLanguage] = useState({ languagId: '' });
@@ -110,6 +111,12 @@ const Login = () => {
                 setAlert({ sev: "error", content: `${err} !`, });
             })
     }, [])
+
+    useEffect(() => {
+        if (navType !== "PUSH") {
+          navigate(1);
+        }
+      }, [navType]);
 
 
     return (

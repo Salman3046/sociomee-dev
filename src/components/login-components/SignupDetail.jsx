@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
@@ -7,6 +7,8 @@ import axios from 'axios';
 import {addMonths} from '../../date_utils'
 
 const SignupDetail = () => {
+    const location=useLocation()
+    const navType = useNavigationType();
 
     const user = JSON.parse(localStorage.getItem('sociomeeUser'))
     const [detail, setDetail] = useState({ dob: "", gender: "", "addressBy": "" });
@@ -52,7 +54,7 @@ const SignupDetail = () => {
                 .then((respo) => {
                     console.log(respo.data.data)
                     if (respo.data.data?.successResult === "Updated User") {
-                        navigate('/SignupInterest')
+                        navigate('/SignupInterest',{state:{verified:true}})
                     }
                     else {
                         errorRef.current.classList.remove('d-none'); setError(respo.data.data?.errorResult)
@@ -77,6 +79,19 @@ const SignupDetail = () => {
             }
         }
     }, [detail])
+
+    
+  useEffect(() => {
+    if (!location.state) {
+      navigate("/Signup");
+    }
+  });
+
+  useLayoutEffect(() => {
+    if (navType !== "PUSH") {
+      navigate(1);
+    }
+  }, [navType]);
 
 
 
