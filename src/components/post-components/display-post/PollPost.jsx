@@ -8,14 +8,12 @@ const PollPost = ({ poll, pageSize, setOpen, setAlert }) => {
     const dispatch = useDispatch();
 
     // submit poll's answer
-    const selectPollOption = (postId, pollOptionId) => {
+    const selectPollOption = async(postId, pollOptionId) => {
         // console.log(postId, pollOptionId)
-        dispatch(addAnswerOnPollPost({ postId: postId, pollOptionId: pollOptionId }))
-        setOpen(true);
-        setAlert({ sev: "success", content: "Poll Submitted ✔️", });
-        setTimeout(() => {
+        await dispatch(addAnswerOnPollPost({ postId: postId, pollOptionId: pollOptionId }))
+        // setOpen(true);
+        // setAlert({ sev: "success", content: "Poll Submitted ✔️", });
             dispatch(loadAllUserPosts(pageSize))
-        }, 1000)
     }
 
     return (

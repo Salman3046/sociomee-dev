@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate, useNavigationType } from "react-router-dom";
 import axios from "axios";
 
 const REGEX =
@@ -7,6 +7,8 @@ const REGEX =
 
 const SignupProfile = () => {
   const location = useLocation();
+  const navType = useNavigationType();
+
   const [user, setUser] = useState(location.state?.user || location.state);
   const [profile, setProfile] = useState({
     fullName: "",
@@ -141,7 +143,7 @@ const SignupProfile = () => {
                   )
                   .then((res) => {
                     if (res.data.data?.successResult) {
-                      navigate("/SignupDetail");
+                      navigate("/SignupDetail",{state:{verified:true}});
                       localStorage.setItem(
                         "sociomeeUser",
                         JSON.stringify(res.data.data.successResult)
@@ -189,6 +191,19 @@ const SignupProfile = () => {
       setFlag(true);
     }
   }, [profile]);
+
+  
+  useEffect(() => {
+    if (!location.state) {
+      navigate("/Signup");
+    }
+  });
+
+  useLayoutEffect(() => {
+    if (navType !== "PUSH") {
+      navigate(1);
+    }
+  }, [navType]);
 
   return (
     <>
