@@ -1,18 +1,20 @@
-import { Autocomplete, TextField } from '@mui/material';
-import React, { useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 
 import axios from 'axios';
 import { useEffect } from 'react';
 
 
 const SignupInterest = () => {
+    const location=useLocation();
 
     const user = JSON.parse(localStorage.getItem('sociomeeUser'))
     const errorRef = useRef(null);
     const [error, setError] = useState('')
 
     let navigate = useNavigate();
+    const navType = useNavigationType();
+
     const [interestData, setInterestData] = useState([]);
     const [getAllInterest, setGetAllInterest] = useState([]);
     const [searchValue, setSearchValue] = useState("")
@@ -74,6 +76,18 @@ const SignupInterest = () => {
                 setError(err)
             })
     }, [])
+
+    useEffect(() => {
+        if (!location.state) {
+          navigate("/Signup");
+        }
+      });
+    
+      useLayoutEffect(() => {
+        if (navType !== "PUSH") {
+          navigate(1);
+        }
+      }, [navType]);
 
     return (
         <>

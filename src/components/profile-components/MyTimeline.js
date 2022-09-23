@@ -127,9 +127,9 @@ const MyTimeline=()=> {
       postId: postId,
       reactionId: reactId,
     };
-    let postFinder = allPostsByUserId.find((fin) => fin.postId == postId);
+    let postFinder = allPostsByUserId?.rows?.find((fin) => fin.postId == postId);
     let likeFinder = postFinder.topLikes
-      ? postFinder.topLikes.find((fin) => fin.id === userProfileByUserId.id)
+      ? postFinder.topLikes?.find((fin) => fin.id === userProfileByUserId.id)
       : "";
     if (!likeFinder) {
       // setOpen(true);

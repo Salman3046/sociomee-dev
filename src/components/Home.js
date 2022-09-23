@@ -108,12 +108,10 @@ export default function Home({ user }) {
         postId: "",
         comment: "",
       });
-      setOpen(true);
-      setAlert({ sev: "success", content: "Comment Added !" });
-      setTimeout(() => {
+      // setOpen(true);
+      // setAlert({ sev: "success", content: "Comment Added !" });
         commentRef.current.value = "";
         dispatch(loadAllUserPosts(pageSize));
-      }, 1000);
     }
   };
 
@@ -124,7 +122,7 @@ export default function Home({ user }) {
     (state) => state.getUserProfileByUserIdData
   );
 
-  const likeHandler = (postId, reactId) => {
+  const likeHandler =async (postId, reactId) => {
     let data = {
       postId: postId,
       reactionId: reactId,
@@ -134,12 +132,10 @@ export default function Home({ user }) {
       ? postFinder.topLikes.find((fin) => fin.id === userProfileByUserId.id)
       : "";
     if (!likeFinder) {
-      setOpen(true);
-      setAlert({ sev: "success", content: "Like 👍" });
-      dispatch(addLikeOnPost(data));
-      setTimeout(() => {
-        dispatch(loadAllUserPosts(pageSize));
-      }, 500);
+      // setOpen(true);
+      // setAlert({ sev: "success", content: "Like 👍" });
+      await dispatch(addLikeOnPost(data));
+      dispatch(loadAllUserPosts(pageSize));
     } else {
       setOpen(true);
       setAlert({ sev: "error", content: "You Already Liked This Post !" });
