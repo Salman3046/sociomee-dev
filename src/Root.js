@@ -84,6 +84,8 @@ import CreateAdScreen from "./components/AdmanagerD/AdsScreens/CreateAd/CreateAd
 import AdTypeScreen from "./components/AdmanagerD/AdsScreens/AdType/AdTypeScreen";
 import SingleImageAdScreen from "./components/AdmanagerD/AdsScreens/SingleImageAd/SingleImageAdScreen";
 import InDevelopment from "./components/InDevelopment";
+import CaroselImageAdImage from "./components/AdmanagerD/AdsScreens/CaroselImageAd/CaroselImageAdImage";
+import VideoAdScreen from "./components/AdmanagerD/AdsScreens/VideoAd/VideoAdScreen";
 
 const Root = () => {
   return (
@@ -151,9 +153,12 @@ const Root = () => {
       <Route exact path="/CreateBiz" element={<CreateBiz />} />
       <Route exact path="/CreateBizPage" element={<CreateBizPage />} />
 
+      {/* AD */}
       <Route exact path="/CreateAd" element={<CreateAdScreen />} />
       <Route exact path="/Ad/Display/:id" element={<AdTypeScreen />} />
       <Route exact path="/Ad/SingleImage" element={<SingleImageAdScreen />} />
+      <Route exact path="/Ad/CaroselAd" element={<CaroselImageAdImage />} />
+      <Route exact path="/Ad/VideoAd" element={<VideoAdScreen />} />
 
       <Route exact path="/Display2" element={<Display />} />
       <Route exact path="/ConfigureAd" element={<ConfigureAd />} />

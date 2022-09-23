@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import AdmanagerHeaderR from '../../AdmanagerHeaderR/AdmanagerHeaderR'
 
-const SingleImageAdScreen = () => {
+const VideoAdScreen = () => {
     const imageUpload = () => {
         document.getElementById('input_file').click();
     }
@@ -66,7 +66,7 @@ const SingleImageAdScreen = () => {
                                     <div className="navigate col-lg-12">
                                         <div className="row">
                                             <div className="navigate-left col-lg-6">
-                                                <p className='navigate-color'>Brand Awareness- CPV  /  Single Image Ad</p>
+                                                <p className='navigate-color'>Brand Awareness- CPV  /  Video Ad</p>
                                             </div>
                                             <div className="navigate-right col-lg-6">
                                                 <h4>Preview on
@@ -107,8 +107,8 @@ const SingleImageAdScreen = () => {
                                             <p className="p-max-car">Max 60 Characters</p>
                                         </div>
                                         <div className='col-lg-6 col-12'>
-                                            <p className='p-heading'>Add Your Image</p>
-                                            <button onClick={imageUpload} className="upload-img">Upload Image</button>
+                                            <p className='p-heading'>Add Your Video</p>
+                                            <button onClick={imageUpload} className="upload-img">Upload Video</button>
                                             <input type="file" name="" id='input_file' hidden />
                                         </div>
                                         {/* </div> */}
@@ -145,4 +145,4 @@ const SingleImageAdScreen = () => {
     )
 }
 
-export default SingleImageAdScreen
+export default VideoAdScreen

@@ -111,11 +111,16 @@
 
 
 /* SINGLE IMAGE AD */
+.navigate{
+    padding-bottom: 1rem;
+}
 .p-heading{
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 21px;
     color: #4D4D4D;
+    margin-bottom: .5rem;
+    margin-right: .3rem;
 }
 .upload-img{
     width: 400px;
@@ -126,3 +131,91 @@
     font-size: 14px;
     font-weight: bold;
 }
+.p-max-car{
+    margin-top: .5rem;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: right;
+    color: #808080;
+}
+.btn-toggle {
+    margin: 0 1rem;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1.5rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+    color: #6b7381;
+    background: #bdc1c8;
+  }
+  .btn-toggle:focus,
+  .btn-toggle.focus,
+  .btn-toggle:focus.active,
+  .btn-toggle.focus.active {
+    outline: none;
+  }
+  .btn-toggle:before,
+  .btn-toggle:after {
+    line-height: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity 0.25s;
+  }
+  .btn-toggle > .handle {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    background: #fff;
+    transition: left 0.25s;
+  }
+  .btn-toggle.active {
+    transition: background-color 0.25s;
+  }
+  .btn-toggle.active > .handle {
+    left: 1.6875rem;
+    transition: left 0.25s;
+  }
+  .btn-toggle.active:before {
+    opacity: 0.5;
+  }
+  .btn-toggle.active:after {
+    opacity: 1;
+  }
+  .btn-size{
+    padding: 12px 25px !important;
+  }
+  .navigate-right{
+    display: block;
+    text-align: end;
+  }
+  .navigate-color{
+    color: #81C14B;
+  }
+
+
+  /* CAROSEL AD */
+  .carosel-heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .ad-btn-new{
+    background: transparent;
+    border: 1px solid #81C14B;
+    display: inline;
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 10px 30px;
+    margin: 5px;
+  }
