@@ -28,7 +28,7 @@ const SubComments = ({ postId, commentId, pageSize }) => {
     useEffect(() => {
         axios.post(`${process.env.REACT_APP_IPURL}/post/getComments`, data,
             {
-                headers: { Authorization: `Bearer ${user.token}` }
+                headers: { Authorization: `Bearer ${user?.token}` }
             })
             .then((res) => {
                 setPostSubComments(res.data.data.successResult)

@@ -11,7 +11,7 @@ export const blockUser = (id) => {
                 "blockedUserId": id,
             }
             axios.post(`${process.env.REACT_APP_IPURL}/user/blockUser`, data,
-                { headers: { Authorization: `Bearer ${user.token}` } })
+                { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(loadAllUserFollowing())
                     dispatch(loadAllUserFollowers())

@@ -13,7 +13,7 @@ export const loadAllTrendingHashtag = (pageSize) => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/hashtag/getTrending`, pageSize,
                 {
-                    headers: { Authorization: `Bearer ${user.token}` }
+                    headers: { Authorization: `Bearer ${user?.token}` }
                 })
                 .then((res) => {
                     dispatch(getAllTrendingHashtag(res.data.data.successResult))

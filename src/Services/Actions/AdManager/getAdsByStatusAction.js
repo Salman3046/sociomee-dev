@@ -17,7 +17,7 @@ export const loadAdsByStatus = () => {
                 "adStatus": "DRAFT"
             }
             axios.post(`${process.env.REACT_APP_IPURL}/ads/adMaster/get/ad/by/adStatus`, data,
-                { headers: { Authorization: `Bearer ${user.token}` } })
+                { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     console.log(res.data)
                     dispatch(getAdsByStatus(res.data.data.successResult))

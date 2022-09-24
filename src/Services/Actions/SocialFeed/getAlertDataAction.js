@@ -15,12 +15,9 @@ const getAlertLevel = (alertLevel) => ({
 // get all alert range
 export const loadAlertRange = () => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-    const config = {
-        headers: { Authorization: `Bearer ${user?.token}` }
-    };
     return function (dispatch) {
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getAlertDistance`, {}, config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getAlertDistance`, {}, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getAlertRange(res.data.data.successResult.rows))
                 })
@@ -34,12 +31,9 @@ export const loadAlertRange = () => {
 // get all alert level
 export const loadAlertLevel = () => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-    const config = {
-        headers: { Authorization: `Bearer ${user?.token}` }
-    };
     return function (dispatch) {
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getAlertLevels`, {}, config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getAlertLevels`, {}, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getAlertLevel(res.data.data.successResult.rows))
                 })

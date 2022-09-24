@@ -33,7 +33,7 @@ const Comments = ({ postId, pageSize }) => {
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_IPURL}/post/getComments`, data, {
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${user?.token}` },
       })
       .then((res) => {
         setPostComments(res.data.data.successResult);

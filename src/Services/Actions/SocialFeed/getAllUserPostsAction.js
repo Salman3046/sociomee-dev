@@ -44,7 +44,7 @@ export const addPost = (post) => {
       .post(`${process.env.REACT_APP_IPURL}/post/createPost/`, post, {
         headers: {
           Authorization: `Bearer ${
-            user.token !== undefined ? user?.token : ""
+           user?.token
           }`,
         },
       })
@@ -63,14 +63,13 @@ export const addPost = (post) => {
 // delete post
 export const deletePost = (id) => {
   let user = JSON.parse(localStorage.getItem("sociomeeUser"));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.token !== undefined ? user?.token : ""}`,
-    },
-  };
   return function (dispatch) {
     axios
-      .post(`${process.env.REACT_APP_IPURL}/post/deletePost/`, id, config)
+      .post(`${process.env.REACT_APP_IPURL}/post/deletePost/`, id, {
+    headers: {
+      Authorization: `Bearer ${user?.token }`,
+    },
+  })
       .then((res) => {
         console.log("delete post response :", res);
         dispatch(postDeleted(res.data));

@@ -14,7 +14,7 @@ export const loadAllSports = () => {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getAllSports`, {}, {
-                headers: { Authorization: `Bearer ${user.token}` }
+                headers: { Authorization: `Bearer ${user?.token}` }
             })
                 .then((res) => {
                     dispatch(getAllSports(res.data.data.successResult))
@@ -30,7 +30,7 @@ export const loadAllSports = () => {
 export const addSports = (sport) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
-        user && axios.post(`${process.env.REACT_APP_IPURL}/user/addSports`, sport, { headers: { Authorization: `Bearer ${user.token}` } })
+        user && axios.post(`${process.env.REACT_APP_IPURL}/user/addSports`, sport, { headers: { Authorization: `Bearer ${user?.token}` } })
             .then((res) => {
                 console.log(res)
                 dispatch(loadSportsByUserId())
