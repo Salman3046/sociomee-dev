@@ -14,7 +14,7 @@ export const getSuggestedUsers = () => {
             axios.get('https://api.ipgeolocation.io/ipgeo?apiKey=c1016d597c494a02aa190877148a5688')
                 .then((res) => {
                     const location = { lat: res.data.latitude, long: res.data.longitude,pageIndex:0,pageSize:20 }
-                    axios.post(`${process.env.REACT_APP_IPURL}/post/getSuggestedUsers`, location, { headers: { Authorization: `Bearer ${user.token}` } })
+                    axios.post(`${process.env.REACT_APP_IPURL}/post/getSuggestedUsers`, location, { headers: { Authorization: `Bearer ${user?.token}` } })
                         .then((res) => {
                             dispatch(suggestedUsersGet(res.data.data.successResult))
                         })

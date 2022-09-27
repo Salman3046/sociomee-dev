@@ -12,7 +12,7 @@ export const updateUserBio = (id) => {
     if (user) {
         axios.post(`${process.env.REACT_APP_IPURL}/user/update`, {} ,
         {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         })
             .then((res) => {
                 dispatch(userBioUpdated());

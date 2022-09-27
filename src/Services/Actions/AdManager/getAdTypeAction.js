@@ -20,7 +20,7 @@ export const loadAdType = () => {
                 "pageSize":10
             }
             axios.post(`${process.env.REACT_APP_IPURL}/ads/adMaster/adType`, data,
-                { headers: { Authorization: `Bearer ${user.token}` } })
+                { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     console.log(res.data)
                     dispatch(getAdType(res.data.data.successResult))
@@ -37,7 +37,7 @@ export const getSingleAdTypeOfType = (id) => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('user'));
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         };
         if (user) {
             const adTypeOfTypebody=({ 

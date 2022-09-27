@@ -13,7 +13,7 @@ export const loadAllPostsByUserId = (pageSize) => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/post/getAllPosts`, pageSize,
                 {
-                    headers: { Authorization: `Bearer ${user.token}` }
+                    headers: { Authorization: `Bearer ${user?.token}` }
                 })
                 .then((res) => {
                     // console.log("all posts:", res.data.data.successResult);

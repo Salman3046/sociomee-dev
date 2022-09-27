@@ -10,11 +10,9 @@ const answerAdded = () => ({
 // add answer on poll post
 export const addAnswerOnPollPost = (answer) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-    const config = {
-        headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` }
-    };
+
     return function (dispatch) {
-        axios.post(`${process.env.REACT_APP_IPURL}/post/selectUserPollOption/`, answer, config)
+        axios.post(`${process.env.REACT_APP_IPURL}/post/selectUserPollOption/`, answer, {headers: { Authorization: `Bearer ${user?.token}` }})
             .then((res) => {
                 console.log("add answer response :", res);
                 dispatch(answerAdded(res.data));

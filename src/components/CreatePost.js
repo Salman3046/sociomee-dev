@@ -235,7 +235,7 @@ export default function CreatePost() {
                   {
                     headers: {
                       Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem("sociomeeUser")).token
+                        JSON.parse(localStorage.getItem("sociomeeUser"))?.token
                       }`,
                     },
                   }
@@ -356,8 +356,8 @@ export default function CreatePost() {
               });
               setPollOptionCount([1, 2]);
               document.getElementById("popupclose3").click();
-              setOpen(true);
-              setAlert({ sev: "success", content: "Post Add Successfully !" });
+              // setOpen(true);
+              // setAlert({ sev: "success", content: "Post Add Successfully !" });
             }
           } else if (postData.postType === "event") {
             if (
@@ -384,7 +384,7 @@ export default function CreatePost() {
                   {
                     headers: {
                       Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem("sociomeeUser")).token
+                        JSON.parse(localStorage.getItem("sociomeeUser"))?.token
                       }`,
                     },
                   }

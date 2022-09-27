@@ -13,7 +13,7 @@ export const loadAllUserFollowing = () => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getUserFollowings/`,{},
                 {
-                    headers: { Authorization: `Bearer ${user.token}` }
+                    headers: { Authorization: `Bearer ${user?.token}` }
                 })
                 .then((res) => {
                     dispatch(getAllUserFollowing(res.data.data.successResult))

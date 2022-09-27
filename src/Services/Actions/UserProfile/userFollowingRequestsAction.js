@@ -14,7 +14,7 @@ export const getUserFollowingRequests = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
-            axios.post(`${process.env.REACT_APP_IPURL}/user/getFollowingRequests/`, {}, { headers: { Authorization: `Bearer ${user.token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/user/getFollowingRequests/`, {}, { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(userFollowingRequestsGet(res.data.data.successResult))
                 })
@@ -36,7 +36,7 @@ export const sendUserFollowingRequests = (id, isPrivate) => {
                 "isPrivate": isPrivate === 0 ? false : true
             }
             axios.post(`${process.env.REACT_APP_IPURL}/user/followUnFollow`, data,
-                { headers: { Authorization: `Bearer ${user.token}` } })
+                { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(getSuggestedUsers())
                     dispatch(loadProfileByUserId())
@@ -58,7 +58,7 @@ export const approveUserFollowingRequests = (id) => {
                 "followingUserId": id,
                 "connectionIds": []
             }
-            axios.post(`${process.env.REACT_APP_IPURL}/user/approveFollowingRequest/`, data, { headers: { Authorization: `Bearer ${user.token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/user/approveFollowingRequest/`, data, { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(getUserFollowingRequests())
                     console.log(res.data)
@@ -79,7 +79,7 @@ export const rejectUserFollowingRequests = (id) => {
             const data = {
                 "followingRequestId": id
             }
-            axios.post(`${process.env.REACT_APP_IPURL}/user/disapproveFollowingRequest/`, data, { headers: { Authorization: `Bearer ${user.token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/user/disapproveFollowingRequest/`, data, { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(getUserFollowingRequests())
                     console.log(res.data)

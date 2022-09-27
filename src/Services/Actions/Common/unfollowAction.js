@@ -11,7 +11,7 @@ export const unfollowAction = (id) => {
                 "followingRequestId": id,
             }
             axios.post(`${process.env.REACT_APP_IPURL}/user/disapproveFollowingRequest`, data,
-                { headers: { Authorization: `Bearer ${user.token}` } })
+                { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(loadAllUserFollowing())
                     dispatch(loadAllUserFollowers())

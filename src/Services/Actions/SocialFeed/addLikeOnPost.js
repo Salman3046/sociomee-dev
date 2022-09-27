@@ -11,7 +11,7 @@ const likeAdded = () => ({
 export const addLikeOnPost = (like) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
-        headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` }
+        headers: { Authorization: `Bearer ${user?.token}` }
     };
     return function (dispatch) {
         axios.post(`${process.env.REACT_APP_IPURL}/post/setLike/`, like, config)

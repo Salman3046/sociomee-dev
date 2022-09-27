@@ -49,7 +49,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import MultiMediaPost from "../post-components/display-post/MultiMediaPost";
 import RecommendationPost from "../post-components/display-post/RecommendationPost";
 
-const MyTimeline=()=> {
+const MyTimeline = () => {
   // get all user posts by id using redux
   const { allPostsByUserId } = useSelector(
     (state) => state.getAllPostsByUserIdData
@@ -58,12 +58,12 @@ const MyTimeline=()=> {
 
   // get all reactions using redux
   const { allReactions } = useSelector((state) => state.getAllReactionsData);
+  const { userFollowingRequests } = useSelector(state => state.userFollowingRequestsData)
   // post comment state
   const [commentData, setCommentData] = useState({
     postId: "",
     comment: "",
   });
-
 
   // infinite scroll functionality
   const [pageSize] = useState({
@@ -127,7 +127,9 @@ const MyTimeline=()=> {
       postId: postId,
       reactionId: reactId,
     };
-    let postFinder = allPostsByUserId?.rows?.find((fin) => fin.postId == postId);
+    let postFinder = allPostsByUserId?.rows?.find(
+      (fin) => fin.postId == postId
+    );
     let likeFinder = postFinder.topLikes
       ? postFinder.topLikes?.find((fin) => fin.id === userProfileByUserId.id)
       : "";
@@ -145,7 +147,7 @@ const MyTimeline=()=> {
   };
 
   // comment submit function
-  const submitComment = async(id) => {
+  const submitComment = async (id) => {
     if (!commentData.postId === id) {
       setOpen(true);
       setAlert({
@@ -240,7 +242,7 @@ const MyTimeline=()=> {
             <div className="page-content">
               <div className="content-left">
                 <FriendSuggestion></FriendSuggestion>
-                <FriendRequest></FriendRequest>
+                {userFollowingRequests?.length > 0 && <FriendRequest />}
                 <LikedBizPage></LikedBizPage>
               </div>
               <div className="content-center">
@@ -490,7 +492,8 @@ const MyTimeline=()=> {
                                     <h3 className=" text-break">
                                       {userPosts.postType !== "alert" &&
                                         userPosts.postType !== "thought" &&
-                                        userPosts.postType !== "recommendation" &&
+                                        userPosts.postType !==
+                                          "recommendation" &&
                                         userPosts.caption}
                                     </h3>
                                     {userPosts.postType === "poll" && (
@@ -839,5 +842,5 @@ const MyTimeline=()=> {
       />
     </>
   );
-}
-export default MyTimeline
+};
+export default MyTimeline;

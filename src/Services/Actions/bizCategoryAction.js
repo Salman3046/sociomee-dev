@@ -9,12 +9,10 @@ const getAllBizCategory = (bizCategory) => ({
 export const loadAllBizCategory = () => {
     
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-    const config = {
-        headers: { Authorization: `Bearer ${user.token}` }
-    };
+   
     return function (dispatch) {
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/bp/getAllCategory`,{},config)
+            axios.post(`${process.env.REACT_APP_IPURL}/bp/getAllCategory`,{},{ headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getAllBizCategory(res.data.data.successResult.rows))
                 })

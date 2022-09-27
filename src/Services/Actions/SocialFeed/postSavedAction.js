@@ -16,11 +16,9 @@ const postSaved = () => ({
 export const loadAllSavedPost = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
+        
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getAllSavedPost`, {}, config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getAllSavedPost`, {}, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getAllSavedPost(res.data.data.successResult))
                 })
@@ -36,11 +34,8 @@ export const loadAllSavedPost = () => {
 export const setPostSaved = (data) => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/setPostSaved`,data, config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/setPostSaved`,data, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(postSaved(res.data.data.successResult))
                     dispatch(loadAllSavedPost())
