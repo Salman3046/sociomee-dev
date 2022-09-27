@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import AdmanagerHeaderR from '../../AdmanagerHeaderR/AdmanagerHeaderR'
 
-const VideoAdScreen = () => {
+const FullVideoScreen = () => {
     const imageUpload = () => {
         document.getElementById('input_file').click();
     }
@@ -66,7 +66,7 @@ const VideoAdScreen = () => {
                                     <div className="navigate col-lg-12">
                                         <div className="row">
                                             <div className="navigate-left col-lg-12">
-                                                <p className='navigate-color'>Brand Awareness- CPV  /  Video Ad</p>
+                                                <p className='navigate-color'>Brand Awareness- CPV  / Full Screen Video Ad</p>
                                             </div>
                                             <div className="navigate-right col-lg-6">
                                                 <h4>Preview on
@@ -108,7 +108,9 @@ const VideoAdScreen = () => {
                                         </div>
                                         <div className='col-lg-6 col-12'>
                                             <p className='p-heading'>Add Your Video</p>
-                                            <button onClick={imageUpload} className="upload-img">Upload Video</button>
+                                            <div className='full-video-ad-main'>
+                                                <button onClick={imageUpload} className="upload-img full-video-ad">Upload Video</button>
+                                            </div>
                                             <input type="file" name="" id='input_file' hidden />
                                         </div>
                                         {/* </div> */}
@@ -131,7 +133,7 @@ const VideoAdScreen = () => {
                                     <Link to="" className="btn-cancel">
                                         Cancel
                                     </Link>
-                                    <Link to="/Ad/FullVideoAd" className='btn-next'>
+                                    <Link to="/Ad/ChooseAudience" className='btn-next'>
                                         Next
                                     </Link>
                                 </div>
@@ -145,4 +147,4 @@ const VideoAdScreen = () => {
     )
 }
 
-export default VideoAdScreen
+export default FullVideoScreen

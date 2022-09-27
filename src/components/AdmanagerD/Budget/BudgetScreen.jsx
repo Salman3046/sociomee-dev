@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AdmanagerHeaderR from '../AdmanagerHeaderR/AdmanagerHeaderR'
 
 const BudgetScreen = () => {
-    return (
+    return ( 
         <>
             <AdmanagerHeaderR />
             <div className="main-section-upsd">

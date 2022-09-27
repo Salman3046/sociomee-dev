@@ -9,7 +9,7 @@ const TargetAudienceScreen = () => {
         "Watching",
         "Video Making",
         "World Tour",
-        "New Movies",
+        "New Movies", 
         "Reading Books",
         "Travelling ",
         "Song",

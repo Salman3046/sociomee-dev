@@ -82,7 +82,7 @@ const CreateAdScreen = () => {
                                 <Link to="" className="btn-cancel">
                                     Cancel
                                 </Link>
-                                <Link to="" className='btn-next'>
+                                <Link to="/Ad/SingleImage" className='btn-next'>
                                     Next
                                 </Link>
                             </div>

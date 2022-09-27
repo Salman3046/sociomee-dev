@@ -36861,7 +36861,7 @@ button:focus {
 ==========================**/
 .form-control {
   height: auto;
-  border-color: rgba(100, 117, 137, 0.1);
+  border-color: #DEDEDE;
 }
 
 .theme-form ::-webkit-input-placeholder {

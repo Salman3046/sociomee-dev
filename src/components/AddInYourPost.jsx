@@ -216,7 +216,7 @@ const AddInYourPost=({ createPostHandler, postData, setPostData, clickMedia, pol
                                 label="# Hashtags"
                                 placeholder="Hashtags..."
                             />
-                        )}
+                        )} 
                         disableCloseOnSelect
                         onChange={(e, params) => setTags(params)}
                         disabled={tags.length>=50 ? true : false}

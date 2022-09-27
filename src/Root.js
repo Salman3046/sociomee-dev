@@ -86,6 +86,10 @@ import SingleImageAdScreen from "./components/AdmanagerD/AdsScreens/SingleImageA
 import InDevelopment from "./components/InDevelopment";
 import CaroselImageAdImage from "./components/AdmanagerD/AdsScreens/CaroselImageAd/CaroselImageAdImage";
 import VideoAdScreen from "./components/AdmanagerD/AdsScreens/VideoAd/VideoAdScreen";
+import FullVideoScreen from "./components/AdmanagerD/AdsScreens/FullVideo/FullVideoScreen";
+import ChooseAudienceScreen from "./components/AdmanagerD/AdsScreens/ChooseAudience/ChooseAudienceScreen";
+import TotalBudgetScreen from "./components/AdmanagerD/AdsScreens/TotalBudget/TotalBudgetScreen";
+import AdsPreviewScreen from "./components/AdmanagerD/AdsScreens/AdPreview/AdsPreviewScreen";
 
 const Root = () => {
   return (
@@ -159,6 +163,10 @@ const Root = () => {
       <Route exact path="/Ad/SingleImage" element={<SingleImageAdScreen />} />
       <Route exact path="/Ad/CaroselAd" element={<CaroselImageAdImage />} />
       <Route exact path="/Ad/VideoAd" element={<VideoAdScreen />} />
+      <Route exact path="/Ad/FullVideoAd" element={<FullVideoScreen />} />
+      <Route exact path="/Ad/ChooseAudience" element={<ChooseAudienceScreen />} />
+      <Route exact path="/Ad/TotalBudget" element={<TotalBudgetScreen />} />
+      <Route exact path="/Ad/AdPreview" element={<AdsPreviewScreen />} />
 
       <Route exact path="/Display2" element={<Display />} />
       <Route exact path="/ConfigureAd" element={<ConfigureAd />} />

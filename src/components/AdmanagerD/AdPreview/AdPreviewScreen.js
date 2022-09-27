@@ -7,7 +7,7 @@ const AdPreviewScreen = () => {
     return (
         <>
             <AdmanagerHeaderR />
-            <div className="main-section-upsd">
+            <div className="main-section-upsd"> 
 
                 <div className="sidebar-main-sp">
 
@@ -119,7 +119,7 @@ const AdPreviewScreen = () => {
                 <div className="brand-image-main-upsd brand-image-main-upsd-new">
                     <div className="col-lg-12">
                         <div className="row">
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 ">
                                 <h3>Targeted Audience </h3>
 
                                 <div className="main-left">
