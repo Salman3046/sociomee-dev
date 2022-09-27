@@ -14,7 +14,7 @@ export const loadAllCommments = (data) => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/post/getComments`, data,
                 {
-                    headers: { Authorization: `Bearer ${user.token}` }
+                    headers: { Authorization: `Bearer ${user?.token}` }
                 })
                 .then((res) => {
                     dispatch(getAllComments(res.data.data.successResult))

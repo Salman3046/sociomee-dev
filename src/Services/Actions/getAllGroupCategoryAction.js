@@ -10,12 +10,10 @@ const getAllGroupCategory = (allGroupCategory) => ({
 export const loadAllGroupCategorys = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
+    
         // console.log("config is there ",config)
         if (user) {
-            axios.get(`${process.env.REACT_APP_IPURL}/group/category/getAll`, config)
+            axios.get(`${process.env.REACT_APP_IPURL}/group/category/getAll`, {headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     console.log("reponse categoryes:", res);
                     dispatch(getAllGroupCategory(res.data))

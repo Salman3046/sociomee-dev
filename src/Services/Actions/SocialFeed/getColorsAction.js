@@ -12,7 +12,7 @@ export const loadColors = () => {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/admin/getColors`,{},{headers: { Authorization: `Bearer ${user.token}` }})
+            axios.post(`${process.env.REACT_APP_IPURL}/admin/getColors`,{},{headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     // console.log("all posts:", res.data.data.successResult);
                     dispatch(getColors(res.data.data.successResult))

@@ -23,7 +23,7 @@ export const createBizPage = (page) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
         axios.post(`${process.env.REACT_APP_IPURL}/bp/create/businessPage`, page,
-            { headers: { Authorization: `Bearer ${user.token}` } })
+            { headers: { Authorization: `Bearer ${user?.token}` } })
             .then((res) => {
                 console.log("create page response :", res);
                 dispatch(bizPageCreate(res.data.data))
@@ -38,7 +38,7 @@ export const createBizPage = (page) => {
 export const getUserBizPage = () => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
-        axios.post(`${process.env.REACT_APP_IPURL}/user/getUserBusinessPages`, {}, { headers: { Authorization: `Bearer ${user.token}` } })
+        axios.post(`${process.env.REACT_APP_IPURL}/user/getUserBusinessPages`, {}, { headers: { Authorization: `Bearer ${user?.token}` } })
             .then((res) => {
                 dispatch(userBizPage(res.data.data))
             })
@@ -52,7 +52,7 @@ export const getUserBizPage = () => {
 export const getSingleBizPage = (id) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
-        axios.post(`${process.env.REACT_APP_IPURL}/bp/getpagedetails`, { id: id }, { headers: { Authorization: `Bearer ${user.token}` } })
+        axios.post(`${process.env.REACT_APP_IPURL}/bp/getpagedetails`, { id: id }, { headers: { Authorization: `Bearer ${user?.token}` } })
             .then((res) => {
                 dispatch(singleBizPage(res.data.data))
             })

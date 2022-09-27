@@ -16,7 +16,7 @@ export const getGroupAdministraterAction = (id) => {
             })
             axios.post(`${process.env.REACT_APP_IPURL}/group/administrater/get`, grpBody, {
                 headers: {
-                    Authorization: 'Bearer ' + user.token
+                    Authorization: 'Bearer ' + user?.token
                 }
             })
                 .then((res) => {

@@ -14,7 +14,7 @@ export const loadAllGroupsByUserId = () => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getGroupOfUser`,{userId: user.id }, {
                 headers: {
-                    Authorization: 'Bearer ' + user.token
+                    Authorization: 'Bearer ' + user?.token
                 }
             })
                 .then((res) => {

@@ -13,7 +13,7 @@ export const addCommentOnPost = (comment) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
    
     return function (dispatch) {
-        axios.post(`${process.env.REACT_APP_IPURL}/post/addComment/`, comment, {headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` }})
+        axios.post(`${process.env.REACT_APP_IPURL}/post/addComment/`, comment, {headers: { Authorization: `Bearer ${user?.token}` }})
             .then((res) => {
                 dispatch(commentAdded(res.data));
                 // dispatch(loadAllUserPosts());
@@ -30,7 +30,7 @@ export const addCommentOnPost = (comment) => {
 export const addLikeOnComment = (like) => {
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     return function (dispatch) {
-        axios.post(`${process.env.REACT_APP_IPURL}/post/setCommentLike`, like, { headers: { Authorization: `Bearer ${user.token ? user?.token : ''}` } })
+        axios.post(`${process.env.REACT_APP_IPURL}/post/setCommentLike`, like, { headers: { Authorization: `Bearer ${user?.token}` } })
             .then((res) => {
                 console.log(res.data)
 

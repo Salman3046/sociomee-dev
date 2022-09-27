@@ -10,11 +10,9 @@ const getArticleCategory = (articleCategory) => ({
 export const loadArticleCategory = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
+      
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getArticleCategory`,{},config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getArticleCategory`,{},{ headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     // console.log("all posts:", res.data.data.successResult);
                     dispatch(getArticleCategory(res.data.data.successResult.rows))

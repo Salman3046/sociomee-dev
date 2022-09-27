@@ -15,7 +15,7 @@ export const loadAllGroupCategorys = () => {
         if (user) {
             axios.get(`${process.env.REACT_APP_IPURL}/group/category/getAll`, {
                 headers: {
-                    Authorization: 'Bearer ' + user.token
+                    Authorization: 'Bearer ' + user?.token
                 }
             })
                 .then((res) => {

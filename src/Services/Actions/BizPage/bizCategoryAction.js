@@ -10,7 +10,7 @@ export const loadAllBizCategory = () => {
     
     let user = JSON.parse(localStorage.getItem('sociomeeUser'));
     const config = {
-        headers: { Authorization: `Bearer ${user.token}` }
+        headers: { Authorization: `Bearer ${user?.token}` }
     };
     return function (dispatch) {
         if (user) {

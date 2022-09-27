@@ -48,7 +48,7 @@ const SignupDetail = () => {
         else if (!detail.gender || detail.gender === 'special') { errorRef.current.classList.remove('d-none'); setError('Please Select Gender') }
         else {
             const config = {
-                headers: { Authorization: `Bearer ${user.token}` }
+                headers: { Authorization: `Bearer ${user?.token}` }
             };
             axios.post(`${process.env.REACT_APP_IPURL}/user/update`, detail, config)
                 .then((respo) => {

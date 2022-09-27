@@ -54,7 +54,7 @@ export const loadAllUserMusics = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         };
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getMusic`, {}, config)
@@ -73,7 +73,7 @@ export const loadAllUserMovies = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         };
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getMovies`, {}, config)
@@ -92,7 +92,7 @@ export const loadAllUserEducations = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         };
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getUserEducation`, {}, config)
@@ -111,7 +111,7 @@ export const loadAllHobbies = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${user?.token}` }
         };
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllHobbies`, {}, config)
@@ -130,7 +130,7 @@ export const loadAllProfessions = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllProfessions`, {}, { headers: { Authorization: `Bearer ${user.token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/admin/getAllProfessions`, {}, { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     dispatch(getAllProfession(res.data.data.successResult))
                 })
@@ -146,7 +146,7 @@ export const addUserHobbies = (hobbies) => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/user/addHobbies`, hobbies, { headers: { Authorization: `Bearer ${user.token}` } })
+            axios.post(`${process.env.REACT_APP_IPURL}/user/addHobbies`, hobbies, { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     console.log(res.data)
                     dispatch(loadHobbiesByUserId());

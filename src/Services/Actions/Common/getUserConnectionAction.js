@@ -17,7 +17,7 @@ export const loadAllUserConnection = () => {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/getUserConnections/`, {},
                 {
-                    headers: { Authorization: `Bearer ${user.token}` }
+                    headers: { Authorization: `Bearer ${user?.token}` }
                 })
                 .then((res) => {
                     dispatch(getAllUserConnection(res.data.data.successResult))
@@ -35,7 +35,7 @@ export const addUserConnection = (privacy) => {
     return function (dispatch) {
         if (user) {
             axios.post(`${process.env.REACT_APP_IPURL}/user/addUserConnection/`, privacy,  
-            { headers: { Authorization: `Bearer ${user.token}` } })
+            { headers: { Authorization: `Bearer ${user?.token}` } })
                 .then((res) => {
                     // console.log("added amenities response :", res);
                     dispatch(userConnectionAdded(res.data));

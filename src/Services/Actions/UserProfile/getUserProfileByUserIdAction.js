@@ -24,7 +24,7 @@ export const loadProfileByUserId = (id) => {
         .post(
           `${process.env.REACT_APP_IPURL}/user/getUserProfileById`,
           { userId: user.id },
-          { headers: { Authorization: `Bearer ${user.token}` } }
+          { headers: { Authorization: `Bearer ${user?.token}` } }
         )
         .then((res) => {
           // console.log("all posts:", res.data.data.successResult);
@@ -73,7 +73,7 @@ export const loadSportsByUserId = (id) => {
         .post(
           `${process.env.REACT_APP_IPURL}/user/getSports`,
           { userId: user.id },
-          { headers: { Authorization: `Bearer ${user.token}` } }
+          { headers: { Authorization: `Bearer ${user?.token}` } }
         )
         .then((res) => {
           // console.log("all posts:", res.data.data.successResult);
@@ -96,7 +96,7 @@ export const loadHobbiesByUserId = (id) => {
           `${process.env.REACT_APP_IPURL}/user/getHobbies`,
           { userId: user.id },
           {
-            headers: { Authorization: `Bearer ${user.token}` },
+            headers: { Authorization: `Bearer ${user?.token}` },
           }
         )
         .then((res) => {
@@ -117,7 +117,7 @@ export const updateUserProfile = (data) => {
     if (user) {
       axios
         .post(`${process.env.REACT_APP_IPURL}/user/update`, data, {
-          headers: { Authorization: `Bearer ${user.token}` },
+          headers: { Authorization: `Bearer ${user?.token}` },
         })
         .then((res) => {
           // console.log("all posts:", res.data.data.successResult);

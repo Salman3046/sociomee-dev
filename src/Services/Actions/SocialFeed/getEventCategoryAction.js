@@ -10,11 +10,9 @@ const getEventCategory = (eventCategory) => ({
 export const loadEventCategory = () => {
     return function (dispatch) {
         let user = JSON.parse(localStorage.getItem('sociomeeUser'));
-        const config = {
-            headers: { Authorization: `Bearer ${user.token}` }
-        };
+       
         if (user) {
-            axios.post(`${process.env.REACT_APP_IPURL}/post/getEventCategory`,{},config)
+            axios.post(`${process.env.REACT_APP_IPURL}/post/getEventCategory`,{},{headers: { Authorization: `Bearer ${user?.token}` }})
                 .then((res) => {
                     dispatch(getEventCategory(res.data.data.successResult.rows))
                 })
