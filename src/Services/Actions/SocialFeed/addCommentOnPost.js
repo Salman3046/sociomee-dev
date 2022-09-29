@@ -16,8 +16,6 @@ export const addCommentOnPost = (comment) => {
         axios.post(`${process.env.REACT_APP_IPURL}/post/addComment/`, comment, {headers: { Authorization: `Bearer ${user?.token}` }})
             .then((res) => {
                 dispatch(commentAdded(res.data));
-                // dispatch(loadAllUserPosts());
-                dispatch(loadAllCommments({ postId: comment.postId, pageSize: 4 }));
 
             })
             .catch((error) => {

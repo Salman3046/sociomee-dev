@@ -16,7 +16,6 @@ export const addLikeOnPost = (like) => {
     return function (dispatch) {
         axios.post(`${process.env.REACT_APP_IPURL}/post/setLike/`, like, config)
             .then((res) => {
-                console.log("add like response :", res);
                 dispatch(likeAdded(res.data));
                 // dispatch(loadAllUserPosts());
 
