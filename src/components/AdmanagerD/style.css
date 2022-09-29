@@ -292,6 +292,8 @@
 /* PREVIEW */
 .preview-main{
   background-color: unset;
+  margin: unset;
+  padding: 1rem 0rem;
 }
 .preview-left-end{
   background-color: white;

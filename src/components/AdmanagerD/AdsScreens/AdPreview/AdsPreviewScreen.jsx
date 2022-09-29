@@ -132,7 +132,7 @@ const AdsPreviewScreen = () => {
                     </div>
                   </div>
                 
-                  <h3 className='p-heading'>Billing Detail</h3>
+                  <h3 className='p-heading mt-3'>Billing Detail</h3>
                   <div className="preview-left-end">
                     <div className="main-left">
 
@@ -185,7 +185,7 @@ const AdsPreviewScreen = () => {
                         </div>
                       </div>
 
-                      <Link to="/AdPreview" >
+                      <Link to="/Ad/AdPreviewMore" >
                         <button className="budget-btn btn Publish-btn">
                           Pay € 980 and Publish Ad
                         </button>

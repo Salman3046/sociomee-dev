@@ -65,7 +65,7 @@ const VideoAdScreen = () => {
                                 <div className="single-ad">
                                     <div className="navigate col-lg-12">
                                         <div className="row">
-                                            <div className="navigate-left col-lg-12">
+                                            <div className="navigate-left col-lg-6">
                                                 <p className='navigate-color'>Brand Awareness- CPV  /  Video Ad</p>
                                             </div>
                                             <div className="navigate-right col-lg-6">

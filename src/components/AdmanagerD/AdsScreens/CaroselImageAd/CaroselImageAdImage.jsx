@@ -67,7 +67,7 @@ const CaroselImageAdImage = () => {
                 <div className="single-ad">
                   <div className="navigate col-lg-12">
                     <div className="row">
-                      <div className="navigate-left col-lg-12">
+                      <div className="navigate-left col-lg-6">
                         <p className='navigate-color'>Brand Awareness- CPV  /  Carosel Images ad</p>
                       </div>
                       <div className="navigate-right col-lg-6">
