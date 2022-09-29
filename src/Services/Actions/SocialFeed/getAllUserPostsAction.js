@@ -52,7 +52,6 @@ export const addPost = (post) => {
         console.log("add posts:", res.data);
         dispatch(postAdded(res.data));
         dispatch(loadAllUserPosts({ pageIndex: 0, pageSize: 3 }));
-        dispatch(loadAllPostsByUserId({ pageIndex: 0, pageSize: 3 }));
       })
       .catch((error) => {
         console.log(error);
