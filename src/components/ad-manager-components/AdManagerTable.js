@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import AdManagerMenu from './AdManagerMenu'
 
 const AdManagerTable = () => {
@@ -42,7 +43,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -74,7 +75,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -106,7 +107,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -138,7 +139,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -170,7 +171,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -202,7 +203,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -234,7 +235,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -266,7 +267,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -298,7 +299,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -330,7 +331,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -362,7 +363,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -394,7 +395,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
@@ -426,7 +427,7 @@ const AdManagerTable = () => {
                             <div className='ml-2'>
                                 <p>New Traffic Ad - Kickstarter</p>
                                 <div className='table-link'>
-                                    <span><a href="/">View Charts</a></span>
+                                    <span><Link to='/Adanalysis'>View Charts</Link></span>
                                     <span><a href="/">Duplicate</a></span>
                                 </div>
                             </div>
