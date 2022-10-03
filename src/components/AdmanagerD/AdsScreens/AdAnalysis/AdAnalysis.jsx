@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import AdmanagerHeaderR from "../../AdmanagerHeaderR/AdmanagerHeaderR";
 import Demographic from "./Sections/Demographic";
 import "./analysis.css";
@@ -7,6 +6,7 @@ import AnalysisSidebar from "./AnalysisSidebar";
 import Platform from "./Sections/Platform";
 
 const AdAnalysis = () => {
+  // toggle section state
   const [chartToggle, setChartToggle] = useState(false);
 
   return (
