@@ -3,7 +3,7 @@ import React from "react";
 const ShortAnswer = ({ remover }) => {
   return (
     <>
-      <div className="row ad-types-of-type-map ">
+      <div className="row ad-types-of-type-map "> 
         <div className="single-ad">
           <div className="col-lg-12 inputs d-flex p-0">
             <div className="col-lg-12 col-12">

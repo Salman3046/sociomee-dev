@@ -46,7 +46,7 @@ const SingleImageAdScreen = () => {
                         </div>
                     </div>
 
-                    <div className="col-lg-9">
+                    <div className="col-lg-9 pad-zero">
                         <div className="col-lg-12 step-ad-heading">
                             <div className="row step-section">
                                 <div className="col-lg-2 ad-count">
@@ -60,9 +60,9 @@ const SingleImageAdScreen = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 pad-zero">
                             <div className="row ad-types-of-type-map ">
-                                <div className="single-ad">
+                                <div className="single-ad pad-zero">
                                     <div className="navigate col-lg-12">
                                         <div className="row">
                                             <div className="navigate-left col-lg-6">
@@ -79,38 +79,38 @@ const SingleImageAdScreen = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-12 inputs d-flex p-0">
+                                    <div className="col-lg-12 inputs d-flex p-0 input-img">
                                         {/* <div className="row"> */}
-                                        <div className='col-lg-6 col-12'>
-                                            <div className="">
-                                                <p className='p-heading'>Ad Heading
-                                                    <span className='pl-1'>
-                                                        <img src="/assets/images/adIcon/alert-circle.png" alt="" />
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div className="">
-                                                <input type="text" className='form-control p-2' placeholder='50% sale at girls fashion' />
-                                            </div>
-                                            <p className="p-max-car">Max 42 Characters</p>
+                                            <div className='col-lg-6 col-12'>
+                                                <div className="">
+                                                    <p className='p-heading'>Ad Heading
+                                                        <span className='pl-1'>
+                                                            <img src="/assets/images/adIcon/alert-circle.png" alt="" />
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div className="">
+                                                    <input type="text" className='form-control p-2' placeholder='50% sale at girls fashion' />
+                                                </div>
+                                                <p className="p-max-car">Max 42 Characters</p>
 
-                                            <div className="">
-                                                <p className='p-heading'>Ad Sub-Heading
-                                                    <span className='pl-1'>
-                                                        <img src="/assets/images/adIcon/alert-circle.png" alt="" />
-                                                    </span>
-                                                </p>
+                                                <div className="">
+                                                    <p className='p-heading'>Ad Sub-Heading
+                                                        <span className='pl-1'>
+                                                            <img src="/assets/images/adIcon/alert-circle.png" alt="" />
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div className="">
+                                                    <input type="text" className='form-control p-2' placeholder='Enter advertisement sub-heading...' />
+                                                </div>
+                                                <p className="p-max-car">Max 60 Characters</p>
                                             </div>
-                                            <div className="">
-                                                <input type="text" className='form-control p-2' placeholder='Enter advertisement sub-heading...' />
+                                            <div className='col-lg-6 col-12'>
+                                                <p className='p-heading'>Add Your Image</p>
+                                                <button onClick={imageUpload} className="upload-img">Upload Image</button>
+                                                <input type="file" name="" id='input_file' hidden />
                                             </div>
-                                            <p className="p-max-car">Max 60 Characters</p>
-                                        </div>
-                                        <div className='col-lg-6 col-12'>
-                                            <p className='p-heading'>Add Your Image</p>
-                                            <button onClick={imageUpload} className="upload-img">Upload Image</button>
-                                            <input type="file" name="" id='input_file' hidden />
-                                        </div>
                                         {/* </div> */}
                                     </div>
                                     <div className="textarea col-lg-12">
@@ -131,7 +131,7 @@ const SingleImageAdScreen = () => {
                                     <Link to="" className="btn-cancel">
                                         Cancel
                                     </Link>
-                                    <Link to="/Ad/CaroselAd" className='btn-next'>
+                                    <Link to="/Ad/ChooseAudience" className='btn-next'>
                                         Next
                                     </Link>
                                 </div>

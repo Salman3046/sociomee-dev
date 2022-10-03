@@ -56119,44 +56119,44 @@ body.rtl {
 
 .rtl .mr-1,
 .rtl .mx-1 {
-  margin-left: 0.25rem !important;
-  margin-right: 0 !important;
+  margin-left: 0.25rem;
+  margin-right: 0;
 }
 
 .rtl .mr-2,
 .rtl .mx-2 {
-  margin-right: 0 !important;
-  margin-left: 0.5rem !important;
+  margin-right: 0;
+  margin-left: 0.5rem;
 }
 
 .rtl .ml-2,
 .rtl .mx-2 {
-  margin-left: 0 !important;
-  margin-right: 0.5rem !important;
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
 
 .rtl .mr-3,
 .rtl .mx-3 {
-  margin-right: 0 !important;
-  margin-left: 1rem !important;
+  margin-right: 0;
+  margin-left: 1rem;
 }
 
 .rtl .ml-3,
 .rtl .mx-3 {
-  margin-left: 0 !important;
-  margin-right: 1rem !important;
+  margin-left: 0;
+  margin-right: 1rem;
 }
 
 .rtl .ml-auto,
 .rtl .mx-auto {
-  margin-left: unset !important;
-  margin-right: auto !important;
+  margin-left: unset;
+  margin-right: auto;
 }
 
 .rtl .pr-0,
 .rtl .px-0 {
-  padding-right: unset !important;
-  padding-left: 0 !important;
+  padding-right: unset;
+  padding-left: 0;
 }
 
 .rtl .text-right {
@@ -61948,3 +61948,67 @@ header .header-section .profile-btn .user-img img {
 
 
 /* >>>>>>> 7ca43e2a7a8c7bd39a4437b23fca207424de7a0b */
+
+
+
+.mr-1{
+  margin-right: 0.5rem;
+}
+.mr-2{
+  margin-right: 1rem;
+}
+.mr-3{
+  margin-right: 1.5rem;
+}
+.mr-4{
+  margin-right: 2rem;
+}
+.mr-5{
+  margin-right: 2.5rem;
+}
+.pr-1{
+  margin-right: 0.5rem;
+}
+.pr-2{
+  margin-right: 1rem;
+}
+.pr-3{
+  margin-right: 1.5rem;
+}
+.pr-4{
+  margin-right: 2rem;
+}
+.pr-5{
+  margin-right: 2.5rem;
+}
+/* MARGIN RIGHT */
+.ml-1{
+  margin-left: 0.5rem;
+}
+.ml-2{
+  margin-left: 1rem;
+}
+.ml-3{
+  margin-left: 1.5rem;
+}
+.ml-4{
+  margin-left: 2rem;
+}
+.ml-5{
+  margin-left: 2.5rem;
+}
+.pl-1{
+  margin-left: 0.5rem;
+}
+.pl-2{
+  margin-left: 1rem;
+}
+.pl-3{
+  margin-left: 1.5rem;
+}
+.pl-4{
+  margin-left: 2rem;
+}
+.pl-5{
+  margin-left: 2.5rem;
+}

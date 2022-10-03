@@ -62,7 +62,7 @@ const AdTypeScreen = () => {
                         </div>
                     </div>
 
-                    <div className="col-lg-9">
+                    <div className="col-lg-9 pad-zero">
                         <div className="col-lg-12 step-ad-heading">
                             <div className="row step-section">
                                 <div className="col-lg-2 ad-count">
@@ -76,14 +76,14 @@ const AdTypeScreen = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-12">
-                            <div className="row ad-types-of-type-map">
+                        <div className="col-lg-12 pad-zero">
+                            <div className="row ad-types-of-type-map pad-zero">
                                 
                                 {
                                     singleTypeOfType.successResult?.map((type) => {
                                         return (
-                                            <div className="col-lg-6">
-                                                <Link to="" key={type.id}>
+                                            <div className="col-lg-6 pad-zero">
+                                                <Link to={`/Ad/Display/${type.adFormat}`} key={type.id}>
                                                     <div className="ad-type d-flex ad-types-type">
                                                         <div className='mr-3'>
                                                             <img src="/assets/images/adIcon/Frame 1105.png"
@@ -92,7 +92,7 @@ const AdTypeScreen = () => {
                                                         </div>
                                                         <div className='ad-types-type-dec'>
                                                             <p className='type mt-2'>{type.name}</p>
-                                                            <p className='dec-types mt-2'>{type.note}</p>
+                                                            <p className='dec-types mt-2 pad-zero'>{type.note}</p>
                                                         </div>
                                                     </div>
                                                 </Link>

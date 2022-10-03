@@ -42,7 +42,7 @@ const TotalBudgetScreen = () => {
                         </div>
                     </div>
 
-                    <div className="col-lg-9">
+                    <div className="col-lg-9 pad-zero">
                         <div className="col-lg-12 step-ad-heading">
                             <div className="row step-section">
                                 <div className="col-lg-2 ad-count">
@@ -56,9 +56,9 @@ const TotalBudgetScreen = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 pad-zero">
                             <div className="row ad-types-of-type-map ">
-                                <div className="single-ad">
+                                <div className="single-ad pad-zero">
                                     <div className="navigate col-lg-12">
                                         <div className="row">
                                             <div className="navigate-left col-lg-12">

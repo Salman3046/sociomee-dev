@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import AdmanagerHeaderR from '../../AdmanagerHeaderR/AdmanagerHeaderR'
 
@@ -6,6 +6,14 @@ const CaroselImageAdImage = () => {
   const imageUpload = () => {
     document.getElementById('input_file').click();
   }
+
+  const [inputType, setInputType] = useState([]);
+
+  const inputRemover = ({ type, id }) => {
+    setInputType(inputType.filter(inp=>inp.type!==type && inp.id!==id))
+  }
+  let index = 2;
+
   return (
     <>
       <AdmanagerHeaderR />
@@ -46,7 +54,7 @@ const CaroselImageAdImage = () => {
             </div>
           </div>
 
-          <div className="col-lg-9">
+          <div className="col-lg-9 pad-zero">
             {/* NAVIGATION AND STEP */}
             <div className="col-lg-12 step-ad-heading">
               <div className="row step-section">
@@ -62,9 +70,9 @@ const CaroselImageAdImage = () => {
             </div>
 
             {/* INPUTS SCREEN */}
-            <div className="col-lg-12">
+            <div className="col-lg-12 pad-zero">
               <div className="row ad-types-of-type-map ">
-                <div className="single-ad">
+                <div className="single-ad pad-zero">
                   <div className="navigate col-lg-12">
                     <div className="row">
                       <div className="navigate-left col-lg-6">
@@ -81,7 +89,8 @@ const CaroselImageAdImage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-12 inputs d-flex p-0">
+
+                  <div className="col-lg-12 inputs d-flex mb-3 p-0 input-img">
                     {/* <div className="row"> */}
                     <div className='col-lg-6 col-12'>
                       <div className="carosel-heading">
@@ -118,12 +127,68 @@ const CaroselImageAdImage = () => {
                     {/* </div> */}
                   </div>
 
-                  <div class="ad-buttons-blk">
-                    <a href="#" class="ad-btn-new ad-green-clr-btn">
-                      + Add More Images
-                    </a>
-                  </div>
+                  {inputType &&
+                    inputType.map(({ type, id }) => {
+                      return type === "addCraosel" ? (
+                        <div className="col-lg-12 inputs d-flex mb-3 p-0 input-img" key={id}>
+                          {/* <div className="row"> */}
+                          <div className='col-lg-6 col-12'>
+                            <div className="carosel-heading">
+                              <p className='p-heading'>Ad Heading
+                                <span className='pl-1'>
+                                  <img src="/assets/images/adIcon/alert-circle.png" alt="" />
+                                </span>
+                              </p>
 
+                              <p className='p-heading'>( {index++}/5 Media )</p>
+                            </div>
+                            <div className="">
+                              <input type="text" className='form-control p-2' placeholder='50% sale at girls fashion' />
+                            </div>
+                            <p className="p-max-car">Max 42 Characters</p>
+
+                            <div className="">
+                              <p className='p-heading'>Ad Sub-Heading
+                                <span className='pl-1'>
+                                  <img src="/assets/images/adIcon/alert-circle.png" alt="" />
+                                </span>
+                              </p>
+                            </div>
+                            <div className="">
+                              <input type="text" className='form-control p-2' placeholder='Enter advertisement sub-heading...' />
+                            </div>
+                            <p className="p-max-car">Max 60 Characters</p>
+                          </div>
+                          <div className='col-lg-6 col-12'>
+                            <div>
+                              <p className='p-heading'>Add Your Image</p>
+                              {/* <p  onClick={inputRemover({type:type,id:id})}>Remove</p> */}
+                            </div>
+                            <button onClick={imageUpload} className="upload-img">Upload Image</button>
+                            <input type="file" name="" id='input_file' hidden />
+                          </div>
+                          {/* </div> */}
+                        </div>
+                      ):(
+                        <></>
+                      )
+                    })
+                  }
+
+                  <div class="ad-buttons-blk">
+                    {inputType?.length < 4 && (
+                      <a class="ad-btn-new ad-green-clr-btn"
+                        onClick={() =>
+                          setInputType([
+                            ...inputType,
+                            { type: "addCraosel", id: Math.floor(Math.random() * 10) },
+                          ])
+                        }
+                      >
+                        + Add More Images
+                      </a>
+                    )}
+                  </div>
 
                   <div className="textarea col-lg-12 pt-5">
                     <div className="">
@@ -143,7 +208,7 @@ const CaroselImageAdImage = () => {
                   <Link to="" className="btn-cancel">
                     Cancel
                   </Link>
-                  <Link to="/Ad/VideoAd" className='btn-next'>
+                  <Link to="/Ad/ChooseAudience" className='btn-next'>
                     Next
                   </Link>
                 </div>

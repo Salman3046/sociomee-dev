@@ -101,7 +101,7 @@ const LeftSidebar=()=> {
                         <NavLink to="/AdManager">
                             <img src="/assets/images/left-side-menu-icon/box.svg" className="bar-icon-img" alt="Ad Manager" />
                             <h4>Ad Manager</h4>
-                        </NavLink>
+                        </NavLink> 
                     </li>
                     <li onClick={()=>setOpen(true)}>
                         <a>

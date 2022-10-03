@@ -328,7 +328,7 @@ export default function AdManagerHeader() {
                             </div>
                         </div>
                     </div>
-                </header>
+                </header> 
 
                 {/* MUI Dialog Box  */}
                 <Dialog

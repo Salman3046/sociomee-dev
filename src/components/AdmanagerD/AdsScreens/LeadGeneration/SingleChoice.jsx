@@ -11,6 +11,7 @@ const SingleChoice = ({ remover }) => {
     const { name, value } = e.target;
     setTempSingleOption({ ...tempSingleOption, [name]: value });
   };
+  
   const optionIncrementHandler = (e) => {
     e.preventDefault();
     if (singleOptionCount.length < 10) {
@@ -43,6 +44,7 @@ const SingleChoice = ({ remover }) => {
                 />
               </div>
               <p className="p-max-car">Upto 32 Characters</p>
+              
               <div className="d-flex lead-switch mb-3 mt-3">
                 <p className="p-heading">Add Options</p>
                 {singleOptionCount?.length < 10 && (
@@ -55,6 +57,7 @@ const SingleChoice = ({ remover }) => {
                   </p>
                 )}
               </div>
+
               {singleOptionCount &&
                 singleOptionCount.map((option, i) => {
                   return (

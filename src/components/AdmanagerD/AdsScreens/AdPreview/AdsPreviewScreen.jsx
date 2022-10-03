@@ -42,7 +42,7 @@ const AdsPreviewScreen = () => {
             </div>
           </div>
 
-          <div className="col-lg-9">
+          <div className="col-lg-9 pad-zero">
             <div className="col-lg-12 step-ad-heading">
               <div className="row step-section">
                 <div className="col-lg-2 ad-count">
@@ -51,9 +51,9 @@ const AdsPreviewScreen = () => {
               </div>
             </div>
 
-            <div className="col-lg-12">
+            <div className="col-lg-12 pad-zero">
               <div className="row ad-types-of-type-map preview-main">
-                <div className="col-lg-6 preview-left">
+                <div className="col-lg-6 preview-left pad-zero">
                   <h3 className='p-heading'>Targeted Audience </h3>
                   <div className="preview-left-end"> 
                     <div className="main-left">

@@ -1,23 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { loadAdType } from '../../../../Services/Actions/AdManager/getAdTypeAction'
 import AdmanagerHeaderR from '../../AdmanagerHeaderR/AdmanagerHeaderR'
 import '../../style.css'
 
+// MUI Dialog box
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
+
 const CreateAdScreen = () => {
     const { adType } = useSelector(state => state.getTypeData)
     const dispatch = useDispatch();
+    const [open, setOpen] = useState(false);
+    let navigate = useNavigate();
 
     useEffect(() => {
         dispatch(loadAdType())
     }, [])
 
+    // CANNCEL
+    const logoutUser = () => {
+        setOpen(false)
+        navigate('/AdManager');
+
+    }
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <>
             <AdmanagerHeaderR />
 
-            <div className="col-lg-12">
+            <div className="col-lg-12 pad-zero">
                 <div className="row">
                     <div className="col-lg-3 ad-left">
                         <div className="desh-icon-main">
@@ -55,11 +76,11 @@ const CreateAdScreen = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 pad-zero">
                             <div className="row">
                                 {
                                     adType.map((type) => {
-                                        return <Link to={`/Ad/Display/${type.id}`} >
+                                        return <Link to={`/Ad/Display/${type.id}`} className="pad-zero" >
                                             <div className="col-lg-12">
                                                 <div className="ad-type d-flex">
                                                     <div className='mr-3'>
@@ -79,14 +100,35 @@ const CreateAdScreen = () => {
 
                         <div className='col-lg-12'>
                             <div className="ad-btn">
-                                <Link to="" className="btn-cancel">
+                                <a className="btn-cancel" onClick={() => setOpen(true)}>
                                     Cancel
-                                </Link>
-                                <Link to="/Ad/SingleImage" className='btn-next'>
+                                </a>
+                                <Link to="" className='btn-next'>
                                     Next
                                 </Link>
                             </div>
                         </div>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"OOPS! You just stopped Do you really want to discard this AD?"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>No</Button>
+                                <Button onClick={logoutUser}>
+                                    Yes
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
 
                     </div>
                 </div>

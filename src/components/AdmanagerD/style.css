@@ -25,28 +25,6 @@
   position: absolute;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .ad-count-btn {
   width: 44px;
   height: 44px;
@@ -101,6 +79,9 @@
   font-size: 14px;
 }
 
+.btn-next:hover {
+  color: white;
+}
 .btn-next {
   padding: 12px 3rem;
   background: #81C14B;
@@ -377,19 +358,46 @@
 
 
 /* LEAD GENREGATION */
-.lead-greem{
+.lead-greem {
   color: #81C14B;
   font-size: 14px;
 }
-.lead-switch{
+
+.lead-switch {
   flex-direction: row;
   justify-content: space-between;
 }
-.lead-desh{
+
+.lead-desh {
   display: contents;
 }
-.lead-add{
+
+.lead-add {
   color: #81C14B;
   font-size: 14px;
   font-weight: 600;
+}
+
+
+/* MEDIA QUERY START HERE */
+@media (max-width: 575px) {
+  .ad-left {
+    display: none;
+  }
+  .pad-zero{
+    padding: 0%;
+  }
+  .ad-types-of-type-map{
+    margin: 1rem 0;
+  }
+  .input-img{
+    display: flex;
+    flex-direction: column;
+  }
+  .upload-img {
+    width: 325px;
+  }
+  .ad-types-of-type-map{
+    padding: 1rem 0;
+  }
 }

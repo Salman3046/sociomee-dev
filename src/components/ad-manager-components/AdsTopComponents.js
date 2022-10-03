@@ -9,7 +9,7 @@ const AdsTopComponents = () => {
                 <div className="container-fluid">
                     <div className="col-lg-12 col-md-12 col-sm-4">
                         <div className="row" style={{ flexWrap: "unset" }}>
-                            <div className="col-lg-4 col-md-4 col-sm-12 com">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-4 com">
 
                                 <h3>
                                     <span className='mr-2'>
@@ -34,7 +34,7 @@ const AdsTopComponents = () => {
                                 <button className='btn btn-solid com-btn' data-bs-toggle="modal" data-bs-target="#createGroup">Add Funds</button>
                                 <Model></Model>
                             </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 com">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-4 com">
                                 <h3>
                                     <span className='mr-2'>
                                         <img src="/assets/images/adIcon/icon (3).png" alt="" />
@@ -72,7 +72,7 @@ const AdsTopComponents = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 com">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-4 com">
                                 <h3>
                                     <span className='mr-2'>
                                         <img src="/assets/images/adIcon/icon (1).png" alt="" />

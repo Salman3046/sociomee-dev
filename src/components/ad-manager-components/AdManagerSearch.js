@@ -14,27 +14,27 @@ export default function AdManagerSearch() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="#">
                             <h6>History</h6>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="#">
                             <h6>Preview</h6>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="#">
                             <h6>Reports</h6>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="#">
                             <h6>Ad Stop</h6>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="#">
                             <h6>More..</h6>
                         </NavLink>
                     </li>

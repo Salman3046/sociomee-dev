@@ -8,7 +8,7 @@ import AdsTopComponents from './AdsTopComponents'
 
 const AdPausd = () => {
     return (
-        <>
+        <> 
             <div className='d-flex'>
                 <AdSidebar></AdSidebar>
                 <div>
@@ -47,7 +47,7 @@ const AdPausd = () => {
                             <tr>
                                 <th><input type="checkbox" /></th>
                                 <th scope="row">6</th>
-                                <td>
+                                <td> 
                                     <label className="switch">
                                         <input type="checkbox" />
                                         <span className="slider round"></span>

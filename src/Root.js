@@ -163,15 +163,15 @@ const Root = () => {
       {/* AD */}
       <Route exact path="/CreateAd" element={<CreateAdScreen />} />
       <Route exact path="/Ad/Display/:id" element={<AdTypeScreen />} />
-      <Route exact path="/Ad/SingleImage" element={<SingleImageAdScreen />} />
-      <Route exact path="/Ad/CaroselAd" element={<CaroselImageAdImage />} />
-      <Route exact path="/Ad/VideoAd" element={<VideoAdScreen />} />
-      <Route exact path="/Ad/FullVideoAd" element={<FullVideoScreen />} />
+      <Route exact path="/Ad/Display/SingelImage" element={<SingleImageAdScreen />} />
+      <Route exact path="/Ad/Display/caroselImage" element={<CaroselImageAdImage />} />
+      <Route exact path="/Ad/Display/Video" element={<VideoAdScreen />} />
+      <Route exact path="/Ad/Display/FullScreenVideo" element={<FullVideoScreen />} />
+
       <Route exact path="/Ad/ChooseAudience" element={<ChooseAudienceScreen />} />
       <Route exact path="/Ad/TotalBudget" element={<TotalBudgetScreen />} />
       <Route exact path="/Ad/AdPreview" element={<AdsPreviewScreen />} />
       <Route exact path="/Ad/AdPreviewMore" element={<AdPreviewMoreScreen />} />
-
       <Route exact path="/Ad/LeadGeneration" element={<LeadGenerationScreen />} />
 
       <Route exact path="/Display2" element={<Display />} />
