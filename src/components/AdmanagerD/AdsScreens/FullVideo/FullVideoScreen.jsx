@@ -58,7 +58,7 @@ const FullVideoScreen = () => {
                                     <p>Set-up your ad campaign with an image and description</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 
                         <div className="col-lg-12">
                             <div className="row ad-types-of-type-map ">

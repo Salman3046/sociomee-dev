@@ -17,14 +17,14 @@
     overflow: hidden;
 }
 
-.desh-icon-main {
+/* .desh-icon-main {
     display: flex;
     justify-content: space-between;
     width: 300px;
     margin: auto;
     margin-top: 15px;
     align-items: center;
-}
+} */
 
 .desh-icon {
     display: flex;

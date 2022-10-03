@@ -41,7 +41,7 @@ export const getSingleAdTypeOfType = (id) => {
         };
         if (user) {
             const adTypeOfTypebody=({ 
-                "id" : id,
+                "id" : id, 
             })
             axios.post(`${process.env.REACT_APP_IPURL}/ads/adMaster/adType/subTypes/by`, adTypeOfTypebody, config)
                 .then((res) => {

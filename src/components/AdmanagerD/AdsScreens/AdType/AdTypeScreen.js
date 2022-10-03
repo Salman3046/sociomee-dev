@@ -105,7 +105,7 @@ const AdTypeScreen = () => {
 
                         <div className='col-lg-12'>
                             <div className="ad-btn">
-                                <Link to="" className="btn-cancel">
+                                <Link to="/Ad/LeadGeneration" className="btn-cancel">
                                     Cancel
                                 </Link>
                                 <Link to="/Ad/SingleImage" className='btn-next'>
@@ -114,7 +114,6 @@ const AdTypeScreen = () => {
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>

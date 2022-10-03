@@ -55,7 +55,7 @@ const AdsPreviewScreen = () => {
               <div className="row ad-types-of-type-map preview-main">
                 <div className="col-lg-6 preview-left">
                   <h3 className='p-heading'>Targeted Audience </h3>
-                  <div className="preview-left-end">
+                  <div className="preview-left-end"> 
                     <div className="main-left">
                       <div className="ad-heading-upsd-title-input in-between">
                         <p>Target Gender</p>

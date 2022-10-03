@@ -9,11 +9,11 @@ const getAdsByStatus = (allAdsByStatus) => ({
 // send user following request
 export const loadAdsByStatus = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
+        let user = JSON.parse(localStorage.getItem('user'));
         if (user?.token) {
             const data = {
                 "pageNumber": 10,
-                "pageSize": 0,
+                "pageSize": 0, 
                 "adStatus": "DRAFT"
             }
             axios.post(`${process.env.REACT_APP_IPURL}/ads/adMaster/get/ad/by/adStatus`, data,

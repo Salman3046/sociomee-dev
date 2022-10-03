@@ -91,6 +91,7 @@ import ChooseAudienceScreen from "./components/AdmanagerD/AdsScreens/ChooseAudie
 import TotalBudgetScreen from "./components/AdmanagerD/AdsScreens/TotalBudget/TotalBudgetScreen";
 import AdsPreviewScreen from "./components/AdmanagerD/AdsScreens/AdPreview/AdsPreviewScreen";
 import AdPreviewMoreScreen from "./components/AdmanagerD/AdsScreens/AdPreviewMore/AdPreviewMoreScreen";
+import LeadGenerationScreen from "./components/AdmanagerD/AdsScreens/LeadGeneration/LeadGenerationScreen";
 
 const Root = () => {
   return (
@@ -169,6 +170,8 @@ const Root = () => {
       <Route exact path="/Ad/TotalBudget" element={<TotalBudgetScreen />} />
       <Route exact path="/Ad/AdPreview" element={<AdsPreviewScreen />} />
       <Route exact path="/Ad/AdPreviewMore" element={<AdPreviewMoreScreen />} />
+
+      <Route exact path="/Ad/LeadGeneration" element={<LeadGenerationScreen />} />
 
       <Route exact path="/Display2" element={<Display />} />
       <Route exact path="/ConfigureAd" element={<ConfigureAd />} />
