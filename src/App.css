@@ -195,3 +195,12 @@
   display: inline-block;
   z-index: 1;
 }
+.input-minus{
+  position: absolute;
+    right: 9%;
+    top: 50.4%;
+    background: #FFFFFF;
+    border: 1px solid #81C14B;
+    border-radius: 3px;
+    width: 4.5%;
+}
