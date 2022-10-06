@@ -103,6 +103,22 @@
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.radio_animated_lg:checked:before{
+  padding: 7px;
+}
+
+.radio_animated_lg:checked:after{
+  padding: 10px;
+}
+
+.radio_animated_lg:after{
+  padding: 10px;
+}
+.ch-150{
+  height: 150px !important;
+}
+
+
 /* TYPES OF TYPE */
 .ad-types-type {
   flex-direction: column;
@@ -379,6 +395,8 @@
 }
 
 
+
+
 /* MEDIA QUERY START HERE */
 @media (max-width: 575px) {
   .ad-left {
@@ -401,3 +419,4 @@
     padding: 1rem 0;
   }
 }
+
