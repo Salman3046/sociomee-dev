@@ -10,7 +10,6 @@ import axios from "axios";
 import Loader from "../../../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAdType } from "../../../../Services/Actions/AdManager/getAdTypeAction";
-import MediaSection from "./MediaSection";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -30,10 +29,17 @@ const CaroselImageAdImage = () => {
 
   const dispatch = useDispatch();
 
-  const [sections, setSections] = useState([1]);
+  const [mediaData, setMediaData] = useState([
+    {
+      file: "",
+      fileType: "image",
+      heading: "",
+      subHeading: "",
+      callToActionId: "",
+    },
+  ]);
 
-  const [finalMediaData, setFinalMediaData] = useState([]);
-  console.log('finalMediaData is here',finalMediaData)
+  console.log(mediaData);
 
   const [adData, setAdData] = useState({
     discriptions: "",
@@ -43,6 +49,32 @@ const CaroselImageAdImage = () => {
     adSubTypesId: types.state.subTypeId,
     media: [],
   });
+
+  const mediaInputsHandler = (ev, i) => {
+    const { name, value,files } = ev.target;
+    let cloneArr = mediaData;
+    let tempObj = cloneArr[i]
+    if (name === "file") {
+      tempObj={...tempObj,[name]:files[0]};
+    } else {
+      tempObj={...tempObj,[name]:value};
+    }
+    cloneArr[i] = tempObj;
+    setMediaData([...cloneArr]);
+  };
+
+  const deleteImageHandler = (i) => {
+    console.log('delete',i)
+    let cloneArr = mediaData;
+    let tempObj = cloneArr[i]
+    tempObj={...tempObj,file:''};
+    cloneArr[i] = tempObj;
+    setMediaData([...cloneArr]);
+  };
+
+  const imageUpload = (id) => {
+    document.getElementById(`input_file${id}`).click();
+  };
 
   // Cancel Snackbar
   const handleClose = (event, reason) => {
@@ -156,34 +188,163 @@ const CaroselImageAdImage = () => {
                   </div>
 
                   {/* <div className="row"> */}
-                  {sections &&
-                    sections.map((sec,i) => {
+                  {mediaData &&
+                    mediaData.map((data, i) => {
                       return (
-                        <MediaSection
-                          key={i}
-                          setOpen={setOpen}
-                          setAlert={setAlert}
-                          id={sec}
-                          finalMediaData={finalMediaData}
-                          setFinalMediaData={setFinalMediaData}
-                          removeSection={()=>setSections(sections.filter(fil=>fil!==sections.length))}
-                        />
+                        <div className="col-lg-12 inputs d-flex mb-3 p-0 input-img" key={i}>
+                          <div className="col-lg-6 col-12">
+                            <div className="d-flex justify-content-between">
+                              <p className="p-heading">
+                                Ad Heading
+                                <span className="pl-1">
+                                  <img
+                                    src="/assets/images/adIcon/alert-circle.png"
+                                    alt=""
+                                  />
+                                </span>
+                              </p>
+                              <p className="p-heading">({i + 1}/5) Media</p>
+                            </div>
+                            <div className="">
+                              <input
+                                type="text"
+                                className="form-control p-2"
+                                placeholder="50% sale at girls fashion"
+                                maxLength={"42"}
+                                name="heading"
+                                value={data.heading}
+                                onChange={(e) => mediaInputsHandler(e, i)}
+                              />
+                            </div>
+                            <p className="p-max-car">Max 42 Characters</p>
+
+                            <div className="">
+                              <p className="p-heading">
+                                Ad Sub-Heading
+                                <span className="pl-1">
+                                  <img
+                                    src="/assets/images/adIcon/alert-circle.png"
+                                    alt=""
+                                  />
+                                </span>
+                              </p>
+                            </div>
+                            <div className="">
+                              <input
+                                type="text"
+                                className="form-control p-2"
+                                placeholder="Enter advertisement sub-heading..."
+                                maxLength={"60"}
+                                name="subHeading"
+                                value={data.subHeading}
+                                onChange={(e) => mediaInputsHandler(e, i)}
+                              />
+                            </div>
+                            <p className="p-max-car">Max 60 Characters</p>
+                          </div>
+                          <div className="col-lg-6 col-12">
+                            <div className="d-flex justify-content-between">
+                              <p className="p-heading">Add Your Image</p>
+                              {i !== 0 && (
+                                <p
+                                  className="p-heading text-primary"
+                                  role="button"
+                                  onClick={() =>
+                                    setMediaData(
+                                      mediaData.filter(
+                                        (med, ind) =>
+                                          ind !== mediaData.length - 1
+                                      )
+                                    )
+                                  }
+                                >
+                                  Remove
+                                </p>
+                              )}
+                            </div>
+                            {data.file?.name ? (
+                              <div className="recomandation-display-block position-relative">
+                                <img
+                                  src={URL.createObjectURL(data.file)}
+                                  alt=""
+                                />
+                                <div className="recom-btn-cont-blk new-recom-btn-cont-blk bottom-0">
+                                  <div className="container">
+                                    <div className="row d-flex justify-content-center">
+                                      <div className="col-4 px-auto border-right">
+                                        <h4
+                                          className="text-center"
+                                          role="button"
+                                          onClick={()=>imageUpload(i)}
+                                        >
+                                          Edit
+                                        </h4>
+                                      </div>
+                                      <div className="col-4 px-auto border-left">
+                                        <h4
+                                          className="text-center"
+                                          role="button"
+                                          onClick={() =>
+                                            deleteImageHandler(i)
+                                          }
+                                        >
+                                          Delete
+                                        </h4>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <button
+                                onClick={()=>imageUpload(i)}
+                                className="upload-img w-100"
+                              >
+                                Upload Image
+                              </button>
+                            )}
+
+                            <input
+                              type="file"
+                              name="file"
+                              id={`input_file${i}`}
+                              hidden
+                              onChange={(e) => {
+                                e.target.files[0].type.slice(0, 5) === "image"
+                                  ? mediaInputsHandler(e,i)
+                                  : deleteImageHandler(e, i)
+                                e.target.files[0].type.slice(0, 5) !==
+                                  "image" && setOpen(true);
+                                setAlert({
+                                  sev: "error",
+                                  content: "Please Select Image Only !",
+                                });
+                              }}
+                            />
+                          </div>
+                        </div>
                       );
                     })}
                   {/* </div> */}
 
-                  {sections.length < 5 && (
-                    <div
-                      class="ad-buttons-blk"
-                      role="button"
-                      onClick={() =>
-                        setSections([
-                          ...sections,
-                          sections[sections.length - 1] + 1,
-                        ])
-                      }
-                    >
-                      <div class="ad-btn-new ad-green-clr-btn">
+                  {mediaData.length < 5 && (
+                    <div class="ad-buttons-blk">
+                      <div
+                        class="ad-btn-new ad-green-clr-btn"
+                        role="button"
+                        onClick={() =>
+                          setMediaData([
+                            ...mediaData,
+                            {
+                              file: "",
+                              fileType: "image",
+                              heading: "",
+                              subHeading: "",
+                              callToActionId: "",
+                            },
+                          ])
+                        }
+                      >
                         + Add More Images
                       </div>
                     </div>
