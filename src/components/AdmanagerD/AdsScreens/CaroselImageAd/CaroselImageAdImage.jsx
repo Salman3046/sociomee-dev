@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AdmanagerHeaderR from "../../AdmanagerHeaderR/AdmanagerHeaderR";
 
@@ -26,6 +26,8 @@ const CaroselImageAdImage = () => {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({ sev: "success", content: "" });
   const [loading, setLoading] = useState(false);
+  // used for identify all fields are filled or not
+  const [flag, setFlag] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -39,8 +41,6 @@ const CaroselImageAdImage = () => {
     },
   ]);
 
-  console.log(mediaData);
-
   const [adData, setAdData] = useState({
     discriptions: "",
     websiteLink: "",
@@ -51,25 +51,94 @@ const CaroselImageAdImage = () => {
   });
 
   const mediaInputsHandler = (ev, i) => {
-    const { name, value,files } = ev.target;
+    const { name, value, files } = ev.target;
     let cloneArr = mediaData;
-    let tempObj = cloneArr[i]
+    let tempObj = cloneArr[i];
     if (name === "file") {
-      tempObj={...tempObj,[name]:files[0]};
+      tempObj = { ...tempObj, [name]: files[0] };
     } else {
-      tempObj={...tempObj,[name]:value};
+      tempObj = { ...tempObj, [name]: value };
     }
     cloneArr[i] = tempObj;
     setMediaData([...cloneArr]);
   };
 
   const deleteImageHandler = (i) => {
-    console.log('delete',i)
+    console.log("delete", i);
     let cloneArr = mediaData;
-    let tempObj = cloneArr[i]
-    tempObj={...tempObj,file:''};
+    let tempObj = cloneArr[i];
+    tempObj = { ...tempObj, file: "" };
     cloneArr[i] = tempObj;
     setMediaData([...cloneArr]);
+  };
+
+  //   this function is used for submit details
+  const submitDetails = (e) => {
+    e.preventDefault();
+    if (!flag) {
+      setOpen(true);
+      setAlert({ sev: "error", content: "Please Fill All Details !" });
+    } else if (!adData.discriptions) {
+      setOpen(true);
+      setAlert({ sev: "error", content: "Please Enter Description !" });
+    } else {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("uploadFor", "ads");
+      mediaData.map((media) => formData.append("files", media.file));
+      axios
+        .post(`${process.env.REACT_APP_IPURL}/admin/UploadFile`, formData, {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("sociomeeUser"))?.token
+            }`,
+          },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            console.log(res.data.data.successResult);
+            mediaData.file = res.data.data.successResult[0];
+            adData.media = mediaData.map((media, i) => {
+              media.file = res.data.data.successResult[i];
+              return media;
+            });
+            console.log(adData);
+            axios
+              .post(
+                `${process.env.REACT_APP_IPURL}/ads/create/adMaster/adType/subTypes/adManager`,
+                adData,
+                {
+                  headers: {
+                    Authorization: `Bearer ${
+                      JSON.parse(localStorage.getItem("sociomeeUser"))?.token
+                    }`,
+                  },
+                }
+              )
+              .then((response) => {
+                console.log(response);
+                setLoading(false);
+                setOpen(true);
+                setAlert({
+                  sev: "success",
+                  content: "Ad Created  Successfully",
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            setOpen(true);
+            setAlert({
+              sev: "error",
+              content: `${res.data.data.errorResult}`,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const imageUpload = (id) => {
@@ -87,6 +156,23 @@ const CaroselImageAdImage = () => {
   useLayoutEffect(() => {
     dispatch(loadAdType());
   }, []);
+
+  useEffect(() => {
+    mediaData &&
+      mediaData.map((media) => {
+        if (
+          media.heading &&
+          media.subHeading &&
+          media.file &&
+          adData.discriptions
+        ) {
+          setFlag(true);
+        } else {
+          setFlag(false);
+        }
+      });
+  }, [mediaData, adData]);
+
   return (
     <>
       <AdmanagerHeaderR />
@@ -191,7 +277,10 @@ const CaroselImageAdImage = () => {
                   {mediaData &&
                     mediaData.map((data, i) => {
                       return (
-                        <div className="col-lg-12 inputs d-flex mb-3 p-0 input-img" key={i}>
+                        <div
+                          className="col-lg-12 inputs d-flex mb-3 p-0 input-img"
+                          key={i}
+                        >
                           <div className="col-lg-6 col-12">
                             <div className="d-flex justify-content-between">
                               <p className="p-heading">
@@ -275,7 +364,7 @@ const CaroselImageAdImage = () => {
                                         <h4
                                           className="text-center"
                                           role="button"
-                                          onClick={()=>imageUpload(i)}
+                                          onClick={() => imageUpload(i)}
                                         >
                                           Edit
                                         </h4>
@@ -284,9 +373,7 @@ const CaroselImageAdImage = () => {
                                         <h4
                                           className="text-center"
                                           role="button"
-                                          onClick={() =>
-                                            deleteImageHandler(i)
-                                          }
+                                          onClick={() => deleteImageHandler(i)}
                                         >
                                           Delete
                                         </h4>
@@ -296,12 +383,19 @@ const CaroselImageAdImage = () => {
                                 </div>
                               </div>
                             ) : (
-                              <button
-                                onClick={()=>imageUpload(i)}
-                                className="upload-img w-100"
+                              <div
+                                role="button"
+                                onClick={() => imageUpload(i)}
+                                className="upload-img w-100 d-flex flex-column justify-content-center align-items-center"
                               >
-                                Upload Image
-                              </button>
+                                <img
+                                  src="/assets/images/adIcon/upload.png"
+                                  alt=""
+                                />
+                                <h4 className="mt-2 font-weight-bold">
+                                  Upload Image
+                                </h4>
+                              </div>
                             )}
 
                             <input
@@ -311,8 +405,8 @@ const CaroselImageAdImage = () => {
                               hidden
                               onChange={(e) => {
                                 e.target.files[0].type.slice(0, 5) === "image"
-                                  ? mediaInputsHandler(e,i)
-                                  : deleteImageHandler(e, i)
+                                  ? mediaInputsHandler(e, i)
+                                  : deleteImageHandler(e, i);
                                 e.target.files[0].type.slice(0, 5) !==
                                   "image" && setOpen(true);
                                 setAlert({
@@ -387,9 +481,13 @@ const CaroselImageAdImage = () => {
                   <Link to="" className="btn-cancel">
                     Cancel
                   </Link>
-                  <Link to="/Ad/ChooseAudience" className="btn-next ml-2">
+                  <button
+                    className="btn-next ml-2 without-input-fill"
+                    onClick={submitDetails}
+                    disabled={!flag}
+                  >
                     Next
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
