@@ -13,7 +13,7 @@ const Demographic = ({setChartToggle}) => {
                 <h6>Demographics</h6>
               </button>
             </li>
-            <li>
+            <li> 
               <button className="tab-button" onClick={()=>setChartToggle(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

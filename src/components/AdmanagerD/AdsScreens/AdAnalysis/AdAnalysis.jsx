@@ -203,7 +203,7 @@ const AdAnalysis = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div className="panel">
               <div className="container">
                 {/* chart tab */}
