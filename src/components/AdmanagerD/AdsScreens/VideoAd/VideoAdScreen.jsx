@@ -322,12 +322,13 @@ const VideoAdScreen = () => {
                           </div>
                         </div>
                       ) : (
-                        <button
+                        <div role='button'
                           onClick={imageUpload}
-                          className="upload-img w-100"
+                          className="upload-img w-100 d-flex flex-column justify-content-center align-items-center"
                         >
-                          Upload Video
-                        </button>
+                        <img src="/assets/images/adIcon/upload.png" alt="" />
+                          <h4 className='mt-2 font-weight-bold'>Upload Video</h4>
+                        </div>
                       )}
 
                       <input
