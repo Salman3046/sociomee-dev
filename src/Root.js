@@ -54,22 +54,6 @@ import Trending from "./components/top-trending-components/Trending";
 import CreateBiz from "./components/biz-components/CreateBiz";
 import CreateBizPage from "./components/biz-components/CreateBizPage";
 
-import Display from "./components/AdmanagerD/BrandAwareness/Display/Display";
-import Display2 from "./components/AdmanagerD/Display2/Display2";
-import ConfigureAd from "./components/AdmanagerD/ConfigureAd/ConfigureAd";
-import ConfigureAd1 from "./components/AdmanagerD/ConfigureAd/ConfigureAd1";
-import ConfigureAd2 from "./components/AdmanagerD/ConfigureAd/ConfigureAd2";
-import ConfigureAd3 from "./components/AdmanagerD/ConfigureAd/ConfigureAd3";
-import VideoAd from "./components/AdmanagerD/VideoAd/VideoAd";
-import VideoAd1 from "./components/AdmanagerD/VideoAd/VideoAd1";
-import FullScrVideoAd from "./components/AdmanagerD/VideoAd/FullScrVideoAd";
-import FullScrVideoAd1 from "./components/AdmanagerD/VideoAd/FullScrVideoAd1";
-import CreateAd from "./components/AdmanagerD/BrandAwareness/CreateAd";
-import TargetAudienceScreen from "./components/AdmanagerD/TargetAudience/TargetAudienceScreen";
-import BudgetScreen from "./components/AdmanagerD/Budget/BudgetScreen";
-import AdPreviewScreen from "./components/AdmanagerD/AdPreview/AdPreviewScreen";
-import AdPreviewScreenTwo from "./components/AdmanagerD/AdPreview/AdPreviewScreenTwo";
-
 import GoLive from "./components/golive-components/GoLive";
 import GoLiveDetail from "./components/golive-components/GoLiveDetail";
 import CreateGoLive from "./components/golive-components/CreateGoLive";
@@ -93,6 +77,7 @@ import AdsPreviewScreen from "./components/AdmanagerD/AdsScreens/AdPreview/AdsPr
 import AdPreviewMoreScreen from "./components/AdmanagerD/AdsScreens/AdPreviewMore/AdPreviewMoreScreen";
 import LeadGenerationScreen from "./components/AdmanagerD/AdsScreens/LeadGeneration/LeadGenerationScreen";
 import AdAnalysis from "./components/AdmanagerD/AdsScreens/AdAnalysis/AdAnalysis";
+import CreateGroupScreen from "./components/group-components/CreateGroup/CreateGroupScreen";
 
 const Root = () => {
   return (
@@ -173,30 +158,18 @@ const Root = () => {
       <Route exact path="/Ad/AdPreview" element={<AdsPreviewScreen />} />
       <Route exact path="/Ad/AdPreviewMore" element={<AdPreviewMoreScreen />} />
       <Route exact path="/Ad/LeadGeneration" element={<LeadGenerationScreen />} />
-
-      <Route exact path="/Display2" element={<Display />} />
-      <Route exact path="/ConfigureAd" element={<ConfigureAd />} />
-      <Route exact path="/ConfigureAd1" element={<ConfigureAd1 />} />
-      <Route exact path="/ConfigureAd2" element={<ConfigureAd2 />} />
-      <Route exact path="/ConfigureAd3" element={<ConfigureAd3 />} />
-      <Route exact path="/VideoAd" element={<VideoAd />} />
-      <Route exact path="/VideoAd1" element={<VideoAd1 />} />
-      <Route exact path="/FullScrVideoAd" element={<FullScrVideoAd />} />
-      <Route exact path="/FullScrVideoAd1" element={<FullScrVideoAd1 />} />
-      <Route exact path="/TargetAudience" element={<TargetAudienceScreen />} />
-      <Route exact path="/Budget" element={<BudgetScreen />} />
-      <Route exact path="/AdPreview" element={<AdPreviewScreen />} />
-      <Route exact path="/AdPreviewTwo" element={<AdPreviewScreenTwo />} />
-      {/* Ad Analysis */}
       <Route exact path="/AdAnalysis" element={<AdAnalysis />} />
+
+
+      {/* GROUP ROUTES */}
+      <Route exact path="/Group/create" element={<CreateGroupScreen />} />
+
+
 
       <Route exact path="/GoLive" element={<GoLive />} />
       <Route exact path="/GoLiveDetail" element={<GoLiveDetail />} />
       <Route exact path="/CreateGoLive" element={<CreateGoLive />} />
-      <Route
-        exact
-        path="/CreateGoLiveDetail"
-        element={<CreateGoLiveDetail />}
+      <Route exact path="/CreateGoLiveDetail" element={<CreateGoLiveDetail />}
       />
 
       <Route exact path="/Connection" element={<Connection />} />

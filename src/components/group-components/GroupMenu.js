@@ -10,27 +10,22 @@ export default function GroupMenu() {
                 <ul>
                     <li>
                         <NavLink to="/Group">
-                            <h6>All Groups (56)</h6>
+                            <h6>All(56)</h6>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/OwnedGroup">
-                            <h6>Owned (23)</h6>
+                            <h6>Owned Group (23)</h6>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/JoinedGroup">
-                            <h6>Joined (18)</h6>
+                            <h6>Joined Group (18)</h6>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/InviteGroup">
-                            <h6>Invite by Groups (32)</h6>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/GroupJointRequest">
-                            <h6>Group Join Request (12)</h6>
+                            <h6>Requests (32)</h6>
                         </NavLink>
                     </li>
                 </ul>
