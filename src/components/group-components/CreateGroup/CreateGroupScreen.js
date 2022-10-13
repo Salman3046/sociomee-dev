@@ -184,6 +184,7 @@ const CreateGroupScreen = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div className="profile-menu section-t-space biz-cration-menu-preview">
                                             <ul>
                                                 <li>

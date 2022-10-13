@@ -22,12 +22,10 @@ import OwnedGroup from "./components/group-components/OwnedGroup";
 import JoinedGroup from "./components/group-components/JoinedGroup";
 import InviteGroup from "./components/group-components/InviteGroup";
 import GroupJointRequest from "./components/group-components/GroupJointRequest";
-import GroupDetail from "./components/group-components/GroupDetail";
-import GroupMember from "./components/group-components/GroupMember";
+import GroupDetail from "./components/group-components/GrpDiscussionPanel/GroupDetail";
 import GdBlockedPeople from "./components/group-components/GdBlockedPeople";
 import GdPostRequest from "./components/group-components/GdPostRequest";
 import GdSetting from "./components/group-components/GdSetting";
-import GdAbout from "./components/group-components/GdAbout";
 import Biz from "./components/biz-components/Biz";
 import OwnedBiz from "./components/biz-components/OwnedBiz";
 import JoinedBiz from "./components/biz-components/JoinedBiz";
@@ -98,7 +96,7 @@ const Root = () => {
       <Route exact path="/MyShotz" element={<MyShotz />} />
       <Route exact path="/MyPodcast" element={<MyPodcast />} />
       <Route exact path="/MyPodcastDetails" element={<MyPodcastDetails />} />
-      <Route exact path="/favorites" element={<Favorites />} />
+      <Route exact path="/favorites" element={<Favorites />} /> 
       <Route exact path="/Group" element={<Group />} />
       <Route exact path="/OwnedGroup" element={<OwnedGroup />} />
       <Route exact path="/JoinedGroup" element={<JoinedGroup />} />
@@ -106,8 +104,6 @@ const Root = () => {
       <Route exact path="/GroupJointRequest" element={<GroupJointRequest />} />
 
       <Route exact path="/GroupDetail/group/:id" element={<GroupDetail />} />
-      <Route exact path="/GdAbout/group/:id" element={<GdAbout />} />
-      <Route exact path="/GroupMember/group/:id" element={<GroupMember />} />
 
       <Route exact path="/GdBlockedPeople" element={<GdBlockedPeople />} />
       <Route exact path="/GdPostRequest" element={<GdPostRequest />} />
