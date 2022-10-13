@@ -9,7 +9,7 @@ const getAdsByStatus = (allAdsByStatus) => ({
 // send user following request
 export const loadAdsByStatus = () => {
     return function (dispatch) {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('sociomeeUser'));
         if (user?.token) {
             const data = {
                 "pageNumber": 10,
