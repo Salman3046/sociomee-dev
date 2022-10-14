@@ -6,15 +6,14 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../Services/Actions/SocialFeed/getAllUserPostsAction";
-import { loadProfileByUserId } from "../Services/Actions/UserProfile/getUserProfileByUserIdAction";
-import { loadArticleCategory } from "../Services/Actions/SocialFeed/getArticleCategoryAction";
-import { loadEventCategory } from "../Services/Actions/SocialFeed/getEventCategoryAction";
-import { loadColors } from "../Services/Actions/SocialFeed/getColorsAction";
+import { loadProfileByUserId } from "../../../../Services/Actions/UserProfile/getUserProfileByUserIdAction";
+import { loadArticleCategory } from "../../../../Services/Actions/SocialFeed/getArticleCategoryAction";
+import { loadEventCategory } from "../../../../Services/Actions/SocialFeed/getEventCategoryAction";
+import { loadColors } from "../../../../Services/Actions/SocialFeed/getColorsAction";
 import {
   loadAlertLevel,
   loadAlertRange,
-} from "../Services/Actions/SocialFeed/getAlertDataAction";
+} from "../../../../Services/Actions/SocialFeed/getAlertDataAction";
 import AddInYourPost from "./AddInYourPost";
 import PostDisplayType from "./PostDisplayType";
 import CreateEventModal from "./post-components/Modals/CreateEventModal";
@@ -28,6 +27,7 @@ import CreateRecommendation from "./post-components/CreateRecommendation";
 import CreateText from "./post-components/CreateText";
 import CreateMedia from "./post-components/CreateMedia";
 import Loader from "./Loader/Loader";
+import { addPost } from "../../../../Services/Actions/SocialFeed/getAllUserPostsAction";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

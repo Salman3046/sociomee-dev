@@ -1,16 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../Header';
-import LeftSidebar from '../LeftSidebar';
-import RightSidebar from '../RightSidebar';
-import GroupDetailMenu from './GroupDetailMenu';
-import GroupDetailsTop from './GroupDetailsTop';
-import Models from './Models';
-import { getSingleGroup } from '../../Services/Actions/Group/getAllUserGroupsAction';
-import { getGroupAdministraterAction } from '../../Services/Actions/Group/getGroupAdministraterAction';
+import Header from '../../../Header';
+import LeftSidebar from '../../../LeftSidebar';
+import RightSidebar from '../../../RightSidebar';
+import GroupDetailMenu from '../GroupDetailMenu';
+import GroupDetailsTop from '../GroupDetailsTop';
+import Models from '../../Models';
+import { getSingleGroup } from '../../../../Services/Actions/Group/getAllUserGroupsAction';
+import { getGroupAdministraterAction } from '../../../../Services/Actions/Group/getGroupAdministraterAction';
 
-export default function GroupMember() {  
+export default function GroupMember() {
     let dispatch = useDispatch();
     const { id } = useParams();
 
@@ -51,14 +51,7 @@ export default function GroupMember() {
         setState({ ...getGroupAdministrater })
     }, [getGroupAdministrater])
     return (
-      <>
-        <Header></Header>
-        <div className="page-body container-fluid profile-page">
-          <LeftSidebar></LeftSidebar>
-          <div className="page-center">
-            <GroupDetailsTop></GroupDetailsTop>
-            <GroupDetailMenu></GroupDetailMenu>
-
+        <>
             <div className="container-fluid section-t-space px-0">
                 <div className="page-content">
                     <div className="content-center w-100">
@@ -73,7 +66,7 @@ export default function GroupMember() {
                                             <div className="search-block-podcast">
                                                 <div className="input-search-blk">
                                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="search-svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                                    <input type="text" className="form-control" name="search" placeholder="Search..."  data-bs-toggle="modal" data-bs-target="#peopleSearch"/>
+                                                    <input type="text" className="form-control" name="search" placeholder="Search..." data-bs-toggle="modal" data-bs-target="#peopleSearch" />
                                                 </div>
                                             </div>
                                             <a href="#" className="assign-group-btn">Assign Group Role</a>
@@ -88,7 +81,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src={getGroupAdministrater[0]?.profileImage}/>
+                                                <img src={getGroupAdministrater[0]?.profileImage} />
                                                 <div className="member-cont-blk">
                                                     <h4>{getGroupAdministrater[0]?.fullName}</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -109,7 +102,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-4.jpg"/>
+                                                <img src="/assets/images/story-4.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -125,7 +118,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -141,7 +134,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -161,7 +154,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -177,7 +170,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -198,7 +191,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -213,7 +206,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -228,7 +221,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-4.jpg"/>
+                                                <img src="/assets/images/story-4.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -243,7 +236,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -258,7 +251,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -273,7 +266,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-4.jpg"/>
+                                                <img src="/assets/images/story-4.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -288,7 +281,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -303,7 +296,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -318,7 +311,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-4.jpg"/>
+                                                <img src="/assets/images/story-4.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -333,7 +326,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-2.jpg"/>
+                                                <img src="/assets/images/story-2.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -348,7 +341,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-3.jpg"/>
+                                                <img src="/assets/images/story-3.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -363,7 +356,7 @@ export default function GroupMember() {
                                     <div className="col-md-6 col-sm-6 col-12">
                                         <div className="group-members-block">
                                             <div className="group-member-img-cont-blk">
-                                                <img src="/assets/images/story-4.jpg"/>
+                                                <img src="/assets/images/story-4.jpg" />
                                                 <div className="member-cont-blk">
                                                     <h4>Kenjomen Norke</h4>
                                                     <p>Joined on 23 Mar 2021</p>
@@ -381,10 +374,6 @@ export default function GroupMember() {
                     </div>
                 </div>
             </div>
-          </div>
-          <RightSidebar></RightSidebar>
-        </div>
-          <Models></Models>
-      </>
+        </>
     );
 } 

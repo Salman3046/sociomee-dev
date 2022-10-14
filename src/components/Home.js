@@ -23,7 +23,7 @@ import { loadProfileByUserId } from "../Services/Actions/UserProfile/getUserProf
 import { loadAllReactions } from "../Services/Actions/SocialFeed/getAllReactionsAction";
 
 export default function Home({ user }) {
-  // Snackbar Code
+  // Snackbar Code 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
