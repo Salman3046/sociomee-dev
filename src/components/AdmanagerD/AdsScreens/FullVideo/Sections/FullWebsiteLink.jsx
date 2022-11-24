@@ -9,6 +9,8 @@ import axios from "axios";
 import Loader from "../../../../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCallToActions } from "../../../../../Services/Actions/AdManager/getCallToActionsAction";
+import PreviewMoreSection from "../../AdPreview/Sections/PreviewMoreSection";
+import PreviewsSection from "../../AdPreview/Sections/PreviewsSection";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,6 +24,8 @@ const FullWebsiteLink = ({ typeId, subTypeId, adTypeData }) => {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({ sev: "success", content: "" });
   const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(false);
+  const [expandPreview, setExpandPreview] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -52,16 +56,16 @@ const FullWebsiteLink = ({ typeId, subTypeId, adTypeData }) => {
     if (!mediaData.heading) {
       setOpen(true);
       setAlert({ sev: "error", content: "Please Enter Heading !" });
+    } else if (!mediaData.callToActionId) {
+      setOpen(true);
+      setAlert({ sev: "error", content: "Please Select Call To Action !" });
     } else if (!mediaData.subHeading) {
       setOpen(true);
       setAlert({ sev: "error", content: "Please Enter Sub-Heading !" });
-    }else if (!mediaData.callToActionId) {
-        setOpen(true);
-        setAlert({ sev: "error", content: "Please Select Call To Action !" });
-      }else if (!adData.websiteLink) {
-        setOpen(true);
-        setAlert({ sev: "error", content: "Please Enter Website Link !" });
-      } else if (!adData.discriptions) {
+    } else if (!adData.websiteLink) {
+      setOpen(true);
+      setAlert({ sev: "error", content: "Please Enter Website Link !" });
+    } else if (!adData.discriptions) {
       setOpen(true);
       setAlert({ sev: "error", content: "Please Enter Description !" });
     } else if (!media?.name) {
@@ -149,224 +153,420 @@ const FullWebsiteLink = ({ typeId, subTypeId, adTypeData }) => {
                 <div className="navigate-left col-lg-6">
                   <p className="navigate-color">
                     {adTypeData?.adTypes} - ({adTypeData?.adMastrerType.name}) /
-                    Video Ad
+                    Full Screen Video Ad
                   </p>
                 </div>
                 <div className="navigate-right col-lg-6">
-                  <h4>
-                    Preview on
-                    <span>
-                      <button
-                        type="button"
-                        class="btn btn-lg btn-size btn-toggle"
-                        data-toggle="button"
-                        aria-pressed="false"
-                        autocomplete="off"
-                      >
-                        <div class="handle"></div>
-                      </button>
-                    </span>
-                  </h4>
+                  <div className="row preview-heading-head shadow-none">
+                    <div
+                      className={preview ? `col-lg-6` : `col-lg-12 full-flex`}
+                    >
+                      <div className="d-flex">
+                        <label className="switch">
+                          <input
+                            type="checkbox"
+                            onChange={() => setPreview(!preview)}
+                          />
+                          <span className="slider round"></span>
+                        </label>
+                        <h5 className="p-heading ml-2">Preview on</h5>
+                      </div>
+                    </div>
+                    {preview && (
+                      <div className="col-lg-6 full-flex">
+                        <div
+                          className="d-flex head-less-preview"
+                          onClick={() => setExpandPreview(!expandPreview)}
+                        >
+                          <img src="/assets/images/adIcon/Mask1.png" alt="" />
+                          <p className="ml-1">
+                            {expandPreview ? "Less" : "More"} Preview
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
             <div className="col-lg-12 inputs d-flex p-0 input-img">
-              {/* <div className="row"> */}
-              <div className="col-lg-6 col-12">
-              <div className="">
-                  <p className="p-heading">
-                    Call to Action (CTA)
-                    <span className="pl-1">
-                      <img
-                        src="/assets/images/adIcon/alert-circle.png"
-                        alt=""
+              {preview ? (
+                <>
+                  <div className="col-lg-6 col-12">
+                    <div className="">
+                      <p className="p-heading">
+                        Call to Action (CTA)
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <select
+                        className="form-control"
+                        name="callToActionId"
+                        onChange={mediaInputsHandler}
+                        value={mediaData.callToActionId}
+                      >
+                        <option value="">Choose your CTA button</option>
+                        {callToActions &&
+                          callToActions.map(({ id, name }) => {
+                            return (
+                              <option value={id} key={id}>
+                                {name}
+                              </option>
+                            );
+                          })}
+                      </select>
+                    </div>
+                    <div className="mt-3">
+                      <p className="p-heading">
+                        Ad Heading
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <input
+                        type="text"
+                        className="form-control p-2"
+                        placeholder="50% sale at girls fashion"
+                        maxLength={"42"}
+                        name="heading"
+                        value={mediaData.heading}
+                        onChange={mediaInputsHandler}
                       />
-                    </span>
-                  </p>
-                </div>
-                <div className="">
-                  <select
-                    className="form-control"
-                    name="callToActionId"
-                    onChange={mediaInputsHandler}
-                    value={mediaData.callToActionId}
-                  >
-                    <option value="">Choose your CTA button</option>
-                    {callToActions &&
-                      callToActions.map(({ id, name }) => {
-                        return (
-                          <option value={id} key={id}>
-                            {name}
-                          </option>
-                        );
-                      })}
-                  </select>
-                </div>
-                <div className="mt-3">
-                  <p className="p-heading">
-                    Ad Heading
-                    <span className="pl-1">
-                      <img
-                        src="/assets/images/adIcon/alert-circle.png"
-                        alt=""
-                      />
-                    </span>
-                  </p>
-                </div>
-                <div className="">
-                  <input
-                    type="text"
-                    className="form-control p-2"
-                    placeholder="50% sale at girls fashion"
-                    maxLength={"42"}
-                    name="heading"
-                    value={mediaData.heading}
-                    onChange={mediaInputsHandler}
-                  />
-                </div>
-                <p className="p-max-car">Max 42 Characters</p>
+                    </div>
+                    <p className="p-max-car">Max 42 Characters</p>
 
-                <div className="">
-                  <p className="p-heading">
-                    Ad Sub-Heading
-                    <span className="pl-1">
-                      <img
-                        src="/assets/images/adIcon/alert-circle.png"
-                        alt=""
+                    <div className="">
+                      <p className="p-heading">
+                        Ad Sub-Heading
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <input
+                        type="text"
+                        className="form-control p-2"
+                        placeholder="Enter advertisement sub-heading..."
+                        maxLength={"60"}
+                        name="subHeading"
+                        value={mediaData.subHeading}
+                        onChange={mediaInputsHandler}
                       />
-                    </span>
-                  </p>
-                </div>
-                <div className="">
-                  <input
-                    type="text"
-                    className="form-control p-2"
-                    placeholder="Enter advertisement sub-heading..."
-                    maxLength={"60"}
-                    name="subHeading"
-                    value={mediaData.subHeading}
-                    onChange={mediaInputsHandler}
-                  />
-                </div>
-                <p className="p-max-car">Max 60 Characters</p>
-              </div>
-              <div className="col-lg-6 col-12">
-                <p className="p-heading">Upload Your Video</p>
-                {media?.name ? (
-                  <div className="recomandation-display-block position-relative pb-5">
-                    <video width="100%" height="300" controls>
-                      <source
-                        src={URL.createObjectURL(media)}
-                        type="video/mp4"
+                    </div>
+                    <p className="p-max-car">Max 60 Characters</p>
+                    <div className="">
+                      <p className="p-heading">Ad Video</p>
+                      <p className="">Max video size 600kb</p>
+                      <input
+                        type="file"
+                        name=""
+                        id="input_file"
+                        onChange={(e) => {
+                          e.target.files[0].type.slice(0, 5) === "video"
+                            ? setMedia(e.target.files[0])
+                            : setMedia("");
+                          e.target.files[0].type.slice(0, 5) !== "video" &&
+                            setOpen(true);
+                          setAlert({
+                            sev: "error",
+                            content: "Please Select Video Only !",
+                          });
+                        }}
                       />
-                    </video>
-                    <div className="recom-btn-cont-blk new-recom-btn-cont-blk bottom-0">
-                      <div className="container">
-                        <div className="row d-flex justify-content-center">
-                          <div className="col-4 px-auto border-right">
-                            <h4
-                              className="text-center"
-                              role="button"
-                              onClick={imageUpload}
-                            >
-                              Edit
-                            </h4>
-                          </div>
-                          <div className="col-4 px-auto border-left">
-                            <h4
-                              className="text-center"
-                              role="button"
-                              onClick={() => setMedia("")}
-                            >
-                              Delete
-                            </h4>
+                    </div>
+                    <div className="textarea mt-4">
+                      <div className="">
+                        <p className="p-heading">
+                          Provide Web link
+                          <span className="pl-1">
+                            <img
+                              src="/assets/images/adIcon/alert-circle.png"
+                              alt=""
+                            />
+                          </span>
+                        </p>
+                      </div>
+                      <div className="">
+                        <input
+                          type="text"
+                          name="message"
+                          className="form-control"
+                          placeholder="Enter link to your website here..."
+                          value={adData.websiteLink}
+                          onChange={(e) =>
+                            setAdData({
+                              ...adData,
+                              websiteLink: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="textarea mt-3">
+                      <div className="">
+                        <p className="p-heading">
+                          Ad Description
+                          <span className="pl-1">
+                            <img
+                              src="/assets/images/adIcon/alert-circle.png"
+                              alt=""
+                            />
+                          </span>
+                        </p>
+                      </div>
+                      <div className="">
+                        <textarea
+                          name="message"
+                          className="form-control"
+                          rows="5"
+                          placeholder="Enter Advertisement Description"
+                          maxLength={"300"}
+                          value={adData.discriptions}
+                          onChange={(e) =>
+                            setAdData({
+                              ...adData,
+                              discriptions: e.target.value,
+                            })
+                          }
+                        ></textarea>
+                      </div>
+                      <p className="p-max-car">Max 300 Characters</p>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 col-12">
+                    {expandPreview ? (
+                      <PreviewMoreSection />
+                    ) : (
+                      <PreviewsSection
+                        mediaData={mediaData}
+                        adData={adData}
+                        media={media}
+                        type={"video"}
+                      />
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="col-lg-6 col-12">
+                    <div className="">
+                      <p className="p-heading">
+                        Call to Action (CTA)
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <select
+                        className="form-control"
+                        name="callToActionId"
+                        onChange={mediaInputsHandler}
+                        value={mediaData.callToActionId}
+                      >
+                        <option value="">Choose your CTA button</option>
+                        {callToActions &&
+                          callToActions.map(({ id, name }) => {
+                            return (
+                              <option value={id} key={id}>
+                                {name}
+                              </option>
+                            );
+                          })}
+                      </select>
+                    </div>
+                    <div className="mt-3">
+                      <p className="p-heading">
+                        Ad Heading
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <input
+                        type="text"
+                        className="form-control p-2"
+                        placeholder="50% sale at girls fashion"
+                        maxLength={"42"}
+                        name="heading"
+                        value={mediaData.heading}
+                        onChange={mediaInputsHandler}
+                      />
+                    </div>
+                    <p className="p-max-car">Max 42 Characters</p>
+
+                    <div className="">
+                      <p className="p-heading">
+                        Ad Sub-Heading
+                        <span className="pl-1">
+                          <img
+                            src="/assets/images/adIcon/alert-circle.png"
+                            alt=""
+                          />
+                        </span>
+                      </p>
+                    </div>
+                    <div className="">
+                      <input
+                        type="text"
+                        className="form-control p-2"
+                        placeholder="Enter advertisement sub-heading..."
+                        maxLength={"60"}
+                        name="subHeading"
+                        value={mediaData.subHeading}
+                        onChange={mediaInputsHandler}
+                      />
+                    </div>
+                    <p className="p-max-car">Max 60 Characters</p>
+                  </div>
+                  <div className="col-lg-6 col-12">
+                    <p className="p-heading">Upload Your Video</p>
+                    {media?.name ? (
+                      <div className="recomandation-display-block position-relative pb-5">
+                        <video width="100%" height="300" controls>
+                          <source
+                            src={URL.createObjectURL(media)}
+                            type="video/mp4"
+                          />
+                        </video>
+                        <div className="recom-btn-cont-blk new-recom-btn-cont-blk bottom-0">
+                          <div className="container">
+                            <div className="row d-flex justify-content-center">
+                              <div className="col-4 px-auto border-right">
+                                <h4
+                                  className="text-center"
+                                  role="button"
+                                  onClick={imageUpload}
+                                >
+                                  Edit
+                                </h4>
+                              </div>
+                              <div className="col-4 px-auto border-left">
+                                <h4
+                                  className="text-center"
+                                  role="button"
+                                  onClick={() => setMedia("")}
+                                >
+                                  Delete
+                                </h4>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div
+                        role="button"
+                        onClick={imageUpload}
+                        className="upload-img w-100 d-flex flex-column justify-content-center align-items-center"
+                      >
+                        <img src="/assets/images/adIcon/upload.png" alt="" />
+                        <h4 className="mt-2 font-weight-bold">Upload Video</h4>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      name=""
+                      hidden
+                      id="input_file"
+                      onChange={(e) => {
+                        e.target.files[0].type.slice(0, 5) === "video"
+                          ? setMedia(e.target.files[0])
+                          : setMedia("");
+                        e.target.files[0].type.slice(0, 5) !== "video" &&
+                          setOpen(true);
+                        setAlert({
+                          sev: "error",
+                          content: "Please Select Video Only !",
+                        });
+                      }}
+                    />
                   </div>
-                ) : (
-                  <div className="full-video-ad-main">
-                    <div
-                      role="button"
-                      onClick={imageUpload}
-                      className="upload-img full-video-ad d-flex flex-column justify-content-center align-items-center"
-                    >
-                      <img src="/assets/images/adIcon/upload.png" alt="" />
-                      <h4 className="mt-2 font-weight-bold">Upload Video</h4>
-                    </div>
-                  </div>
-                )}
+                </>
+              )}
+            </div>
 
-                <input
-                  type="file"
-                  name=""
-                  id="input_file"
-                  hidden
-                  onChange={(e) => {
-                    e.target.files[0].type.slice(0, 5) === "video"
-                      ? setMedia(e.target.files[0])
-                      : setMedia("");
-                    e.target.files[0].type.slice(0, 5) !== "video" &&
-                      setOpen(true);
-                    setAlert({
-                      sev: "error",
-                      content: "Please Select Video Only !",
-                    });
-                  }}
-                />
-              </div>
-              {/* </div> */}
-            </div>
-            <div className="textarea col-lg-12">
-              <div className="">
-                <p className="p-heading">
-                  Provide Web link
-                  <span className="pl-1">
-                    <img src="/assets/images/adIcon/alert-circle.png" alt="" />
-                  </span>
-                </p>
-              </div>
-              <div className="">
-                <input
-                  type="text"
-                  name="message"
-                  className="form-control"
-                  placeholder="Enter link to your website here..."
-                  value={adData.websiteLink}
-                  onChange={(e) =>
-                    setAdData({
-                      ...adData,
-                      websiteLink: e.target.value,
-                    })
-                  }
-                />
-              </div>
-            </div>
-            <div className="textarea col-lg-12 mt-3">
-              <div className="">
-                <p className="p-heading">
-                  Ad Description
-                  <span className="pl-1">
-                    <img src="/assets/images/adIcon/alert-circle.png" alt="" />
-                  </span>
-                </p>
-              </div>
-              <div className="">
-                <textarea
-                  name="message"
-                  className="form-control"
-                  rows="5"
-                  placeholder=""
-                  maxLength={"300"}
-                  value={adData.discriptions}
-                  onChange={(e) =>
-                    setAdData({ ...adData, discriptions: e.target.value })
-                  }
-                ></textarea>
-              </div>
-              <p className="p-max-car">Max 300 Characters</p>
-            </div>
+            {!preview && (
+              <>
+                <div className="textarea col-lg-12 w-50">
+                  <div className="">
+                    <p className="p-heading">
+                      Provide Web link
+                      <span className="pl-1">
+                        <img
+                          src="/assets/images/adIcon/alert-circle.png"
+                          alt=""
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      name="message"
+                      className="form-control"
+                      placeholder="Enter link to your website here..."
+                      value={adData.websiteLink}
+                      onChange={(e) =>
+                        setAdData({
+                          ...adData,
+                          websiteLink: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="textarea col-lg-12 mt-3">
+                  <div className="">
+                    <p className="p-heading">
+                      Ad Description
+                      <span className="pl-1">
+                        <img
+                          src="/assets/images/adIcon/alert-circle.png"
+                          alt=""
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div className="">
+                    <textarea
+                      name="message"
+                      className="form-control"
+                      rows="5"
+                      placeholder="Enter Advertisement Description"
+                      maxLength={"300"}
+                      value={adData.discriptions}
+                      onChange={(e) =>
+                        setAdData({ ...adData, discriptions: e.target.value })
+                      }
+                    ></textarea>
+                  </div>
+                  <p className="p-max-car">Max 300 Characters</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 

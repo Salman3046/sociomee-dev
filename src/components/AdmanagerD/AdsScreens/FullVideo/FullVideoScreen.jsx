@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo } from "react";
-import {  useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AdmanagerHeaderR from "../../AdmanagerHeaderR/AdmanagerHeaderR";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -63,7 +63,7 @@ const FullVideoScreen = () => {
                   <img src="/assets/images/adIcon/folder.png" alt="" />
                   <p className="ml-2">
                     {adTypeData?.adTypes} - ({adTypeData?.adMastrerType.name})
-                    Video Ad
+                    Full Screen Video Ad
                   </p>
                 </div>
                 <div className="create-add-second">

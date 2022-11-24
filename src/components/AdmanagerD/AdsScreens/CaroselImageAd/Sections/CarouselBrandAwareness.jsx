@@ -20,7 +20,6 @@ const CarouselBrandAwareness = ({ typeId, subTypeId, adTypeData }) => {
   // used for identify all fields are filled or not
   const [flag, setFlag] = useState(false);
 
-
   const [mediaData, setMediaData] = useState([
     {
       file: "",
@@ -156,7 +155,7 @@ const CarouselBrandAwareness = ({ typeId, subTypeId, adTypeData }) => {
           return true;
         } else {
           setFlag(false);
-          return false
+          return false;
         }
       });
   }, [mediaData, adData]);
@@ -385,6 +384,15 @@ const CarouselBrandAwareness = ({ typeId, subTypeId, adTypeData }) => {
               <p className="p-max-car">Max 300 Characters</p>
             </div>
           </div>
+          {typeId === "91482447-b808-46fc-95dc-aa88252915f9" && (
+            <div className="textarea col-lg-12 pb-4">
+              <div class="ad-buttons-blk">
+                <div class="ad-btn-new ad-green-clr-btn" role="button">
+                  Customize your Lead Generation Form
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="col-lg-12">

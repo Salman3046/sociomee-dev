@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const PreviewsSection = ({ mediaData, adData, media }) => {
+const PreviewsSection = ({ mediaData, adData, media, type }) => {
   // get user profile by user id
   const { userProfileByUserId } = useSelector(
     (state) => state.getUserProfileByUserIdData
@@ -141,13 +141,24 @@ const PreviewsSection = ({ mediaData, adData, media }) => {
           </div>
           <div className="post-details">
             <div className="recomandation-display-block">
-              <img
-                src={
-                  (media?.name && URL.createObjectURL(media)) ||
-                  "/assets/images/image (2).png"
-                }
-                alt=""
-              />
+              {type === "video" && (
+                <video width="100%" height="300" controls>
+                  <source
+                    src={media?.name && URL.createObjectURL(media)}
+                    type="video/mp4"
+                  />
+                </video>
+              )}
+              {type === "image" && (
+                <img
+                  src={
+                    (media?.name && URL.createObjectURL(media)) ||
+                    "/assets/images/image (2).png"
+                  }
+                  alt=""
+                />
+              )}
+
               <div className="recom-btn-cont-blk new-recom-btn-cont-blk">
                 <h4 className="text-break">{mediaData.heading || "Heading"}</h4>
 

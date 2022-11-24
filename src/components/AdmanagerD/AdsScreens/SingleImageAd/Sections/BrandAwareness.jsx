@@ -288,6 +288,7 @@ const BrandAwareness = ({ typeId, subTypeId, adTypeData }) => {
                         mediaData={mediaData}
                         adData={adData}
                         media={media}
+                        type={"image"}
                       />
                     )}
                   </div>
@@ -440,6 +441,15 @@ const BrandAwareness = ({ typeId, subTypeId, adTypeData }) => {
               </div>
             )}
           </div>
+          {typeId === "91482447-b808-46fc-95dc-aa88252915f9" && (
+            <div className="textarea col-lg-12 pb-4">
+              <div class="ad-buttons-blk">
+                <div class="ad-btn-new ad-green-clr-btn" role="button">
+                  Customize your Lead Generation Form
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="col-lg-12">
