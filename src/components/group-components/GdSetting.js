@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Header from '../Header';
 import LeftSidebar from '../LeftSidebar';
 import RightSidebar from '../RightSidebar';
-import GroupDetailMenu from './GroupDetailMenu';
+import GroupDetailMenu from './GrpDiscussionPanel/GroupDetailMenu';
 import Models from './Models';
 
 class GdSetting extends Component {  
